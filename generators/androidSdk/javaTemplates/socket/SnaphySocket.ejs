@@ -120,6 +120,9 @@ public class SnaphySocket<M extends Model, R extends ModelRepository<M>> {
             if(mainSocket != null){
                 mainSocket.off();
             }
+
+            socket.close();
+            mainSocket.close();
         }
         catch(Exception e){
             //Caught

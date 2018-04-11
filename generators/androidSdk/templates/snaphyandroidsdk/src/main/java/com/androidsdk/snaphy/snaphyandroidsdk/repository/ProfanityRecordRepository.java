@@ -41,9 +41,9 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.ProfanityRecord;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.FacebookAccessTokenDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.ProfanityRecordDb;
 
 //Now import model of related models..
 
@@ -58,15 +58,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.FacebookAccessTokenDb;
 
 
 
-public class FacebookAccessTokenRepository extends ModelRepository<FacebookAccessToken> {
+public class ProfanityRecordRepository extends ModelRepository<ProfanityRecord> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public FacebookAccessTokenRepository(){
-        super("FacebookAccessToken", null, FacebookAccessToken.class);
+    public ProfanityRecordRepository(){
+        super("ProfanityRecord", null, ProfanityRecord.class);
 
     }
 
@@ -84,15 +84,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
 
 
-    public FacebookAccessTokenDb getDb() {
-      return facebookAccessTokenDb;
+    public ProfanityRecordDb getDb() {
+      return profanityRecordDb;
     }
 
-    public void setFacebookAccessTokenDb(FacebookAccessTokenDb facebookAccessTokenDb) {
-      this.facebookAccessTokenDb = facebookAccessTokenDb;
+    public void setProfanityRecordDb(ProfanityRecordDb profanityRecordDb) {
+      this.profanityRecordDb = profanityRecordDb;
     }
 
-    private FacebookAccessTokenDb facebookAccessTokenDb;
+    private ProfanityRecordDb profanityRecordDb;
 
 
 
@@ -126,7 +126,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setFacebookAccessTokenDb(new FacebookAccessTokenDb(context, DATABASE_NAME, getRestAdapter()));
+         setProfanityRecordDb(new ProfanityRecordDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -140,7 +140,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:facebookAccessTokenId/appUser", "GET"), "FacebookAccessToken.prototype.__get__appUser");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:profanityRecordId/appUser", "GET"), "ProfanityRecord.prototype.__get__appUser");
     
 
     
@@ -149,7 +149,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "FacebookAccessToken.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ProfanityRecord.create");
     
 
     
@@ -158,7 +158,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "FacebookAccessToken.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ProfanityRecord.create");
     
 
     
@@ -167,7 +167,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "FacebookAccessToken.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "ProfanityRecord.upsert");
     
 
     
@@ -176,7 +176,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "FacebookAccessToken.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "ProfanityRecord.exists");
     
 
     
@@ -185,7 +185,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "FacebookAccessToken.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "ProfanityRecord.findById");
     
 
     
@@ -194,7 +194,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "FacebookAccessToken.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "ProfanityRecord.find");
     
 
     
@@ -203,7 +203,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "FacebookAccessToken.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "ProfanityRecord.findOne");
     
 
     
@@ -212,7 +212,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "FacebookAccessToken.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "ProfanityRecord.updateAll");
     
 
     
@@ -221,7 +221,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "FacebookAccessToken.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "ProfanityRecord.deleteById");
     
 
     
@@ -230,7 +230,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "FacebookAccessToken.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "ProfanityRecord.count");
     
 
     
@@ -239,28 +239,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:facebookAccessTokenId", "PUT"), "FacebookAccessToken.prototype.updateAttributes");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "FacebookAccessToken.getSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "FacebookAccessToken.getAbsoluteSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:profanityRecordId", "PUT"), "ProfanityRecord.prototype.updateAttributes");
     
 
     
@@ -272,7 +251,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "FacebookAccessToken.getDetailSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "ProfanityRecord.getSchema");
     
 
     
@@ -281,13 +260,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "FacebookAccessToken.getModelRelationSchema");
-    
-
-    
-    
-
-    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "ProfanityRecord.getAbsoluteSchema");
     
 
     
@@ -297,15 +270,18 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "ProfanityRecord.getDetailSchema");
     
 
     
     
 
     
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "ProfanityRecord.getModelRelationSchema");
     
 
     
@@ -333,7 +309,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method get__appUser definition
-            public void get__appUser(  String facebookAccessTokenId,  Boolean refresh, final ObjectCallback<AppUser> callback){
+            public void get__appUser(  String profanityRecordId,  Boolean refresh, final ObjectCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -345,7 +321,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("facebookAccessTokenId", facebookAccessTokenId);
+                        hashMapObject.put("profanityRecordId", profanityRecordId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -418,7 +394,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<ProfanityRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -452,27 +428,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    ProfanityRecordRepository profanityRecordRepo = getRestAdapter().createRepository(ProfanityRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = profanityRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(profanityRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //profanityRecordRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    ProfanityRecord profanityRecord = profanityRecordRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = profanityRecord.getClass().getMethod("save__db");
+                                                    method.invoke(profanityRecord);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -480,7 +456,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(profanityRecord);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -502,7 +478,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<ProfanityRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -536,27 +512,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    ProfanityRecordRepository profanityRecordRepo = getRestAdapter().createRepository(ProfanityRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = profanityRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(profanityRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //profanityRecordRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    ProfanityRecord profanityRecord = profanityRecordRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = profanityRecord.getClass().getMethod("save__db");
+                                                    method.invoke(profanityRecord);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -564,7 +540,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(profanityRecord);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -636,7 +612,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<FacebookAccessToken> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<ProfanityRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -672,27 +648,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    ProfanityRecordRepository profanityRecordRepo = getRestAdapter().createRepository(ProfanityRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = profanityRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(profanityRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //profanityRecordRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    ProfanityRecord profanityRecord = profanityRecordRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = profanityRecord.getClass().getMethod("save__db");
+                                                    method.invoke(profanityRecord);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -700,7 +676,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(profanityRecord);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -721,7 +697,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<FacebookAccessToken> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<ProfanityRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -756,12 +732,12 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<FacebookAccessToken> facebookAccessTokenList = new DataList<FacebookAccessToken>();
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    DataList<ProfanityRecord> profanityRecordList = new DataList<ProfanityRecord>();
+                                    ProfanityRecordRepository profanityRecordRepo = getRestAdapter().createRepository(ProfanityRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = profanityRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(profanityRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -769,23 +745,23 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(obj);
+                                        ProfanityRecord profanityRecord = profanityRecordRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                      method.invoke(facebookAccessToken);
+                                                      Method method = profanityRecord.getClass().getMethod("save__db");
+                                                      method.invoke(profanityRecord);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        facebookAccessTokenList.add(facebookAccessToken);
+                                        profanityRecordList.add(profanityRecord);
                                     }
-                                    callback.onSuccess(facebookAccessTokenList);
+                                    callback.onSuccess(profanityRecordList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -804,7 +780,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<FacebookAccessToken> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<ProfanityRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -838,27 +814,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    ProfanityRecordRepository profanityRecordRepo = getRestAdapter().createRepository(ProfanityRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = profanityRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(profanityRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //profanityRecordRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    ProfanityRecord profanityRecord = profanityRecordRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = profanityRecord.getClass().getMethod("save__db");
+                                                    method.invoke(profanityRecord);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -866,7 +842,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(profanityRecord);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1042,7 +1018,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String facebookAccessTokenId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            public void updateAttributes(  String profanityRecordId,  Map<String,  ? extends Object> data, final ObjectCallback<ProfanityRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -1054,7 +1030,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("facebookAccessTokenId", facebookAccessTokenId);
+                        hashMapObject.put("profanityRecordId", profanityRecordId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1078,27 +1054,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    ProfanityRecordRepository profanityRecordRepo = getRestAdapter().createRepository(ProfanityRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = profanityRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(profanityRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //profanityRecordRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    ProfanityRecord profanityRecord = profanityRecordRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = profanityRecord.getClass().getMethod("save__db");
+                                                    method.invoke(profanityRecord);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1106,7 +1082,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(profanityRecord);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1323,22 +1299,6 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
 

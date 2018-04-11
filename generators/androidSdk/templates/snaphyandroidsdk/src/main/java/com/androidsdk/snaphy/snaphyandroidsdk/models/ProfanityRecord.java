@@ -26,7 +26,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ProfanityRecordRepository;
 
 //Now import repository of related models..
 
@@ -44,7 +44,7 @@ import java.util.Map;
 
 
 
-public class FacebookAccessToken extends Model {
+public class ProfanityRecord extends Model {
 
 
     //For converting all model values to hashMap
@@ -59,9 +59,9 @@ public class FacebookAccessToken extends Model {
         }
     }
 
-    private FacebookAccessToken that ;
+    private ProfanityRecord that ;
 
-    public FacebookAccessToken (){
+    public ProfanityRecord (){
         that = this;
     }
 
@@ -70,17 +70,17 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String FbUserId;
+                private String username;
                 /* Adding Getter and Setter methods */
-                public String getFbUserId(){
-                    return FbUserId;
+                public String getUsername(){
+                    return username;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFbUserId(String FbUserId){
-                    this.FbUserId = FbUserId;
+                public void setUsername(String username){
+                    this.username = username;
                     //Update hashMap value..
-                    hashMap.put("FbUserId", FbUserId);
+                    hashMap.put("username", username);
                 }
 
             
@@ -91,17 +91,38 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String token;
+                private Map<String, Object> profilePic;
                 /* Adding Getter and Setter methods */
-                public String getToken(){
-                    return token;
+                public Map<String, Object> getProfilePic(){
+                    return profilePic;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setToken(String token){
-                    this.token = token;
+                public void setProfilePic(Map<String, Object> profilePic){
+                    this.profilePic = profilePic;
+                    //Update Map value..
+                    hashMap.put("profilePic", profilePic);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private double profanityCount;
+                /* Adding Getter and Setter methods */
+                public double getProfanityCount(){
+                    return profanityCount;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setProfanityCount(double profanityCount){
+                    this.profanityCount = profanityCount;
                     //Update hashMap value..
-                    hashMap.put("token", token);
+                    hashMap.put("profanityCount", profanityCount);
                 }
 
             
@@ -112,25 +133,18 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String expires;
+                private double cricUserId;
                 /* Adding Getter and Setter methods */
-                public String getExpires(){
-                    return expires;
+                public double getCricUserId(){
+                    return cricUserId;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setExpires(String expires){
-                    this.expires = expires;
+                public void setCricUserId(double cricUserId){
+                    this.cricUserId = cricUserId;
                     //Update hashMap value..
-                    hashMap.put("expires", expires);
+                    hashMap.put("cricUserId", cricUserId);
                 }
-
-            
-            
-        
-    
-        
-            
 
             
             
@@ -161,6 +175,118 @@ public class FacebookAccessToken extends Model {
             
 
             
+                private String oriUserId;
+                /* Adding Getter and Setter methods */
+                public String getOriUserId(){
+                    return oriUserId;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setOriUserId(String oriUserId){
+                    this.oriUserId = oriUserId;
+                    //Update hashMap value..
+                    hashMap.put("oriUserId", oriUserId);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String isBanned;
+                /* Adding Getter and Setter methods */
+                public String getIsBanned(){
+                    return isBanned;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setIsBanned(String isBanned){
+                    this.isBanned = isBanned;
+                    //Update hashMap value..
+                    hashMap.put("isBanned", isBanned);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String added;
+                /* Adding Getter and Setter methods */
+                public String getAdded(){
+                    return added;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAdded(String added){
+                    this.added = added;
+                    //Update hashMap value..
+                    hashMap.put("added", added);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String updated;
+                /* Adding Getter and Setter methods */
+                public String getUpdated(){
+                    return updated;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUpdated(String updated){
+                    this.updated = updated;
+                    //Update hashMap value..
+                    hashMap.put("updated", updated);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String uniqueNumber;
+                /* Adding Getter and Setter methods */
+                public String getUniqueNumber(){
+                    return uniqueNumber;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUniqueNumber(String uniqueNumber){
+                    this.uniqueNumber = uniqueNumber;
+                    //Update hashMap value..
+                    hashMap.put("uniqueNumber", uniqueNumber);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+            
+        
+    
+        
+            
+
+            
             
         
     
@@ -177,7 +303,7 @@ public class FacebookAccessToken extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+      ProfanityRecordRepository lowercaseFirstLetterRepository = (ProfanityRecordRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -192,7 +318,7 @@ public class FacebookAccessToken extends Model {
 
 
     public void save__db(String id){
-      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+      ProfanityRecordRepository lowercaseFirstLetterRepository = (ProfanityRecordRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -203,7 +329,7 @@ public class FacebookAccessToken extends Model {
 
 
     public void delete__db(){
-      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+      ProfanityRecordRepository lowercaseFirstLetterRepository = (ProfanityRecordRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -239,15 +365,15 @@ public class FacebookAccessToken extends Model {
                 
                     //Define belongsTo relation method here..
                     private transient AppUser  appUser ;
-                    private String userId;
+                    private String appUserId;
 
-                    public String getUserId(){
-                         return userId;
+                    public String getAppUserId(){
+                         return appUserId;
                     }
 
-                    public void setUserId(Object userId){
-                        if(userId != null){
-                          this.userId = userId.toString();
+                    public void setAppUserId(Object appUserId){
+                        if(appUserId != null){
+                          this.appUserId = appUserId.toString();
                         }
                     }
 
@@ -255,9 +381,9 @@ public class FacebookAccessToken extends Model {
                         try{
                           //Adding database method for fetching from relation if not present..
                                       if(appUser == null){
-                                        FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
+                                        ProfanityRecordRepository profanityRecordRepository = (ProfanityRecordRepository) getRepository();
 
-                                        SnaphyRestAdapter restAdapter = facebookAccessTokenRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = profanityRecordRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           appUser = getAppUser__db(restAdapter);
@@ -296,12 +422,12 @@ public class FacebookAccessToken extends Model {
                     }
 
 
-                    //Fetch related data from local database if present a userId identifier as property for belongsTo
+                    //Fetch related data from local database if present a appUserId identifier as property for belongsTo
                     public AppUser getAppUser__db(SnaphyRestAdapter restAdapter){
-                      if(userId != null){
+                      if(appUserId != null){
                         AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
                             try{
-                            FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+                            ProfanityRecordRepository lowercaseFirstLetterRepository = (ProfanityRecordRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
                                                 if(appUserRepository.getDb() == null ){
@@ -310,7 +436,7 @@ public class FacebookAccessToken extends Model {
 
                                                 if(context != null && appUserRepository.getDb() != null){
                                                     appUserRepository.addStorage(context);
-                                                    AppUser appUser = (AppUser) appUserRepository.getDb().get__db(userId);
+                                                    AppUser appUser = (AppUser) appUserRepository.getDb().get__db(appUserId);
                                                     return appUser;
                                                 }else{
                                                     return null;
@@ -349,7 +475,7 @@ public class FacebookAccessToken extends Model {
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final FacebookAccessTokenRepository  facebookAccessTokenRepo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                                        final ProfanityRecordRepository  profanityRecordRepo = restAdapter.createRepository(ProfanityRecordRepository.class);
                                         
                                         
                                         
@@ -358,7 +484,7 @@ public class FacebookAccessToken extends Model {
 
 
 
-                                        facebookAccessTokenRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
+                                        profanityRecordRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
                                             
 
                                             
@@ -398,14 +524,6 @@ public class FacebookAccessToken extends Model {
                                     } //method def ends here.
                                  
                             
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                         
                         

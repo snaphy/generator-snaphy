@@ -23,16 +23,16 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.OnParseCursor;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.LazyList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.SpamWord;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.SpamWordRepository;
 import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class FacebookAccessTokenDb{
+public class SpamWordDb{
 
     // All Static variables
     SnaphyRestAdapter restAdapter;
@@ -54,82 +54,74 @@ public class FacebookAccessTokenDb{
         return db;
     }
 
-  public FacebookAccessTokenDb(Context context, String DATABASE_NAME, SnaphyRestAdapter restAdapter){
+  public SpamWordDb(Context context, String DATABASE_NAME, SnaphyRestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "FacebookAccessToken";
+    TABLE = "SpamWord";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final FacebookAccessToken _modelData) {
+    public void insert__db (final String id, final SpamWord _modelData) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       // Inserting Row
       ContentValues values = getContentValues(_modelData);
-      db.insert("`FacebookAccessToken`", null, values);
+      db.insert("`SpamWord`", null, values);
     }
 
 
 
 
 
-    public ContentValues getContentValues(FacebookAccessToken _modelData){
+    public ContentValues getContentValues(SpamWord _modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String FbUserIdData = "";
-                        if(_modelData.getFbUserId() != null){
-                          FbUserIdData = _modelData.getFbUserId().toString();
-                          values.put("`FbUserId`", FbUserIdData);
+                                                            String wordData = "";
+                        if(_modelData.getWord() != null){
+                          wordData = _modelData.getWord().toString();
+                          values.put("`word`", wordData);
                         }
                                   
                                 
-                                                            String tokenData = "";
-                        if(_modelData.getToken() != null){
-                          tokenData = _modelData.getToken().toString();
-                          values.put("`token`", tokenData);
+                                                            String statusData = "";
+                        if(_modelData.getStatus() != null){
+                          statusData = _modelData.getStatus().toString();
+                          values.put("`status`", statusData);
                         }
                                   
                                 
-                                                            String expiresData = "";
-                        if(_modelData.getExpires() != null){
-                          expiresData = _modelData.getExpires().toString();
-                          values.put("`expires`", expiresData);
+                                                            String addedData = "";
+                        if(_modelData.getAdded() != null){
+                          addedData = _modelData.getAdded().toString();
+                          values.put("`added`", addedData);
                         }
                                   
                                 
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String userIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getUserId");
-                              if(method.invoke(_modelData) != null){
-                                //userIdData = _modelData.getUserId().toString();
-                                userIdData = (String) method.invoke(_modelData);
-                                values.put("`userId`", userIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
+                                                            String updatedData = "";
+                        if(_modelData.getUpdated() != null){
+                          updatedData = _modelData.getUpdated().toString();
+                          values.put("`updated`", updatedData);
                         }
-
                                   
                                 
-                                                            String typeData = "";
-                        if(_modelData.getType() != null){
-                          typeData = _modelData.getType().toString();
-                          values.put("`type`", typeData);
+                                                            String uniqueNumberData = "";
+                        if(_modelData.getUniqueNumber() != null){
+                          uniqueNumberData = _modelData.getUniqueNumber().toString();
+                          values.put("`uniqueNumber`", uniqueNumberData);
                         }
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String customerIdData = "";
+                        String idData = "";
                         try {
-                              Method method = _modelData.getClass().getMethod("getCustomerId");
+                              Method method = _modelData.getClass().getMethod("getId");
                               if(method.invoke(_modelData) != null){
-                                //customerIdData = _modelData.getCustomerId().toString();
-                                customerIdData = (String) method.invoke(_modelData);
-                                values.put("`customerId`", customerIdData);
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
+                                values.put("`id`", idData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -147,10 +139,10 @@ public class FacebookAccessTokenDb{
 
 
     // Getting single c
-    public   FacebookAccessToken get__db(String id) {
+    public   SpamWord get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("FacebookAccessToken", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("SpamWord", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -159,9 +151,9 @@ public class FacebookAccessTokenDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                        SpamWordRepository repo = restAdapter.createRepository(SpamWordRepository.class);
                         repo.addStorage(context);
-                        return (FacebookAccessToken)repo.createObject(hashMap);
+                        return (SpamWord)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -180,10 +172,10 @@ public class FacebookAccessTokenDb{
 
 
     // Getting single cont
-    public   FacebookAccessToken get__db(String whereKey, String whereKeyValue) {
+    public   SpamWord get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("`FacebookAccessToken`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`SpamWord`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -194,9 +186,9 @@ public class FacebookAccessTokenDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                        SpamWordRepository repo = restAdapter.createRepository(SpamWordRepository.class);
                         repo.addStorage(context);
-                        return (FacebookAccessToken)repo.createObject(hashMap);
+                        return (SpamWord)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -218,62 +210,62 @@ public class FacebookAccessTokenDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String FbUserIdData = "";
+                                                            String wordData = "";
                         if(cursor.getString(0) != null){
-                          FbUserIdData = cursor.getString(0);
-                          if(FbUserIdData != null){
-                            FbUserIdData = (String)FbUserIdData;
-                            hashMap.put("FbUserId", FbUserIdData);
+                          wordData = cursor.getString(0);
+                          if(wordData != null){
+                            wordData = (String)wordData;
+                            hashMap.put("word", wordData);
                           }
                         }
                                                 
                                 
-                                                            String tokenData = "";
+                                                            String statusData = "";
                         if(cursor.getString(1) != null){
-                          tokenData = cursor.getString(1);
-                          if(tokenData != null){
-                            tokenData = (String)tokenData;
-                            hashMap.put("token", tokenData);
+                          statusData = cursor.getString(1);
+                          if(statusData != null){
+                            statusData = (String)statusData;
+                            hashMap.put("status", statusData);
                           }
                         }
                                                 
                                 
-                                                            String expiresData = "";
+                                                            String addedData = "";
                         if(cursor.getString(2) != null){
-                          expiresData = cursor.getString(2);
-                          if(expiresData != null){
-                            expiresData = (String)expiresData;
-                            hashMap.put("expires", expiresData);
+                          addedData = cursor.getString(2);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
                                 
-                                                            String userIdData = "";
+                                                            String updatedData = "";
                         if(cursor.getString(3) != null){
-                          userIdData = cursor.getString(3);
-                          if(userIdData != null){
-                            userIdData = userIdData.toString();
-                            hashMap.put("userId", userIdData);
+                          updatedData = cursor.getString(3);
+                          if(updatedData != null){
+                            updatedData = (String)updatedData;
+                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 
                                 
-                                                            String typeData = "";
+                                                            String uniqueNumberData = "";
                         if(cursor.getString(4) != null){
-                          typeData = cursor.getString(4);
-                          if(typeData != null){
-                            typeData = (String)typeData;
-                            hashMap.put("type", typeData);
+                          uniqueNumberData = cursor.getString(4);
+                          if(uniqueNumberData != null){
+                            uniqueNumberData = (String)uniqueNumberData;
+                            hashMap.put("uniqueNumber", uniqueNumberData);
                           }
                         }
                                                 
                                 
-                                                            String customerIdData = "";
+                                                            String idData = "";
                         if(cursor.getString(5) != null){
-                          customerIdData = cursor.getString(5);
-                          if(customerIdData != null){
-                            customerIdData = customerIdData.toString();
-                            hashMap.put("customerId", customerIdData);
+                          idData = cursor.getString(5);
+                          if(idData != null){
+                            idData = idData.toString();
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
@@ -286,7 +278,7 @@ public class FacebookAccessTokenDb{
 
 
 
-    public void upsert__db(String id, FacebookAccessToken model){
+    public void upsert__db(String id, SpamWord model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -297,31 +289,31 @@ public class FacebookAccessTokenDb{
 
 
     // Getting All Contacts
-    public DataList<FacebookAccessToken>  getAll__db() {
-        DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
+    public DataList<SpamWord>  getAll__db() {
+        DataList<SpamWord> modelList = new DataList<SpamWord>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `FacebookAccessToken`";
+        String selectQuery = "SELECT  * FROM `SpamWord`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<FacebookAccessToken>) modelList;
+            return (DataList<SpamWord>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                    SpamWordRepository repo = restAdapter.createRepository(SpamWordRepository.class);
                     repo.addStorage(context);
-                    modelList.add((FacebookAccessToken)repo.createObject(hashMap));
+                    modelList.add((SpamWord)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<FacebookAccessToken>) modelList;
+        return (DataList<SpamWord>) modelList;
     }
 
 
@@ -333,20 +325,20 @@ public class FacebookAccessTokenDb{
      * @param skip
      * @return
      */
-    public LazyList<FacebookAccessToken> getAll__lazy(final int limit, final int skip, ObjectCallback<FacebookAccessToken> callback, final GetUpdatedQuery getUpdatedQuery, final OnParseCursor onParseCursor) {
+    public LazyList<SpamWord> getAll__lazy(final int limit, final int skip, ObjectCallback<SpamWord> callback, final GetUpdatedQuery getUpdatedQuery, final OnParseCursor onParseCursor) {
 
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
 
-        final FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+        final SpamWordRepository repo = restAdapter.createRepository(SpamWordRepository.class);
         repo.addStorage(context);
-        return new LazyList<>(db, new LazyList.ItemFactory<FacebookAccessToken>() {
+        return new LazyList<>(db, new LazyList.ItemFactory<SpamWord>() {
             @Override
-            public FacebookAccessToken create(Cursor cursor, int index) {
-                FacebookAccessToken data;
+            public SpamWord create(Cursor cursor, int index) {
+                SpamWord data;
                 cursor.moveToPosition(index);
                 HashMap<String, Object> hashMap = onParseCursor.parseCursor(cursor);
-                data = (FacebookAccessToken)repo.createObject(hashMap);
+                data = (SpamWord)repo.createObject(hashMap);
                 return data;
             }
         }, callback, new LazyList.OnQueryChange(){
@@ -359,7 +351,7 @@ public class FacebookAccessTokenDb{
                 String whereQuery = getWhereQuery(getWhereKeyValue);
                 String selectQuery;
                 if(orderBy != null){
-                    selectQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery  + " ORDER BY " + orderBy ;
+                    selectQuery = "SELECT  * FROM `SpamWord` " + whereQuery  + " ORDER BY " + orderBy ;
                     if(limit != 0){
                         // Select All Query
                         selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -369,9 +361,9 @@ public class FacebookAccessTokenDb{
                 }else{
                     if(limit != 0){
                         // Select All Query
-                        selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                        selectQuery = "SELECT  * FROM SpamWord " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
                     }else{
-                        selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery  + " LIMIT -1 OFFSET " + skip;
+                        selectQuery = "SELECT  * FROM SpamWord " + whereQuery  + " LIMIT -1 OFFSET " + skip;
                     }
                 }
 
@@ -383,10 +375,10 @@ public class FacebookAccessTokenDb{
 
 
 
-    public FacebookAccessToken get__db(String id, OnParseCursor onParseCursor){
+    public SpamWord get__db(String id, OnParseCursor onParseCursor){
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("FacebookAccessToken", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("SpamWord", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -395,9 +387,9 @@ public class FacebookAccessTokenDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                        SpamWordRepository repo = restAdapter.createRepository(SpamWordRepository.class);
                         repo.addStorage(context);
-                        return (FacebookAccessToken)repo.createObject(hashMap);
+                        return (SpamWord)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -509,19 +501,19 @@ public class FacebookAccessTokenDb{
 
 
     // Getting All Data where
-    public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<SpamWord>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
-        DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
+    public DataList<SpamWord>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
+        DataList<SpamWord> modelList = new DataList<SpamWord>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `SpamWord` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -531,9 +523,9 @@ public class FacebookAccessTokenDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM SpamWord " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery  + " LIMIT -1 OFFSET " + skip;
+                selectQuery = "SELECT  * FROM SpamWord " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -543,27 +535,27 @@ public class FacebookAccessTokenDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<FacebookAccessToken>) modelList;
+            return (DataList<SpamWord>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                    SpamWordRepository repo = restAdapter.createRepository(SpamWordRepository.class);
                     repo.addStorage(context);
-                    modelList.add((FacebookAccessToken)repo.createObject(hashMap));
+                    modelList.add((SpamWord)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
         cursor.close();
         // return contact list
-        return (DataList<FacebookAccessToken>) modelList;
+        return (DataList<SpamWord>) modelList;
     }
 
 
 
     // Getting All Data where
-    public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+    public DataList<SpamWord>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
         return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
@@ -582,7 +574,7 @@ public class FacebookAccessTokenDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `SpamWord` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -592,9 +584,9 @@ public class FacebookAccessTokenDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `SpamWord` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT -1 OFFSET " + skip;
+                countQuery = "SELECT  * FROM `SpamWord` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -618,9 +610,9 @@ public class FacebookAccessTokenDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `SpamWord` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT -1 OFFSET " + skip;
+            countQuery = "SELECT  * FROM `SpamWord` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -650,7 +642,7 @@ public class FacebookAccessTokenDb{
             values.put("_DATA_UPDATED", 0);
             String where = getWhere(whereKeyValue);
             // updating row
-            db.update("`FacebookAccessToken`", values, "_DATA_UPDATED = 1 AND " + where, null);
+            db.update("`SpamWord`", values, "_DATA_UPDATED = 1 AND " + where, null);
     }
 
 
@@ -658,7 +650,7 @@ public class FacebookAccessTokenDb{
     public void deleteOldData__db(final HashMap<String, Object> whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       String where = getWhere(whereKeyValue);
-      db.delete("`FacebookAccessToken`", "_DATA_UPDATED = 0 AND " + where , null);
+      db.delete("`SpamWord`", "_DATA_UPDATED = 0 AND " + where , null);
     }
 
 
@@ -669,7 +661,7 @@ public class FacebookAccessTokenDb{
     public void delete__db(final HashMap<String, Object> whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       String where = getWhere(whereKeyValue);
-      db.delete("`FacebookAccessToken`", where , null);
+      db.delete("`SpamWord`", where , null);
     }
 
 
@@ -679,30 +671,30 @@ public class FacebookAccessTokenDb{
 
 
     // Getting All Data where
-    public DataList<FacebookAccessToken>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
+    public DataList<SpamWord>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<SpamWord> modelList = new DataList<SpamWord>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `FacebookAccessToken` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `SpamWord` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<FacebookAccessToken>) modelList;
+            return (DataList<SpamWord>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                    SpamWordRepository repo = restAdapter.createRepository(SpamWordRepository.class);
                     repo.addStorage(context);
-                    modelList.add((FacebookAccessToken)repo.createObject(hashMap));
+                    modelList.add((SpamWord)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
         cursor.close();
-        return (DataList<FacebookAccessToken>) modelList;
+        return (DataList<SpamWord>) modelList;
     }
 
 
@@ -714,7 +706,7 @@ public class FacebookAccessTokenDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-      String countQuery = "SELECT  * FROM `FacebookAccessToken` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+      String countQuery = "SELECT  * FROM `SpamWord` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
       Cursor cursor = db.rawQuery(countQuery, null);
       int count = cursor.getCount();
@@ -729,23 +721,23 @@ public class FacebookAccessTokenDb{
       ContentValues values = new ContentValues();
       values.put("_DATA_UPDATED", 0);
       // updating row
-      db.update("`FacebookAccessToken`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+      db.update("`SpamWord`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
     }
 
 
     // Delete Old data with where clause
     public void deleteOldData__db(final String whereKey, final String whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-      db.delete("`FacebookAccessToken`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+      db.delete("`SpamWord`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
     }
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final FacebookAccessToken _modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final SpamWord _modelData ){
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       ContentValues values = getContentValues(_modelData);
       String where = getWhere(whereKeyValue);
-      db.update("`FacebookAccessToken`", values, where, null);
+      db.update("`SpamWord`", values, where, null);
     }
 
 
@@ -760,11 +752,11 @@ public class FacebookAccessTokenDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final FacebookAccessToken _modelData) {
+    public void update__db(final String id,   final SpamWord _modelData) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       ContentValues values = getContentValues(_modelData);
       // updating row
-      db.update("`FacebookAccessToken`", values, "id = ?", new String[] { id });
+      db.update("`SpamWord`", values, "id = ?", new String[] { id });
     }
 
 
@@ -774,14 +766,14 @@ public class FacebookAccessTokenDb{
       ContentValues values = new ContentValues();
       values.put("_DATA_UPDATED", 0);
       // updating row
-      db.update("`FacebookAccessToken`", values, "_DATA_UPDATED = 1", null);
+      db.update("`SpamWord`", values, "_DATA_UPDATED = 1", null);
     }
 
 
     // Delete Old data
     public void deleteOldData__db() {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-      db.delete("`FacebookAccessToken`", "_DATA_UPDATED = 0", null);
+      db.delete("`SpamWord`", "_DATA_UPDATED = 0", null);
     }
 
 

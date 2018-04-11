@@ -26,12 +26,26 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatItemRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentResponseRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRoomRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PostRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.NewsRepository;
             
 
         
@@ -44,13 +58,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatItemRepository;
         
     
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatItemRepository;
-            
-
-        
-    
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,7 +65,7 @@ import java.util.Map;
 
 
 
-public class ChatItem extends Model {
+public class CommentResponse extends Model {
 
 
     //For converting all model values to hashMap
@@ -73,33 +80,12 @@ public class ChatItem extends Model {
         }
     }
 
-    private ChatItem that ;
+    private CommentResponse that ;
 
-    public ChatItem (){
+    public CommentResponse (){
         that = this;
     }
 
-    
-        
-            
-
-            
-                private String username;
-                /* Adding Getter and Setter methods */
-                public String getUsername(){
-                    return username;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUsername(String username){
-                    this.username = username;
-                    //Update hashMap value..
-                    hashMap.put("username", username);
-                }
-
-            
-            
-        
     
         
             
@@ -147,80 +133,17 @@ public class ChatItem extends Model {
             
 
             
-                private Map<String, Object> image;
+                private String username;
                 /* Adding Getter and Setter methods */
-                public Map<String, Object> getImage(){
-                    return image;
+                public String getUsername(){
+                    return username;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setImage(Map<String, Object> image){
-                    this.image = image;
-                    //Update Map value..
-                    hashMap.put("image", image);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String type;
-                /* Adding Getter and Setter methods */
-                public String getType(){
-                    return type;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setType(String type){
-                    this.type = type;
+                public void setUsername(String username){
+                    this.username = username;
                     //Update hashMap value..
-                    hashMap.put("type", type);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String readStatus;
-                /* Adding Getter and Setter methods */
-                public String getReadStatus(){
-                    return readStatus;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setReadStatus(String readStatus){
-                    this.readStatus = readStatus;
-                    //Update hashMap value..
-                    hashMap.put("readStatus", readStatus);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String guid;
-                /* Adding Getter and Setter methods */
-                public String getGuid(){
-                    return guid;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setGuid(String guid){
-                    this.guid = guid;
-                    //Update hashMap value..
-                    hashMap.put("guid", guid);
+                    hashMap.put("username", username);
                 }
 
             
@@ -242,6 +165,27 @@ public class ChatItem extends Model {
                     this.added = added;
                     //Update hashMap value..
                     hashMap.put("added", added);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private double cricUserId;
+                /* Adding Getter and Setter methods */
+                public double getCricUserId(){
+                    return cricUserId;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setCricUserId(double cricUserId){
+                    this.cricUserId = cricUserId;
+                    //Update hashMap value..
+                    hashMap.put("cricUserId", cricUserId);
                 }
 
             
@@ -294,90 +238,6 @@ public class ChatItem extends Model {
             
 
             
-                private boolean isMarkedInsensitive;
-                /* Adding Getter and Setter methods */
-                public boolean getIsMarkedInsensitive(){
-                    return isMarkedInsensitive;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setIsMarkedInsensitive(boolean isMarkedInsensitive){
-                    this.isMarkedInsensitive = isMarkedInsensitive;
-                    //Update hashMap value..
-                    hashMap.put("isMarkedInsensitive", isMarkedInsensitive);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String displayMessage;
-                /* Adding Getter and Setter methods */
-                public String getDisplayMessage(){
-                    return displayMessage;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setDisplayMessage(String displayMessage){
-                    this.displayMessage = displayMessage;
-                    //Update hashMap value..
-                    hashMap.put("displayMessage", displayMessage);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private Map<String, Object> replyTo;
-                /* Adding Getter and Setter methods */
-                public Map<String, Object> getReplyTo(){
-                    return replyTo;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setReplyTo(Map<String, Object> replyTo){
-                    this.replyTo = replyTo;
-                    //Update Map value..
-                    hashMap.put("replyTo", replyTo);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String from;
-                /* Adding Getter and Setter methods */
-                public String getFrom(){
-                    return from;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setFrom(String from){
-                    this.from = from;
-                    //Update hashMap value..
-                    hashMap.put("from", from);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
                 private String status;
                 /* Adding Getter and Setter methods */
                 public String getStatus(){
@@ -399,18 +259,25 @@ public class ChatItem extends Model {
             
 
             
-                private double chatUserId;
+                private String uniqueNumber;
                 /* Adding Getter and Setter methods */
-                public double getChatUserId(){
-                    return chatUserId;
+                public String getUniqueNumber(){
+                    return uniqueNumber;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setChatUserId(double chatUserId){
-                    this.chatUserId = chatUserId;
+                public void setUniqueNumber(String uniqueNumber){
+                    this.uniqueNumber = uniqueNumber;
                     //Update hashMap value..
-                    hashMap.put("chatUserId", chatUserId);
+                    hashMap.put("uniqueNumber", uniqueNumber);
                 }
+
+            
+            
+        
+    
+        
+            
 
             
             
@@ -457,7 +324,7 @@ public class ChatItem extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      ChatItemRepository lowercaseFirstLetterRepository = (ChatItemRepository) getRepository();
+      CommentResponseRepository lowercaseFirstLetterRepository = (CommentResponseRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -472,7 +339,7 @@ public class ChatItem extends Model {
 
 
     public void save__db(String id){
-      ChatItemRepository lowercaseFirstLetterRepository = (ChatItemRepository) getRepository();
+      CommentResponseRepository lowercaseFirstLetterRepository = (CommentResponseRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -483,7 +350,7 @@ public class ChatItem extends Model {
 
 
     public void delete__db(){
-      ChatItemRepository lowercaseFirstLetterRepository = (ChatItemRepository) getRepository();
+      CommentResponseRepository lowercaseFirstLetterRepository = (CommentResponseRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -518,80 +385,80 @@ public class ChatItem extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient ChatRoom  chatRoom ;
-                    private String chatRoomId;
+                    private transient Post  post ;
+                    private String postId;
 
-                    public String getChatRoomId(){
-                         return chatRoomId;
+                    public String getPostId(){
+                         return postId;
                     }
 
-                    public void setChatRoomId(Object chatRoomId){
-                        if(chatRoomId != null){
-                          this.chatRoomId = chatRoomId.toString();
+                    public void setPostId(Object postId){
+                        if(postId != null){
+                          this.postId = postId.toString();
                         }
                     }
 
-                    public ChatRoom getChatRoom() {
+                    public Post getPost() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(chatRoom == null){
-                                        ChatItemRepository chatItemRepository = (ChatItemRepository) getRepository();
+                                      if(post == null){
+                                        CommentResponseRepository commentResponseRepository = (CommentResponseRepository) getRepository();
 
-                                        SnaphyRestAdapter restAdapter = chatItemRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = commentResponseRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          chatRoom = getChatRoom__db(restAdapter);
+                                          post = getPost__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return chatRoom;
+                        return post;
                     }
 
-                    public void setChatRoom(ChatRoom chatRoom) {
-                        this.chatRoom = chatRoom;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setChatRoom(Map<String, Object> chatRoom) {
-                        //First create a dummy Repo class object for customer.
-                        ChatRoomRepository chatRoomRepository = new ChatRoomRepository();
-                        ChatRoom chatRoom1 = chatRoomRepository.createObject(chatRoom);
-                        setChatRoom(chatRoom1);
+                    public void setPost(Post post) {
+                        this.post = post;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setChatRoom(HashMap<String, Object> chatRoom) {
+                    public void setPost(Map<String, Object> post) {
                         //First create a dummy Repo class object for customer.
-                        ChatRoomRepository chatRoomRepository = new ChatRoomRepository();
-                        ChatRoom chatRoom1 = chatRoomRepository.createObject(chatRoom);
-                        setChatRoom(chatRoom1);
+                        PostRepository postRepository = new PostRepository();
+                        Post post1 = postRepository.createObject(post);
+                        setPost(post1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setPost(HashMap<String, Object> post) {
+                        //First create a dummy Repo class object for customer.
+                        PostRepository postRepository = new PostRepository();
+                        Post post1 = postRepository.createObject(post);
+                        setPost(post1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(ChatRoom chatRoom) {
-                        that.setChatRoom(chatRoom);
+                    public void addRelation(Post post) {
+                        that.setPost(post);
                     }
 
 
-                    //Fetch related data from local database if present a chatRoomId identifier as property for belongsTo
-                    public ChatRoom getChatRoom__db(SnaphyRestAdapter restAdapter){
-                      if(chatRoomId != null){
-                        ChatRoomRepository chatRoomRepository = restAdapter.createRepository(ChatRoomRepository.class);
+                    //Fetch related data from local database if present a postId identifier as property for belongsTo
+                    public Post getPost__db(SnaphyRestAdapter restAdapter){
+                      if(postId != null){
+                        PostRepository postRepository = restAdapter.createRepository(PostRepository.class);
                             try{
-                            ChatItemRepository lowercaseFirstLetterRepository = (ChatItemRepository) getRepository();
+                            CommentResponseRepository lowercaseFirstLetterRepository = (CommentResponseRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(chatRoomRepository.getDb() == null ){
-                                                    chatRoomRepository.addStorage(context);
+                                                if(postRepository.getDb() == null ){
+                                                    postRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && chatRoomRepository.getDb() != null){
-                                                    chatRoomRepository.addStorage(context);
-                                                    ChatRoom chatRoom = (ChatRoom) chatRoomRepository.getDb().get__db(chatRoomId);
-                                                    return chatRoom;
+                                                if(context != null && postRepository.getDb() != null){
+                                                    postRepository.addStorage(context);
+                                                    Post post = (Post) postRepository.getDb().get__db(postId);
+                                                    return post;
                                                 }else{
                                                     return null;
                                                 }
@@ -624,12 +491,12 @@ public class ChatItem extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__chatRoom( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<ChatRoom> callback) {
+                                    public void get__post( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Post> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final ChatItemRepository  chatItemRepo = restAdapter.createRepository(ChatItemRepository.class);
+                                        final CommentResponseRepository  commentResponseRepo = restAdapter.createRepository(CommentResponseRepository.class);
                                         
                                         
                                         
@@ -638,13 +505,13 @@ public class ChatItem extends Model {
 
 
 
-                                        chatItemRepo.get__chatRoom( (String)that.getId(), refresh,  new ObjectCallback<ChatRoom> (){
+                                        commentResponseRepo.get__post( (String)that.getId(), refresh,  new ObjectCallback<Post> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(ChatRoom object) {
+                                                    public void onSuccess(Post object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -682,6 +549,484 @@ public class ChatItem extends Model {
                             
                          
                             
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+                    //Define belongsTo relation method here..
+                    private transient Comment  comment ;
+                    private String commentId;
+
+                    public String getCommentId(){
+                         return commentId;
+                    }
+
+                    public void setCommentId(Object commentId){
+                        if(commentId != null){
+                          this.commentId = commentId.toString();
+                        }
+                    }
+
+                    public Comment getComment() {
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(comment == null){
+                                        CommentResponseRepository commentResponseRepository = (CommentResponseRepository) getRepository();
+
+                                        SnaphyRestAdapter restAdapter = commentResponseRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          comment = getComment__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
+
+                        return comment;
+                    }
+
+                    public void setComment(Comment comment) {
+                        this.comment = comment;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setComment(Map<String, Object> comment) {
+                        //First create a dummy Repo class object for customer.
+                        CommentRepository commentRepository = new CommentRepository();
+                        Comment comment1 = commentRepository.createObject(comment);
+                        setComment(comment1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setComment(HashMap<String, Object> comment) {
+                        //First create a dummy Repo class object for customer.
+                        CommentRepository commentRepository = new CommentRepository();
+                        Comment comment1 = commentRepository.createObject(comment);
+                        setComment(comment1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(Comment comment) {
+                        that.setComment(comment);
+                    }
+
+
+                    //Fetch related data from local database if present a commentId identifier as property for belongsTo
+                    public Comment getComment__db(SnaphyRestAdapter restAdapter){
+                      if(commentId != null){
+                        CommentRepository commentRepository = restAdapter.createRepository(CommentRepository.class);
+                            try{
+                            CommentResponseRepository lowercaseFirstLetterRepository = (CommentResponseRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(commentRepository.getDb() == null ){
+                                                    commentRepository.addStorage(context);
+                                                }
+
+                                                if(context != null && commentRepository.getDb() != null){
+                                                    commentRepository.addStorage(context);
+                                                    Comment comment = (Comment) commentRepository.getDb().get__db(commentId);
+                                                    return comment;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
+
+                        }else{
+                          return null;
+                      }
+                    }
+                
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__comment( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Comment> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CommentResponseRepository  commentResponseRepo = restAdapter.createRepository(CommentResponseRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        commentResponseRepo.get__comment( (String)that.getId(), refresh,  new ObjectCallback<Comment> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Comment object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+                    //Define belongsTo relation method here..
+                    private transient News  news ;
+                    private String newsId;
+
+                    public String getNewsId(){
+                         return newsId;
+                    }
+
+                    public void setNewsId(Object newsId){
+                        if(newsId != null){
+                          this.newsId = newsId.toString();
+                        }
+                    }
+
+                    public News getNews() {
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(news == null){
+                                        CommentResponseRepository commentResponseRepository = (CommentResponseRepository) getRepository();
+
+                                        SnaphyRestAdapter restAdapter = commentResponseRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          news = getNews__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
+
+                        return news;
+                    }
+
+                    public void setNews(News news) {
+                        this.news = news;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setNews(Map<String, Object> news) {
+                        //First create a dummy Repo class object for customer.
+                        NewsRepository newsRepository = new NewsRepository();
+                        News news1 = newsRepository.createObject(news);
+                        setNews(news1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setNews(HashMap<String, Object> news) {
+                        //First create a dummy Repo class object for customer.
+                        NewsRepository newsRepository = new NewsRepository();
+                        News news1 = newsRepository.createObject(news);
+                        setNews(news1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(News news) {
+                        that.setNews(news);
+                    }
+
+
+                    //Fetch related data from local database if present a newsId identifier as property for belongsTo
+                    public News getNews__db(SnaphyRestAdapter restAdapter){
+                      if(newsId != null){
+                        NewsRepository newsRepository = restAdapter.createRepository(NewsRepository.class);
+                            try{
+                            CommentResponseRepository lowercaseFirstLetterRepository = (CommentResponseRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(newsRepository.getDb() == null ){
+                                                    newsRepository.addStorage(context);
+                                                }
+
+                                                if(context != null && newsRepository.getDb() != null){
+                                                    newsRepository.addStorage(context);
+                                                    News news = (News) newsRepository.getDb().get__db(newsId);
+                                                    return news;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
+
+                        }else{
+                          return null;
+                      }
+                    }
+                
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__news( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<News> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CommentResponseRepository  commentResponseRepo = restAdapter.createRepository(CommentResponseRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        commentResponseRepo.get__news( (String)that.getId(), refresh,  new ObjectCallback<News> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(News object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -753,9 +1098,9 @@ public class ChatItem extends Model {
                         try{
                           //Adding database method for fetching from relation if not present..
                                       if(appUser == null){
-                                        ChatItemRepository chatItemRepository = (ChatItemRepository) getRepository();
+                                        CommentResponseRepository commentResponseRepository = (CommentResponseRepository) getRepository();
 
-                                        SnaphyRestAdapter restAdapter = chatItemRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = commentResponseRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           appUser = getAppUser__db(restAdapter);
@@ -799,7 +1144,7 @@ public class ChatItem extends Model {
                       if(appUserId != null){
                         AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
                             try{
-                            ChatItemRepository lowercaseFirstLetterRepository = (ChatItemRepository) getRepository();
+                            CommentResponseRepository lowercaseFirstLetterRepository = (CommentResponseRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
                                                 if(appUserRepository.getDb() == null ){
@@ -841,6 +1186,8 @@ public class ChatItem extends Model {
 
                      
                             
+                         
+                            
                         
 
                                     //Write the method here..
@@ -849,7 +1196,7 @@ public class ChatItem extends Model {
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final ChatItemRepository  chatItemRepo = restAdapter.createRepository(ChatItemRepository.class);
+                                        final CommentResponseRepository  commentResponseRepo = restAdapter.createRepository(CommentResponseRepository.class);
                                         
                                         
                                         
@@ -858,7 +1205,7 @@ public class ChatItem extends Model {
 
 
 
-                                        chatItemRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
+                                        commentResponseRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
                                             
 
                                             
@@ -912,212 +1259,6 @@ public class ChatItem extends Model {
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
-          
-    
-        
-        
-                
-                    //Define belongsTo relation method here..
-                    private transient ChatItem  chatItem ;
-                    private String chatItemId;
-
-                    public String getChatItemId(){
-                         return chatItemId;
-                    }
-
-                    public void setChatItemId(Object chatItemId){
-                        if(chatItemId != null){
-                          this.chatItemId = chatItemId.toString();
-                        }
-                    }
-
-                    public ChatItem getChatItem() {
-                        try{
-                          //Adding database method for fetching from relation if not present..
-                                      if(chatItem == null){
-                                        ChatItemRepository chatItemRepository = (ChatItemRepository) getRepository();
-
-                                        SnaphyRestAdapter restAdapter = chatItemRepository.getRestAdapter();
-                                        if(restAdapter != null){
-                                          //Fetch locally from db
-                                          chatItem = getChatItem__db(restAdapter);
-                                        }
-                                      }
-                        }catch(Exception e){
-                          //Ignore
-                        }
-
-                        return chatItem;
-                    }
-
-                    public void setChatItem(ChatItem chatItem) {
-                        this.chatItem = chatItem;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setChatItem(Map<String, Object> chatItem) {
-                        //First create a dummy Repo class object for customer.
-                        ChatItemRepository chatItemRepository = new ChatItemRepository();
-                        ChatItem chatItem1 = chatItemRepository.createObject(chatItem);
-                        setChatItem(chatItem1);
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setChatItem(HashMap<String, Object> chatItem) {
-                        //First create a dummy Repo class object for customer.
-                        ChatItemRepository chatItemRepository = new ChatItemRepository();
-                        ChatItem chatItem1 = chatItemRepository.createObject(chatItem);
-                        setChatItem(chatItem1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(ChatItem chatItem) {
-                        that.setChatItem(chatItem);
-                    }
-
-
-                    //Fetch related data from local database if present a chatItemId identifier as property for belongsTo
-                    public ChatItem getChatItem__db(SnaphyRestAdapter restAdapter){
-                      if(chatItemId != null){
-                        ChatItemRepository chatItemRepository = restAdapter.createRepository(ChatItemRepository.class);
-                            try{
-                            ChatItemRepository lowercaseFirstLetterRepository = (ChatItemRepository) getRepository();
-                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-                                                Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(chatItemRepository.getDb() == null ){
-                                                    chatItemRepository.addStorage(context);
-                                                }
-
-                                                if(context != null && chatItemRepository.getDb() != null){
-                                                    chatItemRepository.addStorage(context);
-                                                    ChatItem chatItem = (ChatItem) chatItemRepository.getDb().get__db(chatItemId);
-                                                    return chatItem;
-                                                }else{
-                                                    return null;
-                                                }
-                                          }else{
-                                            return null;
-                                          }
-                            }catch(Exception e){
-                            //Ignore exception..
-                            return null;
-                            }
-
-                        }else{
-                          return null;
-                      }
-                    }
-                
-
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__chatItem( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final ChatItemRepository  chatItemRepo = restAdapter.createRepository(ChatItemRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        chatItemRepo.get__chatItem( (String)that.getId(), refresh,  new ObjectCallback<ChatItem> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(ChatItem object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
                         
                         
                         

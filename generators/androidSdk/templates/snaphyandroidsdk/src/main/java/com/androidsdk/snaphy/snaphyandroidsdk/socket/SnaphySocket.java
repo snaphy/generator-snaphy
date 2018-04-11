@@ -30,13 +30,13 @@ public class SnaphySocket<M extends Model, R extends ModelRepository<M>> {
     private String namespace = "";
     private String TAG = "SnaphySocket";
     //private MainActivity mainActivity;
-
+    private Socket mainSocket;
 
     public SnaphySocket(R dataRepository, HashMap<String, String> where, String baseUrl){
         //this.mainActivity = mainActivity;
         this.where = where;
         this.dataRepository = dataRepository;
-        final Socket mainSocket;
+        
         try {
             mainSocket = IO.socket(new URI(baseUrl));
             getDetails();
@@ -110,9 +110,22 @@ public class SnaphySocket<M extends Model, R extends ModelRepository<M>> {
     public void leave(){
         //socket.emit('leave', this.room);
         socket.emit("leave", room);
+
+        //Turn off the socket listener..
+        try{
+            if(socket != null){
+                socket.off();
+            }
+
+            if(mainSocket != null){
+                mainSocket.off();
+            }
+        }
+        catch(Exception e){
+            //Caught
+            Log.e("SnaphySocket", e.toString());
+        }
     }
-
-
 
     /**
      * Subscriber fires when a new data is to be Updated.

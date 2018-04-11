@@ -26,12 +26,12 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.QuickMessageRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRoomRepository;
             
 
         
@@ -44,7 +44,7 @@ import java.util.Map;
 
 
 
-public class FacebookAccessToken extends Model {
+public class QuickMessage extends Model {
 
 
     //For converting all model values to hashMap
@@ -59,9 +59,9 @@ public class FacebookAccessToken extends Model {
         }
     }
 
-    private FacebookAccessToken that ;
+    private QuickMessage that ;
 
-    public FacebookAccessToken (){
+    public QuickMessage (){
         that = this;
     }
 
@@ -70,17 +70,17 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String FbUserId;
+                private String title;
                 /* Adding Getter and Setter methods */
-                public String getFbUserId(){
-                    return FbUserId;
+                public String getTitle(){
+                    return title;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFbUserId(String FbUserId){
-                    this.FbUserId = FbUserId;
+                public void setTitle(String title){
+                    this.title = title;
                     //Update hashMap value..
-                    hashMap.put("FbUserId", FbUserId);
+                    hashMap.put("title", title);
                 }
 
             
@@ -91,17 +91,17 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String token;
+                private String added;
                 /* Adding Getter and Setter methods */
-                public String getToken(){
-                    return token;
+                public String getAdded(){
+                    return added;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setToken(String token){
-                    this.token = token;
+                public void setAdded(String added){
+                    this.added = added;
                     //Update hashMap value..
-                    hashMap.put("token", token);
+                    hashMap.put("added", added);
                 }
 
             
@@ -112,17 +112,17 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String expires;
+                private String updated;
                 /* Adding Getter and Setter methods */
-                public String getExpires(){
-                    return expires;
+                public String getUpdated(){
+                    return updated;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setExpires(String expires){
-                    this.expires = expires;
+                public void setUpdated(String updated){
+                    this.updated = updated;
                     //Update hashMap value..
-                    hashMap.put("expires", expires);
+                    hashMap.put("updated", updated);
                 }
 
             
@@ -133,25 +133,25 @@ public class FacebookAccessToken extends Model {
             
 
             
+                private double uniqueNumber;
+                /* Adding Getter and Setter methods */
+                public double getUniqueNumber(){
+                    return uniqueNumber;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUniqueNumber(double uniqueNumber){
+                    this.uniqueNumber = uniqueNumber;
+                    //Update hashMap value..
+                    hashMap.put("uniqueNumber", uniqueNumber);
+                }
+
+            
             
         
     
         
             
-
-            
-                private String type;
-                /* Adding Getter and Setter methods */
-                public String getType(){
-                    return type;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setType(String type){
-                    this.type = type;
-                    //Update hashMap value..
-                    hashMap.put("type", type);
-                }
 
             
             
@@ -177,7 +177,7 @@ public class FacebookAccessToken extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+      QuickMessageRepository lowercaseFirstLetterRepository = (QuickMessageRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -192,7 +192,7 @@ public class FacebookAccessToken extends Model {
 
 
     public void save__db(String id){
-      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+      QuickMessageRepository lowercaseFirstLetterRepository = (QuickMessageRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -203,7 +203,7 @@ public class FacebookAccessToken extends Model {
 
 
     public void delete__db(){
-      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+      QuickMessageRepository lowercaseFirstLetterRepository = (QuickMessageRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -238,80 +238,80 @@ public class FacebookAccessToken extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient AppUser  appUser ;
-                    private String userId;
+                    private transient ChatRoom  chatRoom ;
+                    private String chatRoomId;
 
-                    public String getUserId(){
-                         return userId;
+                    public String getChatRoomId(){
+                         return chatRoomId;
                     }
 
-                    public void setUserId(Object userId){
-                        if(userId != null){
-                          this.userId = userId.toString();
+                    public void setChatRoomId(Object chatRoomId){
+                        if(chatRoomId != null){
+                          this.chatRoomId = chatRoomId.toString();
                         }
                     }
 
-                    public AppUser getAppUser() {
+                    public ChatRoom getChatRoom() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(appUser == null){
-                                        FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
+                                      if(chatRoom == null){
+                                        QuickMessageRepository quickMessageRepository = (QuickMessageRepository) getRepository();
 
-                                        SnaphyRestAdapter restAdapter = facebookAccessTokenRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = quickMessageRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          appUser = getAppUser__db(restAdapter);
+                                          chatRoom = getChatRoom__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return appUser;
+                        return chatRoom;
                     }
 
-                    public void setAppUser(AppUser appUser) {
-                        this.appUser = appUser;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setAppUser(Map<String, Object> appUser) {
-                        //First create a dummy Repo class object for customer.
-                        AppUserRepository appUserRepository = new AppUserRepository();
-                        AppUser appUser1 = appUserRepository.createObject(appUser);
-                        setAppUser(appUser1);
+                    public void setChatRoom(ChatRoom chatRoom) {
+                        this.chatRoom = chatRoom;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setAppUser(HashMap<String, Object> appUser) {
+                    public void setChatRoom(Map<String, Object> chatRoom) {
                         //First create a dummy Repo class object for customer.
-                        AppUserRepository appUserRepository = new AppUserRepository();
-                        AppUser appUser1 = appUserRepository.createObject(appUser);
-                        setAppUser(appUser1);
+                        ChatRoomRepository chatRoomRepository = new ChatRoomRepository();
+                        ChatRoom chatRoom1 = chatRoomRepository.createObject(chatRoom);
+                        setChatRoom(chatRoom1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setChatRoom(HashMap<String, Object> chatRoom) {
+                        //First create a dummy Repo class object for customer.
+                        ChatRoomRepository chatRoomRepository = new ChatRoomRepository();
+                        ChatRoom chatRoom1 = chatRoomRepository.createObject(chatRoom);
+                        setChatRoom(chatRoom1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(AppUser appUser) {
-                        that.setAppUser(appUser);
+                    public void addRelation(ChatRoom chatRoom) {
+                        that.setChatRoom(chatRoom);
                     }
 
 
-                    //Fetch related data from local database if present a userId identifier as property for belongsTo
-                    public AppUser getAppUser__db(SnaphyRestAdapter restAdapter){
-                      if(userId != null){
-                        AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
+                    //Fetch related data from local database if present a chatRoomId identifier as property for belongsTo
+                    public ChatRoom getChatRoom__db(SnaphyRestAdapter restAdapter){
+                      if(chatRoomId != null){
+                        ChatRoomRepository chatRoomRepository = restAdapter.createRepository(ChatRoomRepository.class);
                             try{
-                            FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+                            QuickMessageRepository lowercaseFirstLetterRepository = (QuickMessageRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(appUserRepository.getDb() == null ){
-                                                    appUserRepository.addStorage(context);
+                                                if(chatRoomRepository.getDb() == null ){
+                                                    chatRoomRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && appUserRepository.getDb() != null){
-                                                    appUserRepository.addStorage(context);
-                                                    AppUser appUser = (AppUser) appUserRepository.getDb().get__db(userId);
-                                                    return appUser;
+                                                if(context != null && chatRoomRepository.getDb() != null){
+                                                    chatRoomRepository.addStorage(context);
+                                                    ChatRoom chatRoom = (ChatRoom) chatRoomRepository.getDb().get__db(chatRoomId);
+                                                    return chatRoom;
                                                 }else{
                                                     return null;
                                                 }
@@ -344,12 +344,12 @@ public class FacebookAccessToken extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__appUser( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                    public void get__chatRoom( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<ChatRoom> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final FacebookAccessTokenRepository  facebookAccessTokenRepo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                                        final QuickMessageRepository  quickMessageRepo = restAdapter.createRepository(QuickMessageRepository.class);
                                         
                                         
                                         
@@ -358,13 +358,13 @@ public class FacebookAccessToken extends Model {
 
 
 
-                                        facebookAccessTokenRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
+                                        quickMessageRepo.get__chatRoom( (String)that.getId(), refresh,  new ObjectCallback<ChatRoom> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(AppUser object) {
+                                                    public void onSuccess(ChatRoom object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -398,6 +398,7 @@ public class FacebookAccessToken extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

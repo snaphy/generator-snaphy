@@ -23,16 +23,16 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.OnParseCursor;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.LazyList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.ChatItem;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.ChatRoom;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatItemRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRoomRepository;
 import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class ChatItemDb{
+public class ChatRoomDb{
 
     // All Static variables
     SnaphyRestAdapter restAdapter;
@@ -54,52 +54,49 @@ public class ChatItemDb{
         return db;
     }
 
-  public ChatItemDb(Context context, String DATABASE_NAME, SnaphyRestAdapter restAdapter){
+  public ChatRoomDb(Context context, String DATABASE_NAME, SnaphyRestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "ChatItem";
+    TABLE = "ChatRoom";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final ChatItem _modelData) {
+    public void insert__db (final String id, final ChatRoom _modelData) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       // Inserting Row
       ContentValues values = getContentValues(_modelData);
-      db.insert("`ChatItem`", null, values);
+      db.insert("`ChatRoom`", null, values);
     }
 
 
 
 
 
-    public ContentValues getContentValues(ChatItem _modelData){
+    public ContentValues getContentValues(ChatRoom _modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String usernameData = "";
-                        if(_modelData.getUsername() != null){
-                          usernameData = _modelData.getUsername().toString();
-                          values.put("`username`", usernameData);
+                                                            String roomNameData = "";
+                        if(_modelData.getRoomName() != null){
+                          roomNameData = _modelData.getRoomName().toString();
+                          values.put("`roomName`", roomNameData);
                         }
                                   
                                 
-                                                            String profilePicData = "";
-                        if(_modelData.getProfilePic() != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                          profilePicData = gson.toJson(_modelData.getProfilePic(), HashMap.class);
-                          values.put("`profilePic`", profilePicData);
+                                                            String shortNameData = "";
+                        if(_modelData.getShortName() != null){
+                          shortNameData = _modelData.getShortName().toString();
+                          values.put("`shortName`", shortNameData);
                         }
                                   
                                 
-                                                            String messageData = "";
-                        if(_modelData.getMessage() != null){
-                          messageData = _modelData.getMessage().toString();
-                          values.put("`message`", messageData);
+                                                            String titleData = "";
+                        if(_modelData.getTitle() != null){
+                          titleData = _modelData.getTitle().toString();
+                          values.put("`title`", titleData);
                         }
                                   
                                 
@@ -113,24 +110,41 @@ public class ChatItemDb{
                         }
                                   
                                 
-                                                            String typeData = "";
-                        if(_modelData.getType() != null){
-                          typeData = _modelData.getType().toString();
-                          values.put("`type`", typeData);
+                                                            String statusData = "";
+                        if(_modelData.getStatus() != null){
+                          statusData = _modelData.getStatus().toString();
+                          values.put("`status`", statusData);
                         }
                                   
                                 
-                                                            String readStatusData = "";
-                        if(_modelData.getReadStatus() != null){
-                          readStatusData = _modelData.getReadStatus().toString();
-                          values.put("`readStatus`", readStatusData);
+                                                            String startTimeData = "";
+                        if(_modelData.getStartTime() != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          startTimeData = gson.toJson(_modelData.getStartTime(), HashMap.class);
+                          values.put("`startTime`", startTimeData);
                         }
                                   
                                 
-                                                            String guidData = "";
-                        if(_modelData.getGuid() != null){
-                          guidData = _modelData.getGuid().toString();
-                          values.put("`guid`", guidData);
+                                                            String startDateData = "";
+                        if(_modelData.getStartDate() != null){
+                          startDateData = _modelData.getStartDate().toString();
+                          values.put("`startDate`", startDateData);
+                        }
+                                  
+                                
+                                                            String closingDateData = "";
+                        if(_modelData.getClosingDate() != null){
+                          closingDateData = _modelData.getClosingDate().toString();
+                          values.put("`closingDate`", closingDateData);
+                        }
+                                  
+                                
+                                                            String matchDateData = "";
+                        if(_modelData.getMatchDate() != null){
+                          matchDateData = _modelData.getMatchDate().toString();
+                          values.put("`matchDate`", matchDateData);
                         }
                                   
                                 
@@ -148,56 +162,25 @@ public class ChatItemDb{
                         }
                                   
                                 
-                                                            String oriUserIdData = "";
-                        if(_modelData.getOriUserId() != null){
-                          oriUserIdData = _modelData.getOriUserId().toString();
-                          values.put("`oriUserId`", oriUserIdData);
+                                                            String uniqueKeyData = "";
+                        if(_modelData.getUniqueKey() != null){
+                          uniqueKeyData = _modelData.getUniqueKey().toString();
+                          values.put("`uniqueKey`", uniqueKeyData);
                         }
                                   
                                 
-                                                            int isMarkedInsensitiveData = 0;
-                        if(_modelData.getIsMarkedInsensitive()){
-                          isMarkedInsensitiveData = 1;
-                        }else{
-                          isMarkedInsensitiveData = 0;
-                        }
-                        values.put("`isMarkedInsensitive`", isMarkedInsensitiveData);
-                                  
-                                
-                                                            String displayMessageData = "";
-                        if(_modelData.getDisplayMessage() != null){
-                          displayMessageData = _modelData.getDisplayMessage().toString();
-                          values.put("`displayMessage`", displayMessageData);
+                                                            String oriRoomIdData = "";
+                        if(_modelData.getOriRoomId() != null){
+                          oriRoomIdData = _modelData.getOriRoomId().toString();
+                          values.put("`oriRoomId`", oriRoomIdData);
                         }
                                   
                                 
-                                                            String replyToData = "";
-                        if(_modelData.getReplyTo() != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                          replyToData = gson.toJson(_modelData.getReplyTo(), HashMap.class);
-                          values.put("`replyTo`", replyToData);
+                                                            String typeData = "";
+                        if(_modelData.getType() != null){
+                          typeData = _modelData.getType().toString();
+                          values.put("`type`", typeData);
                         }
-                                  
-                                
-                                                            String fromData = "";
-                        if(_modelData.getFrom() != null){
-                          fromData = _modelData.getFrom().toString();
-                          values.put("`from`", fromData);
-                        }
-                                  
-                                
-                                                            String statusData = "";
-                        if(_modelData.getStatus() != null){
-                          statusData = _modelData.getStatus().toString();
-                          values.put("`status`", statusData);
-                        }
-                                  
-                                
-                                                            double chatUserIdData;
-                        chatUserIdData = (double)_modelData.getChatUserId();
-                        values.put("`chatUserId`", chatUserIdData);
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
@@ -216,43 +199,13 @@ public class ChatItemDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String chatRoomIdData = "";
+                        String categoryIdData = "";
                         try {
-                              Method method = _modelData.getClass().getMethod("getChatRoomId");
+                              Method method = _modelData.getClass().getMethod("getCategoryId");
                               if(method.invoke(_modelData) != null){
-                                //chatRoomIdData = _modelData.getChatRoomId().toString();
-                                chatRoomIdData = (String) method.invoke(_modelData);
-                                values.put("`chatRoomId`", chatRoomIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String appUserIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getAppUserId");
-                              if(method.invoke(_modelData) != null){
-                                //appUserIdData = _modelData.getAppUserId().toString();
-                                appUserIdData = (String) method.invoke(_modelData);
-                                values.put("`appUserId`", appUserIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String chatItemIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getChatItemId");
-                              if(method.invoke(_modelData) != null){
-                                //chatItemIdData = _modelData.getChatItemId().toString();
-                                chatItemIdData = (String) method.invoke(_modelData);
-                                values.put("`chatItemId`", chatItemIdData);
+                                //categoryIdData = _modelData.getCategoryId().toString();
+                                categoryIdData = (String) method.invoke(_modelData);
+                                values.put("`categoryId`", categoryIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -270,10 +223,10 @@ public class ChatItemDb{
 
 
     // Getting single c
-    public   ChatItem get__db(String id) {
+    public   ChatRoom get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("ChatItem", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("ChatRoom", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -282,9 +235,9 @@ public class ChatItemDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        ChatItemRepository repo = restAdapter.createRepository(ChatItemRepository.class);
+                        ChatRoomRepository repo = restAdapter.createRepository(ChatRoomRepository.class);
                         repo.addStorage(context);
-                        return (ChatItem)repo.createObject(hashMap);
+                        return (ChatRoom)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -303,10 +256,10 @@ public class ChatItemDb{
 
 
     // Getting single cont
-    public   ChatItem get__db(String whereKey, String whereKeyValue) {
+    public   ChatRoom get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("`ChatItem`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`ChatRoom`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -317,9 +270,9 @@ public class ChatItemDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        ChatItemRepository repo = restAdapter.createRepository(ChatItemRepository.class);
+                        ChatRoomRepository repo = restAdapter.createRepository(ChatRoomRepository.class);
                         repo.addStorage(context);
-                        return (ChatItem)repo.createObject(hashMap);
+                        return (ChatRoom)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -341,35 +294,32 @@ public class ChatItemDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String usernameData = "";
+                                                            String roomNameData = "";
                         if(cursor.getString(0) != null){
-                          usernameData = cursor.getString(0);
-                          if(usernameData != null){
-                            usernameData = (String)usernameData;
-                            hashMap.put("username", usernameData);
+                          roomNameData = cursor.getString(0);
+                          if(roomNameData != null){
+                            roomNameData = (String)roomNameData;
+                            hashMap.put("roomName", roomNameData);
                           }
                         }
                                                 
                                 
-                                                            Map<String, Object> profilePicData = new HashMap<>();
+                                                            String shortNameData = "";
                         if(cursor.getString(1) != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                           profilePicData = gson.fromJson(cursor.getString(1), Map.class);
-                          if(profilePicData != null){
-                            profilePicData = (Map<String, Object>)profilePicData;
-                            hashMap.put("profilePic", profilePicData);
+                          shortNameData = cursor.getString(1);
+                          if(shortNameData != null){
+                            shortNameData = (String)shortNameData;
+                            hashMap.put("shortName", shortNameData);
                           }
                         }
                                                 
                                 
-                                                            String messageData = "";
+                                                            String titleData = "";
                         if(cursor.getString(2) != null){
-                          messageData = cursor.getString(2);
-                          if(messageData != null){
-                            messageData = (String)messageData;
-                            hashMap.put("message", messageData);
+                          titleData = cursor.getString(2);
+                          if(titleData != null){
+                            titleData = (String)titleData;
+                            hashMap.put("title", titleData);
                           }
                         }
                                                 
@@ -387,39 +337,62 @@ public class ChatItemDb{
                         }
                                                 
                                 
-                                                            String typeData = "";
+                                                            String statusData = "";
                         if(cursor.getString(4) != null){
-                          typeData = cursor.getString(4);
-                          if(typeData != null){
-                            typeData = (String)typeData;
-                            hashMap.put("type", typeData);
+                          statusData = cursor.getString(4);
+                          if(statusData != null){
+                            statusData = (String)statusData;
+                            hashMap.put("status", statusData);
                           }
                         }
                                                 
                                 
-                                                            String readStatusData = "";
+                                                            Map<String, Object> startTimeData = new HashMap<>();
                         if(cursor.getString(5) != null){
-                          readStatusData = cursor.getString(5);
-                          if(readStatusData != null){
-                            readStatusData = (String)readStatusData;
-                            hashMap.put("readStatus", readStatusData);
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           startTimeData = gson.fromJson(cursor.getString(5), Map.class);
+                          if(startTimeData != null){
+                            startTimeData = (Map<String, Object>)startTimeData;
+                            hashMap.put("startTime", startTimeData);
                           }
                         }
                                                 
                                 
-                                                            String guidData = "";
+                                                            String startDateData = "";
                         if(cursor.getString(6) != null){
-                          guidData = cursor.getString(6);
-                          if(guidData != null){
-                            guidData = (String)guidData;
-                            hashMap.put("guid", guidData);
+                          startDateData = cursor.getString(6);
+                          if(startDateData != null){
+                            startDateData = (String)startDateData;
+                            hashMap.put("startDate", startDateData);
+                          }
+                        }
+                                                
+                                
+                                                            String closingDateData = "";
+                        if(cursor.getString(7) != null){
+                          closingDateData = cursor.getString(7);
+                          if(closingDateData != null){
+                            closingDateData = (String)closingDateData;
+                            hashMap.put("closingDate", closingDateData);
+                          }
+                        }
+                                                
+                                
+                                                            String matchDateData = "";
+                        if(cursor.getString(8) != null){
+                          matchDateData = cursor.getString(8);
+                          if(matchDateData != null){
+                            matchDateData = (String)matchDateData;
+                            hashMap.put("matchDate", matchDateData);
                           }
                         }
                                                 
                                 
                                                             String addedData = "";
-                        if(cursor.getString(7) != null){
-                          addedData = cursor.getString(7);
+                        if(cursor.getString(9) != null){
+                          addedData = cursor.getString(9);
                           if(addedData != null){
                             addedData = (String)addedData;
                             hashMap.put("added", addedData);
@@ -428,8 +401,8 @@ public class ChatItemDb{
                                                 
                                 
                                                             String updatedData = "";
-                        if(cursor.getString(8) != null){
-                          updatedData = cursor.getString(8);
+                        if(cursor.getString(10) != null){
+                          updatedData = cursor.getString(10);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -437,80 +410,39 @@ public class ChatItemDb{
                         }
                                                 
                                 
-                                                            String oriUserIdData = "";
-                        if(cursor.getString(9) != null){
-                          oriUserIdData = cursor.getString(9);
-                          if(oriUserIdData != null){
-                            oriUserIdData = (String)oriUserIdData;
-                            hashMap.put("oriUserId", oriUserIdData);
-                          }
-                        }
-                                                
-                                
-                                                            boolean isMarkedInsensitiveData = false;
-                        int tempisMarkedInsensitiveData = cursor.getInt(10);
-                        if( tempisMarkedInsensitiveData > 0){
-                          isMarkedInsensitiveData = true;
-                        }else{
-                          isMarkedInsensitiveData = false;
-                        }
-                        hashMap.put("isMarkedInsensitive", isMarkedInsensitiveData);
-                                                
-                                
-                                                            String displayMessageData = "";
+                                                            String uniqueKeyData = "";
                         if(cursor.getString(11) != null){
-                          displayMessageData = cursor.getString(11);
-                          if(displayMessageData != null){
-                            displayMessageData = (String)displayMessageData;
-                            hashMap.put("displayMessage", displayMessageData);
+                          uniqueKeyData = cursor.getString(11);
+                          if(uniqueKeyData != null){
+                            uniqueKeyData = (String)uniqueKeyData;
+                            hashMap.put("uniqueKey", uniqueKeyData);
                           }
                         }
                                                 
                                 
-                                                            Map<String, Object> replyToData = new HashMap<>();
+                                                            String oriRoomIdData = "";
                         if(cursor.getString(12) != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                           replyToData = gson.fromJson(cursor.getString(12), Map.class);
-                          if(replyToData != null){
-                            replyToData = (Map<String, Object>)replyToData;
-                            hashMap.put("replyTo", replyToData);
+                          oriRoomIdData = cursor.getString(12);
+                          if(oriRoomIdData != null){
+                            oriRoomIdData = (String)oriRoomIdData;
+                            hashMap.put("oriRoomId", oriRoomIdData);
                           }
                         }
                                                 
                                 
-                                                            String fromData = "";
+                                                            String typeData = "";
                         if(cursor.getString(13) != null){
-                          fromData = cursor.getString(13);
-                          if(fromData != null){
-                            fromData = (String)fromData;
-                            hashMap.put("from", fromData);
+                          typeData = cursor.getString(13);
+                          if(typeData != null){
+                            typeData = (String)typeData;
+                            hashMap.put("type", typeData);
                           }
                         }
-                                                
-                                
-                                                            String statusData = "";
-                        if(cursor.getString(14) != null){
-                          statusData = cursor.getString(14);
-                          if(statusData != null){
-                            statusData = (String)statusData;
-                            hashMap.put("status", statusData);
-                          }
-                        }
-                                                
-                                
-                                                            double chatUserIdData = (double)0;
-                          chatUserIdData = cursor.getInt(15);
-                          chatUserIdData = (double)chatUserIdData;
-                          hashMap.put("chatUserId", chatUserIdData);
-
-
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(16) != null){
-                          idData = cursor.getString(16);
+                        if(cursor.getString(14) != null){
+                          idData = cursor.getString(14);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -518,32 +450,12 @@ public class ChatItemDb{
                         }
                                                 
                                 
-                                                            String chatRoomIdData = "";
-                        if(cursor.getString(17) != null){
-                          chatRoomIdData = cursor.getString(17);
-                          if(chatRoomIdData != null){
-                            chatRoomIdData = chatRoomIdData.toString();
-                            hashMap.put("chatRoomId", chatRoomIdData);
-                          }
-                        }
-                                                
-                                
-                                                            String appUserIdData = "";
-                        if(cursor.getString(18) != null){
-                          appUserIdData = cursor.getString(18);
-                          if(appUserIdData != null){
-                            appUserIdData = appUserIdData.toString();
-                            hashMap.put("appUserId", appUserIdData);
-                          }
-                        }
-                                                
-                                
-                                                            String chatItemIdData = "";
-                        if(cursor.getString(19) != null){
-                          chatItemIdData = cursor.getString(19);
-                          if(chatItemIdData != null){
-                            chatItemIdData = chatItemIdData.toString();
-                            hashMap.put("chatItemId", chatItemIdData);
+                                                            String categoryIdData = "";
+                        if(cursor.getString(15) != null){
+                          categoryIdData = cursor.getString(15);
+                          if(categoryIdData != null){
+                            categoryIdData = categoryIdData.toString();
+                            hashMap.put("categoryId", categoryIdData);
                           }
                         }
                                                 
@@ -556,7 +468,7 @@ public class ChatItemDb{
 
 
 
-    public void upsert__db(String id, ChatItem model){
+    public void upsert__db(String id, ChatRoom model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -567,31 +479,31 @@ public class ChatItemDb{
 
 
     // Getting All Contacts
-    public DataList<ChatItem>  getAll__db() {
-        DataList<ChatItem> modelList = new DataList<ChatItem>();
+    public DataList<ChatRoom>  getAll__db() {
+        DataList<ChatRoom> modelList = new DataList<ChatRoom>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `ChatItem`";
+        String selectQuery = "SELECT  * FROM `ChatRoom`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<ChatItem>) modelList;
+            return (DataList<ChatRoom>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    ChatItemRepository repo = restAdapter.createRepository(ChatItemRepository.class);
+                    ChatRoomRepository repo = restAdapter.createRepository(ChatRoomRepository.class);
                     repo.addStorage(context);
-                    modelList.add((ChatItem)repo.createObject(hashMap));
+                    modelList.add((ChatRoom)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<ChatItem>) modelList;
+        return (DataList<ChatRoom>) modelList;
     }
 
 
@@ -603,20 +515,20 @@ public class ChatItemDb{
      * @param skip
      * @return
      */
-    public LazyList<ChatItem> getAll__lazy(final int limit, final int skip, ObjectCallback<ChatItem> callback, final GetUpdatedQuery getUpdatedQuery, final OnParseCursor onParseCursor) {
+    public LazyList<ChatRoom> getAll__lazy(final int limit, final int skip, ObjectCallback<ChatRoom> callback, final GetUpdatedQuery getUpdatedQuery, final OnParseCursor onParseCursor) {
 
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
 
-        final ChatItemRepository repo = restAdapter.createRepository(ChatItemRepository.class);
+        final ChatRoomRepository repo = restAdapter.createRepository(ChatRoomRepository.class);
         repo.addStorage(context);
-        return new LazyList<>(db, new LazyList.ItemFactory<ChatItem>() {
+        return new LazyList<>(db, new LazyList.ItemFactory<ChatRoom>() {
             @Override
-            public ChatItem create(Cursor cursor, int index) {
-                ChatItem data;
+            public ChatRoom create(Cursor cursor, int index) {
+                ChatRoom data;
                 cursor.moveToPosition(index);
                 HashMap<String, Object> hashMap = onParseCursor.parseCursor(cursor);
-                data = (ChatItem)repo.createObject(hashMap);
+                data = (ChatRoom)repo.createObject(hashMap);
                 return data;
             }
         }, callback, new LazyList.OnQueryChange(){
@@ -629,7 +541,7 @@ public class ChatItemDb{
                 String whereQuery = getWhereQuery(getWhereKeyValue);
                 String selectQuery;
                 if(orderBy != null){
-                    selectQuery = "SELECT  * FROM `ChatItem` " + whereQuery  + " ORDER BY " + orderBy ;
+                    selectQuery = "SELECT  * FROM `ChatRoom` " + whereQuery  + " ORDER BY " + orderBy ;
                     if(limit != 0){
                         // Select All Query
                         selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -639,9 +551,9 @@ public class ChatItemDb{
                 }else{
                     if(limit != 0){
                         // Select All Query
-                        selectQuery = "SELECT  * FROM ChatItem " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                        selectQuery = "SELECT  * FROM ChatRoom " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
                     }else{
-                        selectQuery = "SELECT  * FROM ChatItem " + whereQuery  + " LIMIT -1 OFFSET " + skip;
+                        selectQuery = "SELECT  * FROM ChatRoom " + whereQuery  + " LIMIT -1 OFFSET " + skip;
                     }
                 }
 
@@ -653,10 +565,10 @@ public class ChatItemDb{
 
 
 
-    public ChatItem get__db(String id, OnParseCursor onParseCursor){
+    public ChatRoom get__db(String id, OnParseCursor onParseCursor){
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("ChatItem", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("ChatRoom", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -665,9 +577,9 @@ public class ChatItemDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        ChatItemRepository repo = restAdapter.createRepository(ChatItemRepository.class);
+                        ChatRoomRepository repo = restAdapter.createRepository(ChatRoomRepository.class);
                         repo.addStorage(context);
-                        return (ChatItem)repo.createObject(hashMap);
+                        return (ChatRoom)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -779,19 +691,19 @@ public class ChatItemDb{
 
 
     // Getting All Data where
-    public DataList<ChatItem>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<ChatRoom>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<ChatItem>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
-        DataList<ChatItem> modelList = new DataList<ChatItem>();
+    public DataList<ChatRoom>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
+        DataList<ChatRoom> modelList = new DataList<ChatRoom>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM `ChatItem` " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `ChatRoom` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -801,9 +713,9 @@ public class ChatItemDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM ChatItem " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM ChatRoom " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM ChatItem " + whereQuery  + " LIMIT -1 OFFSET " + skip;
+                selectQuery = "SELECT  * FROM ChatRoom " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -813,27 +725,27 @@ public class ChatItemDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<ChatItem>) modelList;
+            return (DataList<ChatRoom>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    ChatItemRepository repo = restAdapter.createRepository(ChatItemRepository.class);
+                    ChatRoomRepository repo = restAdapter.createRepository(ChatRoomRepository.class);
                     repo.addStorage(context);
-                    modelList.add((ChatItem)repo.createObject(hashMap));
+                    modelList.add((ChatRoom)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
         cursor.close();
         // return contact list
-        return (DataList<ChatItem>) modelList;
+        return (DataList<ChatRoom>) modelList;
     }
 
 
 
     // Getting All Data where
-    public DataList<ChatItem>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+    public DataList<ChatRoom>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
         return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
@@ -852,7 +764,7 @@ public class ChatItemDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM `ChatItem` " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `ChatRoom` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -862,9 +774,9 @@ public class ChatItemDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `ChatItem` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `ChatRoom` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `ChatItem` " + whereQuery + " LIMIT -1 OFFSET " + skip;
+                countQuery = "SELECT  * FROM `ChatRoom` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -888,9 +800,9 @@ public class ChatItemDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `ChatItem` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `ChatRoom` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `ChatItem` " + whereQuery + " LIMIT -1 OFFSET " + skip;
+            countQuery = "SELECT  * FROM `ChatRoom` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -920,7 +832,7 @@ public class ChatItemDb{
             values.put("_DATA_UPDATED", 0);
             String where = getWhere(whereKeyValue);
             // updating row
-            db.update("`ChatItem`", values, "_DATA_UPDATED = 1 AND " + where, null);
+            db.update("`ChatRoom`", values, "_DATA_UPDATED = 1 AND " + where, null);
     }
 
 
@@ -928,7 +840,7 @@ public class ChatItemDb{
     public void deleteOldData__db(final HashMap<String, Object> whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       String where = getWhere(whereKeyValue);
-      db.delete("`ChatItem`", "_DATA_UPDATED = 0 AND " + where , null);
+      db.delete("`ChatRoom`", "_DATA_UPDATED = 0 AND " + where , null);
     }
 
 
@@ -939,7 +851,7 @@ public class ChatItemDb{
     public void delete__db(final HashMap<String, Object> whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       String where = getWhere(whereKeyValue);
-      db.delete("`ChatItem`", where , null);
+      db.delete("`ChatRoom`", where , null);
     }
 
 
@@ -949,30 +861,30 @@ public class ChatItemDb{
 
 
     // Getting All Data where
-    public DataList<ChatItem>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<ChatItem> modelList = new DataList<ChatItem>();
+    public DataList<ChatRoom>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<ChatRoom> modelList = new DataList<ChatRoom>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `ChatItem` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `ChatRoom` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<ChatItem>) modelList;
+            return (DataList<ChatRoom>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    ChatItemRepository repo = restAdapter.createRepository(ChatItemRepository.class);
+                    ChatRoomRepository repo = restAdapter.createRepository(ChatRoomRepository.class);
                     repo.addStorage(context);
-                    modelList.add((ChatItem)repo.createObject(hashMap));
+                    modelList.add((ChatRoom)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
         cursor.close();
-        return (DataList<ChatItem>) modelList;
+        return (DataList<ChatRoom>) modelList;
     }
 
 
@@ -984,7 +896,7 @@ public class ChatItemDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-      String countQuery = "SELECT  * FROM `ChatItem` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+      String countQuery = "SELECT  * FROM `ChatRoom` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
       Cursor cursor = db.rawQuery(countQuery, null);
       int count = cursor.getCount();
@@ -999,23 +911,23 @@ public class ChatItemDb{
       ContentValues values = new ContentValues();
       values.put("_DATA_UPDATED", 0);
       // updating row
-      db.update("`ChatItem`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+      db.update("`ChatRoom`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
     }
 
 
     // Delete Old data with where clause
     public void deleteOldData__db(final String whereKey, final String whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-      db.delete("`ChatItem`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+      db.delete("`ChatRoom`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
     }
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final ChatItem _modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final ChatRoom _modelData ){
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       ContentValues values = getContentValues(_modelData);
       String where = getWhere(whereKeyValue);
-      db.update("`ChatItem`", values, where, null);
+      db.update("`ChatRoom`", values, where, null);
     }
 
 
@@ -1030,11 +942,11 @@ public class ChatItemDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final ChatItem _modelData) {
+    public void update__db(final String id,   final ChatRoom _modelData) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       ContentValues values = getContentValues(_modelData);
       // updating row
-      db.update("`ChatItem`", values, "id = ?", new String[] { id });
+      db.update("`ChatRoom`", values, "id = ?", new String[] { id });
     }
 
 
@@ -1044,14 +956,14 @@ public class ChatItemDb{
       ContentValues values = new ContentValues();
       values.put("_DATA_UPDATED", 0);
       // updating row
-      db.update("`ChatItem`", values, "_DATA_UPDATED = 1", null);
+      db.update("`ChatRoom`", values, "_DATA_UPDATED = 1", null);
     }
 
 
     // Delete Old data
     public void deleteOldData__db() {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-      db.delete("`ChatItem`", "_DATA_UPDATED = 0", null);
+      db.delete("`ChatRoom`", "_DATA_UPDATED = 0", null);
     }
 
 

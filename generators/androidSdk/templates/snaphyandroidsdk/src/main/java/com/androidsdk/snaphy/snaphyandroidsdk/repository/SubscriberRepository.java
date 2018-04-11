@@ -41,18 +41,11 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.ChatItem;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Subscriber;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.ChatItemDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.SubscriberDb;
 
 //Now import model of related models..
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.ChatRoom;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRoomRepository;
-            
-        
-    
 
     
             import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
@@ -62,8 +55,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.ChatItemDb;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.ChatItem;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatItemRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.ChatRoom;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRoomRepository;
             
         
     
@@ -72,15 +65,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.ChatItemDb;
 
 
 
-public class ChatItemRepository extends ModelRepository<ChatItem> {
+public class SubscriberRepository extends ModelRepository<Subscriber> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public ChatItemRepository(){
-        super("ChatItem", null, ChatItem.class);
+    public SubscriberRepository(){
+        super("Subscriber", null, Subscriber.class);
 
     }
 
@@ -98,15 +91,15 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
 
 
-    public ChatItemDb getDb() {
-      return chatItemDb;
+    public SubscriberDb getDb() {
+      return subscriberDb;
     }
 
-    public void setChatItemDb(ChatItemDb chatItemDb) {
-      this.chatItemDb = chatItemDb;
+    public void setSubscriberDb(SubscriberDb subscriberDb) {
+      this.subscriberDb = subscriberDb;
     }
 
-    private ChatItemDb chatItemDb;
+    private SubscriberDb subscriberDb;
 
 
 
@@ -140,7 +133,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setChatItemDb(new ChatItemDb(context, DATABASE_NAME, getRestAdapter()));
+         setSubscriberDb(new SubscriberDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -154,7 +147,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chatItemId/chatRoom", "GET"), "ChatItem.prototype.__get__chatRoom");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:subscriberId/appUser", "GET"), "Subscriber.prototype.__get__appUser");
     
 
     
@@ -163,7 +156,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chatItemId/appUser", "GET"), "ChatItem.prototype.__get__appUser");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:subscriberId/chatRoom", "GET"), "Subscriber.prototype.__get__chatRoom");
     
 
     
@@ -172,7 +165,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chatItemId/chatItem", "GET"), "ChatItem.prototype.__get__chatItem");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Subscriber.create");
     
 
     
@@ -181,7 +174,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ChatItem.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Subscriber.create");
     
 
     
@@ -190,7 +183,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ChatItem.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Subscriber.upsert");
     
 
     
@@ -199,7 +192,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "ChatItem.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Subscriber.exists");
     
 
     
@@ -208,7 +201,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "ChatItem.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Subscriber.findById");
     
 
     
@@ -217,7 +210,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "ChatItem.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Subscriber.find");
     
 
     
@@ -226,7 +219,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "ChatItem.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Subscriber.findOne");
     
 
     
@@ -235,7 +228,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "ChatItem.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Subscriber.updateAll");
     
 
     
@@ -244,7 +237,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "ChatItem.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Subscriber.deleteById");
     
 
     
@@ -253,7 +246,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "ChatItem.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Subscriber.count");
     
 
     
@@ -262,130 +255,28 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "ChatItem.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:subscriberId", "PUT"), "Subscriber.prototype.updateAttributes");
     
 
     
     
 
     
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chatItemId", "PUT"), "ChatItem.prototype.updateAttributes");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "ChatItem.getSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "ChatItem.getAbsoluteSchema");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/sendScore", "POST"), "ChatItem.sendScore");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getChatItem", "POST"), "ChatItem.getChatItem");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchChatItems", "POST"), "ChatItem.fetchChatItems");
     
 
     
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/deleteChatItem", "POST"), "ChatItem.deleteChatItem");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/markInsensitive", "POST"), "ChatItem.markInsensitive");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "ChatItem.getDetailSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "ChatItem.getModelRelationSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/subscribe", "POST"), "ChatItem.subscribe");
-    
-
-    
-    
-
-    
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Subscriber.getSchema");
     
 
     
     
 
-    
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Subscriber.getAbsoluteSchema");
     
 
     
@@ -395,27 +286,27 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/toggleNotify", "POST"), "Subscriber.toggleNotify");
     
 
     
     
 
     
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSubscribedUser", "POST"), "Subscriber.getSubscribedUser");
     
 
     
     
 
-    
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Subscriber.getDetailSchema");
     
 
     
@@ -424,7 +315,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chatItemId/chatItem", "GET"), "ChatItem.prototype.__get__chatItem");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Subscriber.getModelRelationSchema");
     
 
     
@@ -451,93 +342,8 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
     
         
-            //Method get__chatRoom definition
-            public void get__chatRoom(  String chatItemId,  Boolean refresh, final ObjectCallback<ChatRoom> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("chatItemId", chatItemId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__chatRoom", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ChatRoomRepository chatRoomRepo = getRestAdapter().createRepository(ChatRoomRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = chatRoomRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(chatRoomRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //chatRoomRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    ChatRoom chatRoom = chatRoomRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = chatRoom.getClass().getMethod("save__db");
-                                                    method.invoke(chatRoom);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(chatRoom);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method get__chatRoom definition ends here..
-
-            
-
-        
-    
-        
             //Method get__appUser definition
-            public void get__appUser(  String chatItemId,  Boolean refresh, final ObjectCallback<AppUser> callback){
+            public void get__appUser(  String subscriberId,  Boolean refresh, final ObjectCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -549,7 +355,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("chatItemId", chatItemId);
+                        hashMapObject.put("subscriberId", subscriberId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -621,8 +427,8 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
         
     
         
-            //Method get__chatItem definition
-            public void get__chatItem(  String chatItemId,  Boolean refresh, final ObjectCallback<ChatItem> callback){
+            //Method get__chatRoom definition
+            public void get__chatRoom(  String subscriberId,  Boolean refresh, final ObjectCallback<ChatRoom> callback){
 
                 /**
                 Call the onBefore event
@@ -634,7 +440,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("chatItemId", chatItemId);
+                        hashMapObject.put("subscriberId", subscriberId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -645,7 +451,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__chatItem", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__chatRoom", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -658,27 +464,27 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
+                                    ChatRoomRepository chatRoomRepo = getRestAdapter().createRepository(ChatRoomRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(chatItemRepo, context);
+                                            Method method = chatRoomRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRoomRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //chatItemRepo.addStorage(context);
+                                        //chatRoomRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    ChatItem chatItem = chatItemRepo.createObject(result);
+                                    ChatRoom chatRoom = chatRoomRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = chatItem.getClass().getMethod("save__db");
-                                                    method.invoke(chatItem);
+                                                    Method method = chatRoom.getClass().getMethod("save__db");
+                                                    method.invoke(chatRoom);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -686,7 +492,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
                                       }
 
-                                    callback.onSuccess(chatItem);
+                                    callback.onSuccess(chatRoom);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -699,7 +505,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
                 
 
-            }//Method get__chatItem definition ends here..
+            }//Method get__chatRoom definition ends here..
 
             
 
@@ -707,7 +513,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<ChatItem> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Subscriber> callback){
 
                 /**
                 Call the onBefore event
@@ -741,27 +547,27 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
+                                    SubscriberRepository subscriberRepo = getRestAdapter().createRepository(SubscriberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(chatItemRepo, context);
+                                            Method method = subscriberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(subscriberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //chatItemRepo.addStorage(context);
+                                        //subscriberRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    ChatItem chatItem = chatItemRepo.createObject(result);
+                                    Subscriber subscriber = subscriberRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = chatItem.getClass().getMethod("save__db");
-                                                    method.invoke(chatItem);
+                                                    Method method = subscriber.getClass().getMethod("save__db");
+                                                    method.invoke(subscriber);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -769,7 +575,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
                                       }
 
-                                    callback.onSuccess(chatItem);
+                                    callback.onSuccess(subscriber);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -791,7 +597,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<ChatItem> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Subscriber> callback){
 
                 /**
                 Call the onBefore event
@@ -825,27 +631,27 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
+                                    SubscriberRepository subscriberRepo = getRestAdapter().createRepository(SubscriberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(chatItemRepo, context);
+                                            Method method = subscriberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(subscriberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //chatItemRepo.addStorage(context);
+                                        //subscriberRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    ChatItem chatItem = chatItemRepo.createObject(result);
+                                    Subscriber subscriber = subscriberRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = chatItem.getClass().getMethod("save__db");
-                                                    method.invoke(chatItem);
+                                                    Method method = subscriber.getClass().getMethod("save__db");
+                                                    method.invoke(subscriber);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -853,7 +659,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
                                       }
 
-                                    callback.onSuccess(chatItem);
+                                    callback.onSuccess(subscriber);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -925,7 +731,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<ChatItem> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Subscriber> callback){
 
                 /**
                 Call the onBefore event
@@ -961,27 +767,27 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
+                                    SubscriberRepository subscriberRepo = getRestAdapter().createRepository(SubscriberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(chatItemRepo, context);
+                                            Method method = subscriberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(subscriberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //chatItemRepo.addStorage(context);
+                                        //subscriberRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    ChatItem chatItem = chatItemRepo.createObject(result);
+                                    Subscriber subscriber = subscriberRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = chatItem.getClass().getMethod("save__db");
-                                                    method.invoke(chatItem);
+                                                    Method method = subscriber.getClass().getMethod("save__db");
+                                                    method.invoke(subscriber);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -989,7 +795,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
                                       }
 
-                                    callback.onSuccess(chatItem);
+                                    callback.onSuccess(subscriber);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1010,7 +816,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<ChatItem> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Subscriber> callback){
 
                 /**
                 Call the onBefore event
@@ -1045,12 +851,12 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<ChatItem> chatItemList = new DataList<ChatItem>();
-                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
+                                    DataList<Subscriber> subscriberList = new DataList<Subscriber>();
+                                    SubscriberRepository subscriberRepo = getRestAdapter().createRepository(SubscriberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(chatItemRepo, context);
+                                            Method method = subscriberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(subscriberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1058,23 +864,23 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        ChatItem chatItem = chatItemRepo.createObject(obj);
+                                        Subscriber subscriber = subscriberRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = chatItem.getClass().getMethod("save__db");
-                                                      method.invoke(chatItem);
+                                                      Method method = subscriber.getClass().getMethod("save__db");
+                                                      method.invoke(subscriber);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        chatItemList.add(chatItem);
+                                        subscriberList.add(subscriber);
                                     }
-                                    callback.onSuccess(chatItemList);
+                                    callback.onSuccess(subscriberList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1093,7 +899,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<ChatItem> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Subscriber> callback){
 
                 /**
                 Call the onBefore event
@@ -1127,27 +933,27 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
+                                    SubscriberRepository subscriberRepo = getRestAdapter().createRepository(SubscriberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(chatItemRepo, context);
+                                            Method method = subscriberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(subscriberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //chatItemRepo.addStorage(context);
+                                        //subscriberRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    ChatItem chatItem = chatItemRepo.createObject(result);
+                                    Subscriber subscriber = subscriberRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = chatItem.getClass().getMethod("save__db");
-                                                    method.invoke(chatItem);
+                                                    Method method = subscriber.getClass().getMethod("save__db");
+                                                    method.invoke(subscriber);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1155,7 +961,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
                                       }
 
-                                    callback.onSuccess(chatItem);
+                                    callback.onSuccess(subscriber);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1331,7 +1137,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String chatItemId,  Map<String,  ? extends Object> data, final ObjectCallback<ChatItem> callback){
+            public void updateAttributes(  String subscriberId,  Map<String,  ? extends Object> data, final ObjectCallback<Subscriber> callback){
 
                 /**
                 Call the onBefore event
@@ -1343,7 +1149,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("chatItemId", chatItemId);
+                        hashMapObject.put("subscriberId", subscriberId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1367,27 +1173,27 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
+                                    SubscriberRepository subscriberRepo = getRestAdapter().createRepository(SubscriberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(chatItemRepo, context);
+                                            Method method = subscriberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(subscriberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //chatItemRepo.addStorage(context);
+                                        //subscriberRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    ChatItem chatItem = chatItemRepo.createObject(result);
+                                    Subscriber subscriber = subscriberRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = chatItem.getClass().getMethod("save__db");
-                                                    method.invoke(chatItem);
+                                                    Method method = subscriber.getClass().getMethod("save__db");
+                                                    method.invoke(subscriber);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1395,7 +1201,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
                                       }
 
-                                    callback.onSuccess(chatItem);
+                                    callback.onSuccess(subscriber);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1517,8 +1323,8 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
         
     
         
-            //Method sendScore definition
-            public void sendScore(  String chatRoomId, final ObjectCallback<JSONObject>  callback ){
+            //Method toggleNotify definition
+            public void toggleNotify(  String subscriberId,  String isEnabled, final ObjectCallback<Subscriber> callback){
 
                 /**
                 Call the onBefore event
@@ -1530,6 +1336,93 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
+                        hashMapObject.put("subscriberId", subscriberId);
+                
+                        hashMapObject.put("isEnabled", isEnabled);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("toggleNotify", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SubscriberRepository subscriberRepo = getRestAdapter().createRepository(SubscriberRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = subscriberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(subscriberRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //subscriberRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Subscriber subscriber = subscriberRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = subscriber.getClass().getMethod("save__db");
+                                                    method.invoke(subscriber);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(subscriber);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method toggleNotify definition ends here..
+
+            
+
+        
+    
+        
+            //Method getSubscribedUser definition
+            public void getSubscribedUser(  double subscriberId,  String chatRoomId, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("subscriberId", subscriberId);
+                
                         hashMapObject.put("chatRoomId", chatRoomId);
                 
 
@@ -1538,7 +1431,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
                 
                     
-                    invokeStaticMethod("sendScore", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSubscribedUser", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1561,310 +1454,7 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
                 
 
-            }//Method sendScore definition ends here..
-
-            
-
-        
-    
-        
-            //Method getChatItem definition
-            public void getChatItem(  String chatItemId, final ObjectCallback<ChatItem> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("chatItemId", chatItemId);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("getChatItem", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(chatItemRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //chatItemRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    ChatItem chatItem = chatItemRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = chatItem.getClass().getMethod("save__db");
-                                                    method.invoke(chatItem);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(chatItem);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method getChatItem definition ends here..
-
-            
-
-        
-    
-        
-            //Method fetchChatItems definition
-            public void fetchChatItems(  String chatRoomId,  double limit,  double skip, final DataListCallback<ChatItem> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("chatRoomId", chatRoomId);
-                
-                        hashMapObject.put("limit", limit);
-                
-                        hashMapObject.put("skip", skip);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("fetchChatItems", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<ChatItem> chatItemList = new DataList<ChatItem>();
-                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(chatItemRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-                                    }
-                                    for (Map<String, Object> obj : result) {
-
-                                        ChatItem chatItem = chatItemRepo.createObject(obj);
-
-                                        //Add to database if persistent storage required..
-                                        if(isSTORE_LOCALLY()){
-                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                            try {
-                                                      Method method = chatItem.getClass().getMethod("save__db");
-                                                      method.invoke(chatItem);
-
-                                            } catch (Exception e) {
-                                                Log.e("Database Error", e.toString());
-                                            }
-                                        }
-
-                                        chatItemList.add(chatItem);
-                                    }
-                                    callback.onSuccess(chatItemList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-            }//Method fetchChatItems definition ends here..
-
-            
-
-        
-    
-        
-            //Method deleteChatItem definition
-            public void deleteChatItem(  String chatItemId,  String chatRoomId,  double userId, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("chatItemId", chatItemId);
-                
-                        hashMapObject.put("chatRoomId", chatRoomId);
-                
-                        hashMapObject.put("userId", userId);
-                
-
-                
-                    invokeStaticMethod("deleteChatItem", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method deleteChatItem definition ends here..
-
-            
-
-        
-    
-        
-            //Method markInsensitive definition
-            public void markInsensitive(  String chatItemId, final ObjectCallback<ChatItem> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("chatItemId", chatItemId);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("markInsensitive", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(chatItemRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //chatItemRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    ChatItem chatItem = chatItemRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = chatItem.getClass().getMethod("save__db");
-                                                    method.invoke(chatItem);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(chatItem);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method markInsensitive definition ends here..
+            }//Method getSubscribedUser definition ends here..
 
             
 
@@ -1968,90 +1558,6 @@ public class ChatItemRepository extends ModelRepository<ChatItem> {
 
         
     
-        
-            //Method subscribe definition
-            public void subscribe(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("subscribe", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method subscribe definition ends here..
-
-            
-
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
 
 
 

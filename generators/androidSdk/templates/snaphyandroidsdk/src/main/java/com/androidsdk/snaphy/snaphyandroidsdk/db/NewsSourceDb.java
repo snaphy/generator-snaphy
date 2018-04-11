@@ -23,16 +23,16 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.OnParseCursor;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.LazyList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.NewsSource;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.NewsSourceRepository;
 import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class FacebookAccessTokenDb{
+public class NewsSourceDb{
 
     // All Static variables
     SnaphyRestAdapter restAdapter;
@@ -54,82 +54,63 @@ public class FacebookAccessTokenDb{
         return db;
     }
 
-  public FacebookAccessTokenDb(Context context, String DATABASE_NAME, SnaphyRestAdapter restAdapter){
+  public NewsSourceDb(Context context, String DATABASE_NAME, SnaphyRestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "FacebookAccessToken";
+    TABLE = "NewsSource";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final FacebookAccessToken _modelData) {
+    public void insert__db (final String id, final NewsSource _modelData) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       // Inserting Row
       ContentValues values = getContentValues(_modelData);
-      db.insert("`FacebookAccessToken`", null, values);
+      db.insert("`NewsSource`", null, values);
     }
 
 
 
 
 
-    public ContentValues getContentValues(FacebookAccessToken _modelData){
+    public ContentValues getContentValues(NewsSource _modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String FbUserIdData = "";
-                        if(_modelData.getFbUserId() != null){
-                          FbUserIdData = _modelData.getFbUserId().toString();
-                          values.put("`FbUserId`", FbUserIdData);
+                                                            String nameData = "";
+                        if(_modelData.getName() != null){
+                          nameData = _modelData.getName().toString();
+                          values.put("`name`", nameData);
                         }
                                   
                                 
-                                                            String tokenData = "";
-                        if(_modelData.getToken() != null){
-                          tokenData = _modelData.getToken().toString();
-                          values.put("`token`", tokenData);
+                                                            String imageData = "";
+                        if(_modelData.getImage() != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          imageData = gson.toJson(_modelData.getImage(), HashMap.class);
+                          values.put("`image`", imageData);
                         }
                                   
                                 
-                                                            String expiresData = "";
-                        if(_modelData.getExpires() != null){
-                          expiresData = _modelData.getExpires().toString();
-                          values.put("`expires`", expiresData);
-                        }
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String userIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getUserId");
-                              if(method.invoke(_modelData) != null){
-                                //userIdData = _modelData.getUserId().toString();
-                                userIdData = (String) method.invoke(_modelData);
-                                values.put("`userId`", userIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            String typeData = "";
-                        if(_modelData.getType() != null){
-                          typeData = _modelData.getType().toString();
-                          values.put("`type`", typeData);
+                                                            String urlData = "";
+                        if(_modelData.getUrl() != null){
+                          urlData = _modelData.getUrl().toString();
+                          values.put("`url`", urlData);
                         }
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String customerIdData = "";
+                        String idData = "";
                         try {
-                              Method method = _modelData.getClass().getMethod("getCustomerId");
+                              Method method = _modelData.getClass().getMethod("getId");
                               if(method.invoke(_modelData) != null){
-                                //customerIdData = _modelData.getCustomerId().toString();
-                                customerIdData = (String) method.invoke(_modelData);
-                                values.put("`customerId`", customerIdData);
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
+                                values.put("`id`", idData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -147,10 +128,10 @@ public class FacebookAccessTokenDb{
 
 
     // Getting single c
-    public   FacebookAccessToken get__db(String id) {
+    public   NewsSource get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("FacebookAccessToken", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("NewsSource", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -159,9 +140,9 @@ public class FacebookAccessTokenDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                        NewsSourceRepository repo = restAdapter.createRepository(NewsSourceRepository.class);
                         repo.addStorage(context);
-                        return (FacebookAccessToken)repo.createObject(hashMap);
+                        return (NewsSource)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -180,10 +161,10 @@ public class FacebookAccessTokenDb{
 
 
     // Getting single cont
-    public   FacebookAccessToken get__db(String whereKey, String whereKeyValue) {
+    public   NewsSource get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("`FacebookAccessToken`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`NewsSource`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -194,9 +175,9 @@ public class FacebookAccessTokenDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                        NewsSourceRepository repo = restAdapter.createRepository(NewsSourceRepository.class);
                         repo.addStorage(context);
-                        return (FacebookAccessToken)repo.createObject(hashMap);
+                        return (NewsSource)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -218,62 +199,45 @@ public class FacebookAccessTokenDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String FbUserIdData = "";
+                                                            String nameData = "";
                         if(cursor.getString(0) != null){
-                          FbUserIdData = cursor.getString(0);
-                          if(FbUserIdData != null){
-                            FbUserIdData = (String)FbUserIdData;
-                            hashMap.put("FbUserId", FbUserIdData);
+                          nameData = cursor.getString(0);
+                          if(nameData != null){
+                            nameData = (String)nameData;
+                            hashMap.put("name", nameData);
                           }
                         }
                                                 
                                 
-                                                            String tokenData = "";
+                                                            Map<String, Object> imageData = new HashMap<>();
                         if(cursor.getString(1) != null){
-                          tokenData = cursor.getString(1);
-                          if(tokenData != null){
-                            tokenData = (String)tokenData;
-                            hashMap.put("token", tokenData);
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           imageData = gson.fromJson(cursor.getString(1), Map.class);
+                          if(imageData != null){
+                            imageData = (Map<String, Object>)imageData;
+                            hashMap.put("image", imageData);
                           }
                         }
                                                 
                                 
-                                                            String expiresData = "";
+                                                            String urlData = "";
                         if(cursor.getString(2) != null){
-                          expiresData = cursor.getString(2);
-                          if(expiresData != null){
-                            expiresData = (String)expiresData;
-                            hashMap.put("expires", expiresData);
+                          urlData = cursor.getString(2);
+                          if(urlData != null){
+                            urlData = (String)urlData;
+                            hashMap.put("url", urlData);
                           }
                         }
                                                 
                                 
-                                                            String userIdData = "";
+                                                            String idData = "";
                         if(cursor.getString(3) != null){
-                          userIdData = cursor.getString(3);
-                          if(userIdData != null){
-                            userIdData = userIdData.toString();
-                            hashMap.put("userId", userIdData);
-                          }
-                        }
-                                                
-                                
-                                                            String typeData = "";
-                        if(cursor.getString(4) != null){
-                          typeData = cursor.getString(4);
-                          if(typeData != null){
-                            typeData = (String)typeData;
-                            hashMap.put("type", typeData);
-                          }
-                        }
-                                                
-                                
-                                                            String customerIdData = "";
-                        if(cursor.getString(5) != null){
-                          customerIdData = cursor.getString(5);
-                          if(customerIdData != null){
-                            customerIdData = customerIdData.toString();
-                            hashMap.put("customerId", customerIdData);
+                          idData = cursor.getString(3);
+                          if(idData != null){
+                            idData = idData.toString();
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
@@ -286,7 +250,7 @@ public class FacebookAccessTokenDb{
 
 
 
-    public void upsert__db(String id, FacebookAccessToken model){
+    public void upsert__db(String id, NewsSource model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -297,31 +261,31 @@ public class FacebookAccessTokenDb{
 
 
     // Getting All Contacts
-    public DataList<FacebookAccessToken>  getAll__db() {
-        DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
+    public DataList<NewsSource>  getAll__db() {
+        DataList<NewsSource> modelList = new DataList<NewsSource>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `FacebookAccessToken`";
+        String selectQuery = "SELECT  * FROM `NewsSource`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<FacebookAccessToken>) modelList;
+            return (DataList<NewsSource>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                    NewsSourceRepository repo = restAdapter.createRepository(NewsSourceRepository.class);
                     repo.addStorage(context);
-                    modelList.add((FacebookAccessToken)repo.createObject(hashMap));
+                    modelList.add((NewsSource)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<FacebookAccessToken>) modelList;
+        return (DataList<NewsSource>) modelList;
     }
 
 
@@ -333,20 +297,20 @@ public class FacebookAccessTokenDb{
      * @param skip
      * @return
      */
-    public LazyList<FacebookAccessToken> getAll__lazy(final int limit, final int skip, ObjectCallback<FacebookAccessToken> callback, final GetUpdatedQuery getUpdatedQuery, final OnParseCursor onParseCursor) {
+    public LazyList<NewsSource> getAll__lazy(final int limit, final int skip, ObjectCallback<NewsSource> callback, final GetUpdatedQuery getUpdatedQuery, final OnParseCursor onParseCursor) {
 
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
 
-        final FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+        final NewsSourceRepository repo = restAdapter.createRepository(NewsSourceRepository.class);
         repo.addStorage(context);
-        return new LazyList<>(db, new LazyList.ItemFactory<FacebookAccessToken>() {
+        return new LazyList<>(db, new LazyList.ItemFactory<NewsSource>() {
             @Override
-            public FacebookAccessToken create(Cursor cursor, int index) {
-                FacebookAccessToken data;
+            public NewsSource create(Cursor cursor, int index) {
+                NewsSource data;
                 cursor.moveToPosition(index);
                 HashMap<String, Object> hashMap = onParseCursor.parseCursor(cursor);
-                data = (FacebookAccessToken)repo.createObject(hashMap);
+                data = (NewsSource)repo.createObject(hashMap);
                 return data;
             }
         }, callback, new LazyList.OnQueryChange(){
@@ -359,7 +323,7 @@ public class FacebookAccessTokenDb{
                 String whereQuery = getWhereQuery(getWhereKeyValue);
                 String selectQuery;
                 if(orderBy != null){
-                    selectQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery  + " ORDER BY " + orderBy ;
+                    selectQuery = "SELECT  * FROM `NewsSource` " + whereQuery  + " ORDER BY " + orderBy ;
                     if(limit != 0){
                         // Select All Query
                         selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -369,9 +333,9 @@ public class FacebookAccessTokenDb{
                 }else{
                     if(limit != 0){
                         // Select All Query
-                        selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                        selectQuery = "SELECT  * FROM NewsSource " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
                     }else{
-                        selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery  + " LIMIT -1 OFFSET " + skip;
+                        selectQuery = "SELECT  * FROM NewsSource " + whereQuery  + " LIMIT -1 OFFSET " + skip;
                     }
                 }
 
@@ -383,10 +347,10 @@ public class FacebookAccessTokenDb{
 
 
 
-    public FacebookAccessToken get__db(String id, OnParseCursor onParseCursor){
+    public NewsSource get__db(String id, OnParseCursor onParseCursor){
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("FacebookAccessToken", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("NewsSource", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -395,9 +359,9 @@ public class FacebookAccessTokenDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                        NewsSourceRepository repo = restAdapter.createRepository(NewsSourceRepository.class);
                         repo.addStorage(context);
-                        return (FacebookAccessToken)repo.createObject(hashMap);
+                        return (NewsSource)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -509,19 +473,19 @@ public class FacebookAccessTokenDb{
 
 
     // Getting All Data where
-    public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<NewsSource>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
-        DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
+    public DataList<NewsSource>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
+        DataList<NewsSource> modelList = new DataList<NewsSource>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `NewsSource` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -531,9 +495,9 @@ public class FacebookAccessTokenDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM NewsSource " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery  + " LIMIT -1 OFFSET " + skip;
+                selectQuery = "SELECT  * FROM NewsSource " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -543,27 +507,27 @@ public class FacebookAccessTokenDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<FacebookAccessToken>) modelList;
+            return (DataList<NewsSource>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                    NewsSourceRepository repo = restAdapter.createRepository(NewsSourceRepository.class);
                     repo.addStorage(context);
-                    modelList.add((FacebookAccessToken)repo.createObject(hashMap));
+                    modelList.add((NewsSource)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
         cursor.close();
         // return contact list
-        return (DataList<FacebookAccessToken>) modelList;
+        return (DataList<NewsSource>) modelList;
     }
 
 
 
     // Getting All Data where
-    public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+    public DataList<NewsSource>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
         return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
@@ -582,7 +546,7 @@ public class FacebookAccessTokenDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `NewsSource` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -592,9 +556,9 @@ public class FacebookAccessTokenDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `NewsSource` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT -1 OFFSET " + skip;
+                countQuery = "SELECT  * FROM `NewsSource` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -618,9 +582,9 @@ public class FacebookAccessTokenDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `NewsSource` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT -1 OFFSET " + skip;
+            countQuery = "SELECT  * FROM `NewsSource` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -650,7 +614,7 @@ public class FacebookAccessTokenDb{
             values.put("_DATA_UPDATED", 0);
             String where = getWhere(whereKeyValue);
             // updating row
-            db.update("`FacebookAccessToken`", values, "_DATA_UPDATED = 1 AND " + where, null);
+            db.update("`NewsSource`", values, "_DATA_UPDATED = 1 AND " + where, null);
     }
 
 
@@ -658,7 +622,7 @@ public class FacebookAccessTokenDb{
     public void deleteOldData__db(final HashMap<String, Object> whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       String where = getWhere(whereKeyValue);
-      db.delete("`FacebookAccessToken`", "_DATA_UPDATED = 0 AND " + where , null);
+      db.delete("`NewsSource`", "_DATA_UPDATED = 0 AND " + where , null);
     }
 
 
@@ -669,7 +633,7 @@ public class FacebookAccessTokenDb{
     public void delete__db(final HashMap<String, Object> whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       String where = getWhere(whereKeyValue);
-      db.delete("`FacebookAccessToken`", where , null);
+      db.delete("`NewsSource`", where , null);
     }
 
 
@@ -679,30 +643,30 @@ public class FacebookAccessTokenDb{
 
 
     // Getting All Data where
-    public DataList<FacebookAccessToken>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
+    public DataList<NewsSource>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<NewsSource> modelList = new DataList<NewsSource>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `FacebookAccessToken` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `NewsSource` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<FacebookAccessToken>) modelList;
+            return (DataList<NewsSource>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                    NewsSourceRepository repo = restAdapter.createRepository(NewsSourceRepository.class);
                     repo.addStorage(context);
-                    modelList.add((FacebookAccessToken)repo.createObject(hashMap));
+                    modelList.add((NewsSource)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
         cursor.close();
-        return (DataList<FacebookAccessToken>) modelList;
+        return (DataList<NewsSource>) modelList;
     }
 
 
@@ -714,7 +678,7 @@ public class FacebookAccessTokenDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-      String countQuery = "SELECT  * FROM `FacebookAccessToken` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+      String countQuery = "SELECT  * FROM `NewsSource` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
       Cursor cursor = db.rawQuery(countQuery, null);
       int count = cursor.getCount();
@@ -729,23 +693,23 @@ public class FacebookAccessTokenDb{
       ContentValues values = new ContentValues();
       values.put("_DATA_UPDATED", 0);
       // updating row
-      db.update("`FacebookAccessToken`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+      db.update("`NewsSource`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
     }
 
 
     // Delete Old data with where clause
     public void deleteOldData__db(final String whereKey, final String whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-      db.delete("`FacebookAccessToken`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+      db.delete("`NewsSource`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
     }
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final FacebookAccessToken _modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final NewsSource _modelData ){
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       ContentValues values = getContentValues(_modelData);
       String where = getWhere(whereKeyValue);
-      db.update("`FacebookAccessToken`", values, where, null);
+      db.update("`NewsSource`", values, where, null);
     }
 
 
@@ -760,11 +724,11 @@ public class FacebookAccessTokenDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final FacebookAccessToken _modelData) {
+    public void update__db(final String id,   final NewsSource _modelData) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       ContentValues values = getContentValues(_modelData);
       // updating row
-      db.update("`FacebookAccessToken`", values, "id = ?", new String[] { id });
+      db.update("`NewsSource`", values, "id = ?", new String[] { id });
     }
 
 
@@ -774,14 +738,14 @@ public class FacebookAccessTokenDb{
       ContentValues values = new ContentValues();
       values.put("_DATA_UPDATED", 0);
       // updating row
-      db.update("`FacebookAccessToken`", values, "_DATA_UPDATED = 1", null);
+      db.update("`NewsSource`", values, "_DATA_UPDATED = 1", null);
     }
 
 
     // Delete Old data
     public void deleteOldData__db() {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-      db.delete("`FacebookAccessToken`", "_DATA_UPDATED = 0", null);
+      db.delete("`NewsSource`", "_DATA_UPDATED = 0", null);
     }
 
 

@@ -41,15 +41,15 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.WelcomeMessage;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.FacebookAccessTokenDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.WelcomeMessageDb;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.ChatRoom;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRoomRepository;
             
         
     
@@ -58,15 +58,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.FacebookAccessTokenDb;
 
 
 
-public class FacebookAccessTokenRepository extends ModelRepository<FacebookAccessToken> {
+public class WelcomeMessageRepository extends ModelRepository<WelcomeMessage> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public FacebookAccessTokenRepository(){
-        super("FacebookAccessToken", null, FacebookAccessToken.class);
+    public WelcomeMessageRepository(){
+        super("WelcomeMessage", null, WelcomeMessage.class);
 
     }
 
@@ -84,15 +84,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
 
 
-    public FacebookAccessTokenDb getDb() {
-      return facebookAccessTokenDb;
+    public WelcomeMessageDb getDb() {
+      return welcomeMessageDb;
     }
 
-    public void setFacebookAccessTokenDb(FacebookAccessTokenDb facebookAccessTokenDb) {
-      this.facebookAccessTokenDb = facebookAccessTokenDb;
+    public void setWelcomeMessageDb(WelcomeMessageDb welcomeMessageDb) {
+      this.welcomeMessageDb = welcomeMessageDb;
     }
 
-    private FacebookAccessTokenDb facebookAccessTokenDb;
+    private WelcomeMessageDb welcomeMessageDb;
 
 
 
@@ -126,7 +126,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setFacebookAccessTokenDb(new FacebookAccessTokenDb(context, DATABASE_NAME, getRestAdapter()));
+         setWelcomeMessageDb(new WelcomeMessageDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -140,7 +140,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:facebookAccessTokenId/appUser", "GET"), "FacebookAccessToken.prototype.__get__appUser");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:welcomeMessageId/chatRoom", "GET"), "WelcomeMessage.prototype.__get__chatRoom");
     
 
     
@@ -149,7 +149,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "FacebookAccessToken.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "WelcomeMessage.create");
     
 
     
@@ -158,7 +158,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "FacebookAccessToken.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "WelcomeMessage.create");
     
 
     
@@ -167,7 +167,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "FacebookAccessToken.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "WelcomeMessage.upsert");
     
 
     
@@ -176,7 +176,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "FacebookAccessToken.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "WelcomeMessage.exists");
     
 
     
@@ -185,7 +185,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "FacebookAccessToken.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "WelcomeMessage.findById");
     
 
     
@@ -194,7 +194,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "FacebookAccessToken.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "WelcomeMessage.find");
     
 
     
@@ -203,7 +203,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "FacebookAccessToken.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "WelcomeMessage.findOne");
     
 
     
@@ -212,7 +212,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "FacebookAccessToken.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "WelcomeMessage.updateAll");
     
 
     
@@ -221,7 +221,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "FacebookAccessToken.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "WelcomeMessage.deleteById");
     
 
     
@@ -230,7 +230,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "FacebookAccessToken.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "WelcomeMessage.count");
     
 
     
@@ -239,28 +239,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:facebookAccessTokenId", "PUT"), "FacebookAccessToken.prototype.updateAttributes");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "FacebookAccessToken.getSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "FacebookAccessToken.getAbsoluteSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:welcomeMessageId", "PUT"), "WelcomeMessage.prototype.updateAttributes");
     
 
     
@@ -272,7 +251,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "FacebookAccessToken.getDetailSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "WelcomeMessage.getSchema");
     
 
     
@@ -281,13 +260,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "FacebookAccessToken.getModelRelationSchema");
-    
-
-    
-    
-
-    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "WelcomeMessage.getAbsoluteSchema");
     
 
     
@@ -297,15 +270,18 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "WelcomeMessage.getDetailSchema");
     
 
     
     
 
     
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "WelcomeMessage.getModelRelationSchema");
     
 
     
@@ -332,8 +308,8 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
     
         
-            //Method get__appUser definition
-            public void get__appUser(  String facebookAccessTokenId,  Boolean refresh, final ObjectCallback<AppUser> callback){
+            //Method get__chatRoom definition
+            public void get__chatRoom(  String welcomeMessageId,  Boolean refresh, final ObjectCallback<ChatRoom> callback){
 
                 /**
                 Call the onBefore event
@@ -345,7 +321,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("facebookAccessTokenId", facebookAccessTokenId);
+                        hashMapObject.put("welcomeMessageId", welcomeMessageId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -356,7 +332,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__appUser", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__chatRoom", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -369,27 +345,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    ChatRoomRepository chatRoomRepo = getRestAdapter().createRepository(ChatRoomRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(appUserRepo, context);
+                                            Method method = chatRoomRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRoomRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //appUserRepo.addStorage(context);
+                                        //chatRoomRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    ChatRoom chatRoom = chatRoomRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = appUser.getClass().getMethod("save__db");
-                                                    method.invoke(appUser);
+                                                    Method method = chatRoom.getClass().getMethod("save__db");
+                                                    method.invoke(chatRoom);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -397,7 +373,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(appUser);
+                                    callback.onSuccess(chatRoom);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -410,7 +386,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method get__appUser definition ends here..
+            }//Method get__chatRoom definition ends here..
 
             
 
@@ -418,7 +394,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<WelcomeMessage> callback){
 
                 /**
                 Call the onBefore event
@@ -452,27 +428,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    WelcomeMessageRepository welcomeMessageRepo = getRestAdapter().createRepository(WelcomeMessageRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = welcomeMessageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(welcomeMessageRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //welcomeMessageRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    WelcomeMessage welcomeMessage = welcomeMessageRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = welcomeMessage.getClass().getMethod("save__db");
+                                                    method.invoke(welcomeMessage);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -480,7 +456,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(welcomeMessage);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -502,7 +478,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<WelcomeMessage> callback){
 
                 /**
                 Call the onBefore event
@@ -536,27 +512,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    WelcomeMessageRepository welcomeMessageRepo = getRestAdapter().createRepository(WelcomeMessageRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = welcomeMessageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(welcomeMessageRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //welcomeMessageRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    WelcomeMessage welcomeMessage = welcomeMessageRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = welcomeMessage.getClass().getMethod("save__db");
+                                                    method.invoke(welcomeMessage);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -564,7 +540,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(welcomeMessage);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -636,7 +612,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<FacebookAccessToken> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<WelcomeMessage> callback){
 
                 /**
                 Call the onBefore event
@@ -672,27 +648,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    WelcomeMessageRepository welcomeMessageRepo = getRestAdapter().createRepository(WelcomeMessageRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = welcomeMessageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(welcomeMessageRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //welcomeMessageRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    WelcomeMessage welcomeMessage = welcomeMessageRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = welcomeMessage.getClass().getMethod("save__db");
+                                                    method.invoke(welcomeMessage);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -700,7 +676,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(welcomeMessage);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -721,7 +697,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<FacebookAccessToken> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<WelcomeMessage> callback){
 
                 /**
                 Call the onBefore event
@@ -756,12 +732,12 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<FacebookAccessToken> facebookAccessTokenList = new DataList<FacebookAccessToken>();
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    DataList<WelcomeMessage> welcomeMessageList = new DataList<WelcomeMessage>();
+                                    WelcomeMessageRepository welcomeMessageRepo = getRestAdapter().createRepository(WelcomeMessageRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = welcomeMessageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(welcomeMessageRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -769,23 +745,23 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(obj);
+                                        WelcomeMessage welcomeMessage = welcomeMessageRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                      method.invoke(facebookAccessToken);
+                                                      Method method = welcomeMessage.getClass().getMethod("save__db");
+                                                      method.invoke(welcomeMessage);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        facebookAccessTokenList.add(facebookAccessToken);
+                                        welcomeMessageList.add(welcomeMessage);
                                     }
-                                    callback.onSuccess(facebookAccessTokenList);
+                                    callback.onSuccess(welcomeMessageList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -804,7 +780,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<FacebookAccessToken> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<WelcomeMessage> callback){
 
                 /**
                 Call the onBefore event
@@ -838,27 +814,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    WelcomeMessageRepository welcomeMessageRepo = getRestAdapter().createRepository(WelcomeMessageRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = welcomeMessageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(welcomeMessageRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //welcomeMessageRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    WelcomeMessage welcomeMessage = welcomeMessageRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = welcomeMessage.getClass().getMethod("save__db");
+                                                    method.invoke(welcomeMessage);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -866,7 +842,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(welcomeMessage);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1042,7 +1018,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String facebookAccessTokenId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            public void updateAttributes(  String welcomeMessageId,  Map<String,  ? extends Object> data, final ObjectCallback<WelcomeMessage> callback){
 
                 /**
                 Call the onBefore event
@@ -1054,7 +1030,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("facebookAccessTokenId", facebookAccessTokenId);
+                        hashMapObject.put("welcomeMessageId", welcomeMessageId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1078,27 +1054,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    WelcomeMessageRepository welcomeMessageRepo = getRestAdapter().createRepository(WelcomeMessageRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = welcomeMessageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(welcomeMessageRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //welcomeMessageRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    WelcomeMessage welcomeMessage = welcomeMessageRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = welcomeMessage.getClass().getMethod("save__db");
+                                                    method.invoke(welcomeMessage);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1106,7 +1082,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(welcomeMessage);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1323,22 +1299,6 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
 

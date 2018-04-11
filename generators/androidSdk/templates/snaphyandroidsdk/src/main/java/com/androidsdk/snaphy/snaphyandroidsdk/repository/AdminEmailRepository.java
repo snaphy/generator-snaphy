@@ -168,24 +168,6 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
     
     
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/sendMail", "POST"), "adminEmail.sendMail");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getMailSchema", "POST"), "adminEmail.getMailSchema");
-    
-
-    
-    
     return contract;
     }
 
@@ -400,110 +382,6 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                 
 
             }//Method getModelRelationSchema definition ends here..
-
-            
-
-        
-    
-        
-            //Method sendMail definition
-            public void sendMail(  DataList<String> to,  String subject,  String html, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("to", to);
-                
-                        hashMapObject.put("subject", subject);
-                
-                        hashMapObject.put("html", html);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("sendMail", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method sendMail definition ends here..
-
-            
-
-        
-    
-        
-            //Method getMailSchema definition
-            public void getMailSchema( final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("getMailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method getMailSchema definition ends here..
 
             
 
