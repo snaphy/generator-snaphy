@@ -113,12 +113,18 @@ public class SnaphySocket<M extends Model, R extends ModelRepository<M>> {
 
         //Turn off the socket listener..
         try{
+            
             if(socket != null){
+                socket.disconnect();
                 socket.off();
+                socket.close();
             }
 
             if(mainSocket != null){
+                mainSocket.disconnect();
                 mainSocket.off();
+                mainSocket.close();
+
             }
         }
         catch(Exception e){

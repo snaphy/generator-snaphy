@@ -810,6 +810,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             <% if(model.allModels[type] === undefined) { %>
                                 callback.onSuccess(response);
                             <% }else{ %>
@@ -847,6 +848,10 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                     callback.onSuccess(null);
                                 }
                             <% } %>
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -864,8 +869,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             <% if(model.allModels[type] === undefined) { %>
-                                callback.onSuccess(response);
+                            callback.onSuccess(response);
                             <% }else{ %>
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -904,8 +910,11 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                     callback.onSuccess(null);
                                 }
                             <% } %>
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 <% } %>
@@ -919,12 +928,17 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 invokeStaticMethod("prototype.__get__customer", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
                     @Override
                     public void onSuccess(JSONObject response) {
-                        CustomerRepository responseCustomerRepository = new CustomerRepository();
-                        Customer  customer = response != null
-                                ? responseCustomerRepository.createObject(Util.fromJson(response))
-                                : null;
-                        //List<Order> customerList ;
-                        callback.onSuccess(customer);
+                        try{
+                          CustomerRepository responseCustomerRepository = new CustomerRepository();
+                          Customer  customer = response != null
+                                  ? responseCustomerRepository.createObject(Util.fromJson(response))
+                                  : null;
+                          //List<Order> customerList ;
+                          callback.onSuccess(customer);
+                        }catch(Exception e){
+                          Log.e("Snaphy", e.toString());
+                        }
+
                     }
 
                     @Override
