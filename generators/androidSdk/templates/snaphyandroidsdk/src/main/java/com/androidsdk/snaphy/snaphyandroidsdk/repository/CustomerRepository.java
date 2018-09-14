@@ -56,8 +56,43 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.CustomerDb;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Industry;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IndustryRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.BusinessType;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BusinessTypeRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Address;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AddressRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Invoice;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.InvoiceRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.RecentSearch;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecentSearchRepository;
             
         
     
@@ -268,7 +303,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken/:fk", "GET"), "Customer.prototype.__findById__facebookAccessToken");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/employee", "GET"), "Customer.prototype.__get__employee");
     
 
     
@@ -277,7 +312,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken/:fk", "DELETE"), "Customer.prototype.__destroyById__facebookAccessToken");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/addresses/:fk", "GET"), "Customer.prototype.__findById__addresses");
     
 
     
@@ -286,7 +321,88 @@ public class CustomerRepository extends UserRepository<Customer> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken/:fk", "PUT"), "Customer.prototype.__updateById__facebookAccessToken");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/addresses/:fk", "DELETE"), "Customer.prototype.__destroyById__addresses");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/addresses/:fk", "PUT"), "Customer.prototype.__updateById__addresses");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/invoices/:fk", "GET"), "Customer.prototype.__findById__invoices");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/invoices/:fk", "DELETE"), "Customer.prototype.__destroyById__invoices");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/invoices/:fk", "PUT"), "Customer.prototype.__updateById__invoices");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentSearches/:fk", "GET"), "Customer.prototype.__findById__recentSearches");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentSearches/:fk", "DELETE"), "Customer.prototype.__destroyById__recentSearches");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentSearches/:fk", "PUT"), "Customer.prototype.__updateById__recentSearches");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/businessType", "GET"), "Customer.prototype.__get__businessType");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/industry", "GET"), "Customer.prototype.__get__industry");
     
 
     
@@ -331,7 +447,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "GET"), "Customer.prototype.__get__facebookAccessToken");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/addresses", "GET"), "Customer.prototype.__get__addresses");
     
 
     
@@ -340,7 +456,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "POST"), "Customer.prototype.__create__facebookAccessToken");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/addresses", "POST"), "Customer.prototype.__create__addresses");
     
 
     
@@ -349,7 +465,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "DELETE"), "Customer.prototype.__delete__facebookAccessToken");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/addresses", "DELETE"), "Customer.prototype.__delete__addresses");
     
 
     
@@ -358,7 +474,79 @@ public class CustomerRepository extends UserRepository<Customer> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken/count", "GET"), "Customer.prototype.__count__facebookAccessToken");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/addresses/count", "GET"), "Customer.prototype.__count__addresses");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/invoices", "GET"), "Customer.prototype.__get__invoices");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/invoices", "POST"), "Customer.prototype.__create__invoices");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/invoices", "DELETE"), "Customer.prototype.__delete__invoices");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/invoices/count", "GET"), "Customer.prototype.__count__invoices");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentSearches", "GET"), "Customer.prototype.__get__recentSearches");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentSearches", "POST"), "Customer.prototype.__create__recentSearches");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentSearches", "DELETE"), "Customer.prototype.__delete__recentSearches");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentSearches/count", "GET"), "Customer.prototype.__count__recentSearches");
     
 
     
@@ -528,6 +716,135 @@ public class CustomerRepository extends UserRepository<Customer> {
 
     
     
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/saveInterestedCat", "POST"), "Customer.saveInterestedCat");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/updateCustomerData", "POST"), "Customer.updateCustomerData");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/updateRetailerInfo", "POST"), "Customer.updateRetailerInfo");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchRetailerData", "POST"), "Customer.fetchRetailerData");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/requestOtp", "POST"), "Customer.requestOtp");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/retryOtp", "POST"), "Customer.retryOtp");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithOtp", "POST"), "Customer.loginWithOtp");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/subscribe", "POST"), "Customer.subscribe");
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
     return contract;
     }
 
@@ -585,6 +902,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
@@ -620,6 +938,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -720,6 +1042,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
@@ -755,6 +1078,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -770,8 +1097,8 @@ public class CustomerRepository extends UserRepository<Customer> {
         
     
         
-            //Method findById__facebookAccessToken definition
-            public void findById__facebookAccessToken(  String customerId,  String fk, final ObjectCallback<FacebookAccessToken> callback){
+            //Method get__employee definition
+            public void get__employee(  String customerId,  Boolean refresh, final ObjectCallback<Employee> callback){
 
                 /**
                 Call the onBefore event
@@ -785,7 +1112,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                         hashMapObject.put("customerId", customerId);
                 
-                        hashMapObject.put("fk", fk);
+                        hashMapObject.put("refresh", refresh);
                 
 
                 
@@ -794,7 +1121,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__employee", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -805,29 +1132,30 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(employeeRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //employeeRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    Employee employee = employeeRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = employee.getClass().getMethod("save__db");
+                                                    method.invoke(employee);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -835,11 +1163,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(employee);
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -848,15 +1180,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method findById__facebookAccessToken definition ends here..
+            }//Method get__employee definition ends here..
 
             
 
         
     
         
-            //Method destroyById__facebookAccessToken definition
-            public void destroyById__facebookAccessToken(  String customerId,  String fk, final VoidCallback callback){
+            //Method findById__addresses definition
+            public void findById__addresses(  String customerId,  String fk, final ObjectCallback<Address> callback){
 
                 /**
                 Call the onBefore event
@@ -874,7 +1206,97 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
 
                 
-                    invokeStaticMethod("prototype.__destroyById__facebookAccessToken", hashMapObject, new Adapter.Callback() {
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__addresses", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    AddressRepository addressRepo = getRestAdapter().createRepository(AddressRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = addressRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(addressRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //addressRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Address address = addressRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = address.getClass().getMethod("save__db");
+                                                    method.invoke(address);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(address);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__addresses definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__addresses definition
+            public void destroyById__addresses(  String customerId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__addresses", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -896,15 +1318,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method destroyById__facebookAccessToken definition ends here..
+            }//Method destroyById__addresses definition ends here..
 
             
 
         
     
         
-            //Method updateById__facebookAccessToken definition
-            public void updateById__facebookAccessToken(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            //Method updateById__addresses definition
+            public void updateById__addresses(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Address> callback){
 
                 /**
                 Call the onBefore event
@@ -929,7 +1351,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__addresses", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -940,29 +1362,30 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    AddressRepository addressRepo = getRestAdapter().createRepository(AddressRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = addressRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(addressRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //addressRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    Address address = addressRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = address.getClass().getMethod("save__db");
+                                                    method.invoke(address);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -970,11 +1393,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(address);
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -983,7 +1410,647 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method updateById__facebookAccessToken definition ends here..
+            }//Method updateById__addresses definition ends here..
+
+            
+
+        
+    
+        
+            //Method findById__invoices definition
+            public void findById__invoices(  String customerId,  String fk, final ObjectCallback<Invoice> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__invoices", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    InvoiceRepository invoiceRepo = getRestAdapter().createRepository(InvoiceRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = invoiceRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(invoiceRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //invoiceRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Invoice invoice = invoiceRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = invoice.getClass().getMethod("save__db");
+                                                    method.invoke(invoice);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(invoice);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__invoices definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__invoices definition
+            public void destroyById__invoices(  String customerId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__invoices", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__invoices definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__invoices definition
+            public void updateById__invoices(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Invoice> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__invoices", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    InvoiceRepository invoiceRepo = getRestAdapter().createRepository(InvoiceRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = invoiceRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(invoiceRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //invoiceRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Invoice invoice = invoiceRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = invoice.getClass().getMethod("save__db");
+                                                    method.invoke(invoice);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(invoice);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__invoices definition ends here..
+
+            
+
+        
+    
+        
+            //Method findById__recentSearches definition
+            public void findById__recentSearches(  String customerId,  String fk, final ObjectCallback<RecentSearch> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__recentSearches", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    RecentSearchRepository recentSearchRepo = getRestAdapter().createRepository(RecentSearchRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = recentSearchRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(recentSearchRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //recentSearchRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    RecentSearch recentSearch = recentSearchRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = recentSearch.getClass().getMethod("save__db");
+                                                    method.invoke(recentSearch);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(recentSearch);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__recentSearches definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__recentSearches definition
+            public void destroyById__recentSearches(  String customerId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__recentSearches", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__recentSearches definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__recentSearches definition
+            public void updateById__recentSearches(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<RecentSearch> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__recentSearches", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    RecentSearchRepository recentSearchRepo = getRestAdapter().createRepository(RecentSearchRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = recentSearchRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(recentSearchRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //recentSearchRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    RecentSearch recentSearch = recentSearchRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = recentSearch.getClass().getMethod("save__db");
+                                                    method.invoke(recentSearch);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(recentSearch);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__recentSearches definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__businessType definition
+            public void get__businessType(  String customerId,  Boolean refresh, final ObjectCallback<BusinessType> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__businessType", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    BusinessTypeRepository businessTypeRepo = getRestAdapter().createRepository(BusinessTypeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = businessTypeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(businessTypeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //businessTypeRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    BusinessType businessType = businessTypeRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = businessType.getClass().getMethod("save__db");
+                                                    method.invoke(businessType);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(businessType);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__businessType definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__industry definition
+            public void get__industry(  String customerId,  Boolean refresh, final ObjectCallback<Industry> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__industry", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    IndustryRepository industryRepo = getRestAdapter().createRepository(IndustryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = industryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(industryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //industryRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Industry industry = industryRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = industry.getClass().getMethod("save__db");
+                                                    method.invoke(industry);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(industry);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__industry definition ends here..
 
             
 
@@ -1024,6 +2091,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -1062,8 +2130,11 @@ public class CustomerRepository extends UserRepository<Customer> {
                                     callback.onSuccess(null);
                                 }
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
@@ -1110,6 +2181,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
@@ -1145,6 +2217,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1241,9 +2317,14 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1259,8 +2340,8 @@ public class CustomerRepository extends UserRepository<Customer> {
         
     
         
-            //Method get__facebookAccessToken definition
-            public void get__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<FacebookAccessToken> callback){
+            //Method get__addresses definition
+            public void get__addresses(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<Address> callback){
 
                 /**
                 Call the onBefore event
@@ -1283,7 +2364,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
 
                 
-                    invokeStaticMethod("prototype.__get__facebookAccessToken", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__addresses", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1293,16 +2374,17 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<FacebookAccessToken> facebookAccessTokenList = new DataList<FacebookAccessToken>();
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    DataList<Address> addressList = new DataList<Address>();
+                                    AddressRepository addressRepo = getRestAdapter().createRepository(AddressRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = addressRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(addressRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1310,42 +2392,45 @@ public class CustomerRepository extends UserRepository<Customer> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(obj);
+                                        Address address = addressRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                      method.invoke(facebookAccessToken);
+                                                      Method method = address.getClass().getMethod("save__db");
+                                                      method.invoke(address);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        facebookAccessTokenList.add(facebookAccessToken);
+                                        addressList.add(address);
                                     }
-                                    callback.onSuccess(facebookAccessTokenList);
+                                    callback.onSuccess(addressList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
 
-            }//Method get__facebookAccessToken definition ends here..
+            }//Method get__addresses definition ends here..
 
             
 
         
     
         
-            //Method create__facebookAccessToken definition
-            public void create__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            //Method create__addresses definition
+            public void create__addresses(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Address> callback){
 
                 /**
                 Call the onBefore event
@@ -1368,7 +2453,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__addresses", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1379,29 +2464,30 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    AddressRepository addressRepo = getRestAdapter().createRepository(AddressRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(facebookAccessTokenRepo, context);
+                                            Method method = addressRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(addressRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //facebookAccessTokenRepo.addStorage(context);
+                                        //addressRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    Address address = addressRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
-                                                    method.invoke(facebookAccessToken);
+                                                    Method method = address.getClass().getMethod("save__db");
+                                                    method.invoke(address);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1409,11 +2495,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                                       }
 
-                                    callback.onSuccess(facebookAccessToken);
+                                    callback.onSuccess(address);
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1422,15 +2512,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method create__facebookAccessToken definition ends here..
+            }//Method create__addresses definition ends here..
 
             
 
         
     
         
-            //Method delete__facebookAccessToken definition
-            public void delete__facebookAccessToken(  String customerId, final VoidCallback callback){
+            //Method delete__addresses definition
+            public void delete__addresses(  String customerId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -1446,7 +2536,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
 
                 
-                    invokeStaticMethod("prototype.__delete__facebookAccessToken", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__addresses", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -1468,15 +2558,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method delete__facebookAccessToken definition ends here..
+            }//Method delete__addresses definition ends here..
 
             
 
         
     
         
-            //Method count__facebookAccessToken definition
-            public void count__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            //Method count__addresses definition
+            public void count__addresses(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -1498,7 +2588,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
                     
-                    invokeStaticMethod("prototype.__count__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__addresses", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1510,9 +2600,14 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1521,7 +2616,573 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method count__facebookAccessToken definition ends here..
+            }//Method count__addresses definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__invoices definition
+            public void get__invoices(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<Invoice> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__invoices", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                          try{
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Invoice> invoiceList = new DataList<Invoice>();
+                                    InvoiceRepository invoiceRepo = getRestAdapter().createRepository(InvoiceRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = invoiceRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(invoiceRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        Invoice invoice = invoiceRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = invoice.getClass().getMethod("save__db");
+                                                      method.invoke(invoice);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        invoiceList.add(invoice);
+                                    }
+                                    callback.onSuccess(invoiceList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__invoices definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__invoices definition
+            public void create__invoices(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Invoice> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__invoices", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    InvoiceRepository invoiceRepo = getRestAdapter().createRepository(InvoiceRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = invoiceRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(invoiceRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //invoiceRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Invoice invoice = invoiceRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = invoice.getClass().getMethod("save__db");
+                                                    method.invoke(invoice);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(invoice);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__invoices definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__invoices definition
+            public void delete__invoices(  String customerId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__invoices", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__invoices definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__invoices definition
+            public void count__invoices(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__invoices", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__invoices definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__recentSearches definition
+            public void get__recentSearches(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<RecentSearch> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__recentSearches", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                          try{
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<RecentSearch> recentSearchList = new DataList<RecentSearch>();
+                                    RecentSearchRepository recentSearchRepo = getRestAdapter().createRepository(RecentSearchRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = recentSearchRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(recentSearchRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        RecentSearch recentSearch = recentSearchRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = recentSearch.getClass().getMethod("save__db");
+                                                      method.invoke(recentSearch);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        recentSearchList.add(recentSearch);
+                                    }
+                                    callback.onSuccess(recentSearchList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__recentSearches definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__recentSearches definition
+            public void create__recentSearches(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<RecentSearch> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__recentSearches", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    RecentSearchRepository recentSearchRepo = getRestAdapter().createRepository(RecentSearchRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = recentSearchRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(recentSearchRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //recentSearchRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    RecentSearch recentSearch = recentSearchRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = recentSearch.getClass().getMethod("save__db");
+                                                    method.invoke(recentSearch);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(recentSearch);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__recentSearches definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__recentSearches definition
+            public void delete__recentSearches(  String customerId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__recentSearches", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__recentSearches definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__recentSearches definition
+            public void count__recentSearches(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__recentSearches", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__recentSearches definition ends here..
 
             
 
@@ -1561,6 +3222,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
@@ -1596,6 +3258,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1645,6 +3311,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
@@ -1680,6 +3347,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1728,9 +3399,14 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1781,6 +3457,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
@@ -1816,6 +3493,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1863,6 +3544,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -1901,8 +3583,11 @@ public class CustomerRepository extends UserRepository<Customer> {
                                     callback.onSuccess(null);
                                 }
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
@@ -1947,6 +3632,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
@@ -1982,6 +3668,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2032,9 +3722,14 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2083,9 +3778,14 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2134,9 +3834,14 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2187,6 +3892,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
@@ -2222,6 +3928,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2370,9 +4080,14 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2419,9 +4134,14 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2470,9 +4190,14 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2519,9 +4244,14 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2534,6 +4264,590 @@ public class CustomerRepository extends UserRepository<Customer> {
 
             
 
+        
+    
+        
+            //Method saveInterestedCat definition
+            public void saveInterestedCat(  Map<String,  ? extends Object> ctx, final ObjectCallback<JSONArray> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("saveInterestedCat", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                          try{
+                            
+                            callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method saveInterestedCat definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateCustomerData definition
+            public void updateCustomerData(  Map<String,  ? extends Object> ctx,  Map<String,  ? extends Object> customerData, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("customerData", customerData);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("updateCustomerData", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = customerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(customerRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //customerRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = customer.getClass().getMethod("save__db");
+                                                    method.invoke(customer);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(customer);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateCustomerData definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateRetailerInfo definition
+            public void updateRetailerInfo(  String customerId,  Object customerObj, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("customerObj", customerObj);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("updateRetailerInfo", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = customerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(customerRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //customerRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = customer.getClass().getMethod("save__db");
+                                                    method.invoke(customer);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(customer);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateRetailerInfo definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchRetailerData definition
+            public void fetchRetailerData(  String customerId, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("fetchRetailerData", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = customerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(customerRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //customerRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = customer.getClass().getMethod("save__db");
+                                                    method.invoke(customer);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(customer);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method fetchRetailerData definition ends here..
+
+            
+
+        
+    
+        
+            //Method requestOtp definition
+            public void requestOtp(  String number, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("number", number);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("requestOtp", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method requestOtp definition ends here..
+
+            
+
+        
+    
+        
+            //Method retryOtp definition
+            public void retryOtp(  String number, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("number", number);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("retryOtp", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method retryOtp definition ends here..
+
+            
+
+        
+    
+        
+            //Method loginWithOtp definition
+            public void loginWithOtp(  String number,  String otp, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("number", number);
+                
+                        hashMapObject.put("otp", otp);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("loginWithOtp", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method loginWithOtp definition ends here..
+
+            
+
+        
+    
+        
+            //Method subscribe definition
+            public void subscribe(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("subscribe", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method subscribe definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
 

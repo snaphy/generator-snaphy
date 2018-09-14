@@ -256,15 +256,6 @@ public class CategoryRepository extends ModelRepository<Category> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getCategories", "POST"), "Category.getCategories");
-    
-
-    
-    
-
-    
-
-    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Category.getDetailSchema");
     
 
@@ -275,6 +266,33 @@ public class CategoryRepository extends ModelRepository<Category> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Category.getModelRelationSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchIntresetedCategory", "POST"), "Category.fetchIntresetedCategory");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchAllCategory", "POST"), "Category.fetchAllCategory");
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -337,6 +355,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
@@ -372,6 +391,10 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -421,6 +444,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
@@ -456,6 +480,10 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -504,9 +532,14 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -557,6 +590,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
@@ -592,6 +626,10 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -639,6 +677,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -677,8 +716,11 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     callback.onSuccess(null);
                                 }
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
@@ -723,6 +765,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
@@ -758,6 +801,10 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -808,9 +855,14 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -859,9 +911,14 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -910,9 +967,14 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -963,6 +1025,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
@@ -998,6 +1061,10 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1046,9 +1113,14 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1095,9 +1167,14 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1112,87 +1189,6 @@ public class CategoryRepository extends ModelRepository<Category> {
 
         
     
-        
-    
-        
-            //Method getCategories definition
-            public void getCategories( final DataListCallback<Category> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("getCategories", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Category> categoryList = new DataList<Category>();
-                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = categoryRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(categoryRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-                                    }
-                                    for (Map<String, Object> obj : result) {
-
-                                        Category category = categoryRepo.createObject(obj);
-
-                                        //Add to database if persistent storage required..
-                                        if(isSTORE_LOCALLY()){
-                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                            try {
-                                                      Method method = category.getClass().getMethod("save__db");
-                                                      method.invoke(category);
-
-                                            } catch (Exception e) {
-                                                Log.e("Database Error", e.toString());
-                                            }
-                                        }
-
-                                        categoryList.add(category);
-                                    }
-                                    callback.onSuccess(categoryList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-            }//Method getCategories definition ends here..
-
-            
-
         
     
         
@@ -1227,9 +1223,14 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1276,9 +1277,14 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1291,6 +1297,192 @@ public class CategoryRepository extends ModelRepository<Category> {
 
             
 
+        
+    
+        
+            //Method fetchIntresetedCategory definition
+            public void fetchIntresetedCategory(  Map<String,  ? extends Object> ctx,  double limit,  double skip, final DataListCallback<Category> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("limit", limit);
+                
+                        hashMapObject.put("skip", skip);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("fetchIntresetedCategory", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                          try{
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Category> categoryList = new DataList<Category>();
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = categoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(categoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        Category category = categoryRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = category.getClass().getMethod("save__db");
+                                                      method.invoke(category);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        categoryList.add(category);
+                                    }
+                                    callback.onSuccess(categoryList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method fetchIntresetedCategory definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchAllCategory definition
+            public void fetchAllCategory(  double limit,  double skip, final DataListCallback<Category> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("limit", limit);
+                
+                        hashMapObject.put("skip", skip);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("fetchAllCategory", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                          try{
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Category> categoryList = new DataList<Category>();
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = categoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(categoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        Category category = categoryRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = category.getClass().getMethod("save__db");
+                                                      method.invoke(category);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        categoryList.add(category);
+                                    }
+                                    callback.onSuccess(categoryList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method fetchAllCategory definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+    
         
     
         

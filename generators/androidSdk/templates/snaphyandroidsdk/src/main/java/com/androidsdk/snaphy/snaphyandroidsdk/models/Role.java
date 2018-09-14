@@ -345,20 +345,23 @@ public class Role extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(RoleMapping object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -449,20 +452,23 @@ public class Role extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(RoleMapping object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -509,25 +515,28 @@ public class Role extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(DataList<RoleMapping> object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            RoleMapping obj = new RoleMapping();
-                                                            addRelation(object, obj);
-                                                            //Disabling two way communication for cyclic error..
-                                                            /*for (RoleMapping obj : object) {
-                                                                //Also add relation to child type for two way communication..
-                                                                obj.addRelation(that);
-                                                            }*/
+                                                          //now add relation to this recipe.
+                                                          RoleMapping obj = new RoleMapping();
+                                                          addRelation(object, obj);
+                                                          //Disabling two way communication for cyclic error..
+                                                          /*for (RoleMapping obj : object) {
+                                                              //Also add relation to child type for two way communication..
+                                                              obj.addRelation(that);
+                                                          }*/
 
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -568,20 +577,23 @@ public class Role extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(RoleMapping object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -666,9 +678,14 @@ public class Role extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(JSONObject object) {
+                                                      try{
                                                         callback.onSuccess(object);
                                                         //Calling the finally..callback
                                                         callback.onFinally();
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+
                                                     }
                                                 
                                             

@@ -63,83 +63,6 @@ public class Category extends Model {
             
 
             
-                private String categoryName;
-                /* Adding Getter and Setter methods */
-                public String getCategoryName(){
-                    return categoryName;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setCategoryName(String categoryName){
-                    this.categoryName = categoryName;
-                    //Update hashMap value..
-                    hashMap.put("categoryName", categoryName);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private Map<String, Object> logo;
-                /* Adding Getter and Setter methods */
-                public Map<String, Object> getLogo(){
-                    return logo;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setLogo(Map<String, Object> logo){
-                    this.logo = logo;
-                    //Update Map value..
-                    hashMap.put("logo", logo);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private double priority;
-                /* Adding Getter and Setter methods */
-                public double getPriority(){
-                    return priority;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setPriority(double priority){
-                    this.priority = priority;
-                    //Update hashMap value..
-                    hashMap.put("priority", priority);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String status;
-                /* Adding Getter and Setter methods */
-                public String getStatus(){
-                    return status;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setStatus(String status){
-                    this.status = status;
-                    //Update hashMap value..
-                    hashMap.put("status", status);
-                }
-
-            
             
         
     
@@ -189,17 +112,17 @@ public class Category extends Model {
             
 
             
-                private String slug;
+                private String name;
                 /* Adding Getter and Setter methods */
-                public String getSlug(){
-                    return slug;
+                public String getName(){
+                    return name;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setSlug(String slug){
-                    this.slug = slug;
+                public void setName(String name){
+                    this.name = name;
                     //Update hashMap value..
-                    hashMap.put("slug", slug);
+                    hashMap.put("name", name);
                 }
 
             
@@ -208,6 +131,188 @@ public class Category extends Model {
     
         
             
+
+            
+                private boolean isTrending;
+                /* Adding Getter and Setter methods */
+                public boolean getIsTrending(){
+                    return isTrending;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setIsTrending(boolean isTrending){
+                    this.isTrending = isTrending;
+                    //Update hashMap value..
+                    hashMap.put("isTrending", isTrending);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String status;
+                /* Adding Getter and Setter methods */
+                public String getStatus(){
+                    return status;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStatus(String status){
+                    this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private double priority;
+                /* Adding Getter and Setter methods */
+                public double getPriority(){
+                    return priority;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPriority(double priority){
+                    this.priority = priority;
+                    //Update hashMap value..
+                    hashMap.put("priority", priority);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String identifier;
+                /* Adding Getter and Setter methods */
+                public String getIdentifier(){
+                    return identifier;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setIdentifier(String identifier){
+                    this.identifier = identifier;
+                    //Update hashMap value..
+                    hashMap.put("identifier", identifier);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String description;
+                /* Adding Getter and Setter methods */
+                public String getDescription(){
+                    return description;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setDescription(String description){
+                    this.description = description;
+                    //Update hashMap value..
+                    hashMap.put("description", description);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private Map<String, Object> image;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getImage(){
+                    return image;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setImage(Map<String, Object> image){
+                    this.image = image;
+                    //Update Map value..
+                    hashMap.put("image", image);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private Map<String, Object> homeIcon;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getHomeIcon(){
+                    return homeIcon;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setHomeIcon(Map<String, Object> homeIcon){
+                    this.homeIcon = homeIcon;
+                    //Update Map value..
+                    hashMap.put("homeIcon", homeIcon);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private Map<String, Object> defaultIcon;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getDefaultIcon(){
+                    return defaultIcon;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setDefaultIcon(Map<String, Object> defaultIcon){
+                    this.defaultIcon = defaultIcon;
+                    //Update Map value..
+                    hashMap.put("defaultIcon", defaultIcon);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private boolean isSelected;
+                /* Adding Getter and Setter methods */
+                public boolean getIsSelected(){
+                    return isSelected;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setIsSelected(boolean isSelected){
+                    this.isSelected = isSelected;
+                    //Update hashMap value..
+                    hashMap.put("isSelected", isSelected);
+                }
 
             
             

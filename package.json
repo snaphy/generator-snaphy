@@ -23,7 +23,7 @@
     "mkdirp": "^0.5.1",
     "node-ini": "^1.0.0",
     "rimraf": "^2.6.2",
-    "yeoman-generator": "^2.0.5",
+    "yeoman-generator": "0.24.1",
     "yosay": "^2.0.2"
   },
   "devDependencies": {

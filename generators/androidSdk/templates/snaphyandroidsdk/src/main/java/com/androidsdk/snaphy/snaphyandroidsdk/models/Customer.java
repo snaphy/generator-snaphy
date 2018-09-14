@@ -34,7 +34,42 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IndustryRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BusinessTypeRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AddressRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.InvoiceRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecentSearchRepository;
             
 
         
@@ -73,17 +108,17 @@ public class Customer extends User {
             
 
             
-                private String firstName;
+                private String added;
                 /* Adding Getter and Setter methods */
-                public String getFirstName(){
-                    return firstName;
+                public String getAdded(){
+                    return added;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFirstName(String firstName){
-                    this.firstName = firstName;
+                public void setAdded(String added){
+                    this.added = added;
                     //Update hashMap value..
-                    hashMap.put("firstName", firstName);
+                    hashMap.put("added", added);
                 }
 
             
@@ -94,17 +129,194 @@ public class Customer extends User {
             
 
             
-                private String lastName;
+            
+        
+    
+        
+            
+
+                private DataList<String> interestedCatList;
                 /* Adding Getter and Setter methods */
-                public String getLastName(){
-                    return lastName;
+                public DataList<String> getInterestedCatList(){
+                    return interestedCatList;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastName(String lastName){
-                    this.lastName = lastName;
+                public void setInterestedCatList(DataList<String> interestedCatList){
+                    this.interestedCatList = interestedCatList;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("interestedCatList", interestedCatList);
+                }
+
+            
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String updated;
+                /* Adding Getter and Setter methods */
+                public String getUpdated(){
+                    return updated;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUpdated(String updated){
+                    this.updated = updated;
                     //Update hashMap value..
-                    hashMap.put("lastName", lastName);
+                    hashMap.put("updated", updated);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String name;
+                /* Adding Getter and Setter methods */
+                public String getName(){
+                    return name;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setName(String name){
+                    this.name = name;
+                    //Update hashMap value..
+                    hashMap.put("name", name);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String mobileNumber;
+                /* Adding Getter and Setter methods */
+                public String getMobileNumber(){
+                    return mobileNumber;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setMobileNumber(String mobileNumber){
+                    this.mobileNumber = mobileNumber;
+                    //Update hashMap value..
+                    hashMap.put("mobileNumber", mobileNumber);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String altContactNumber;
+                /* Adding Getter and Setter methods */
+                public String getAltContactNumber(){
+                    return altContactNumber;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAltContactNumber(String altContactNumber){
+                    this.altContactNumber = altContactNumber;
+                    //Update hashMap value..
+                    hashMap.put("altContactNumber", altContactNumber);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String whatsappNumber;
+                /* Adding Getter and Setter methods */
+                public String getWhatsappNumber(){
+                    return whatsappNumber;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setWhatsappNumber(String whatsappNumber){
+                    this.whatsappNumber = whatsappNumber;
+                    //Update hashMap value..
+                    hashMap.put("whatsappNumber", whatsappNumber);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String storeName;
+                /* Adding Getter and Setter methods */
+                public String getStoreName(){
+                    return storeName;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStoreName(String storeName){
+                    this.storeName = storeName;
+                    //Update hashMap value..
+                    hashMap.put("storeName", storeName);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String registeredFirmName;
+                /* Adding Getter and Setter methods */
+                public String getRegisteredFirmName(){
+                    return registeredFirmName;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRegisteredFirmName(String registeredFirmName){
+                    this.registeredFirmName = registeredFirmName;
+                    //Update hashMap value..
+                    hashMap.put("registeredFirmName", registeredFirmName);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private Map<String, Object> image;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getImage(){
+                    return image;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setImage(Map<String, Object> image){
+                    this.image = image;
+                    //Update Map value..
+                    hashMap.put("image", image);
                 }
 
             
@@ -136,17 +348,17 @@ public class Customer extends User {
             
 
             
-                private String username;
+                private String liscenceType;
                 /* Adding Getter and Setter methods */
-                public String getUsername(){
-                    return username;
+                public String getLiscenceType(){
+                    return liscenceType;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUsername(String username){
-                    this.username = username;
+                public void setLiscenceType(String liscenceType){
+                    this.liscenceType = liscenceType;
                     //Update hashMap value..
-                    hashMap.put("username", username);
+                    hashMap.put("liscenceType", liscenceType);
                 }
 
             
@@ -157,17 +369,17 @@ public class Customer extends User {
             
 
             
-                private String added;
+                private String gstNumber;
                 /* Adding Getter and Setter methods */
-                public String getAdded(){
-                    return added;
+                public String getGstNumber(){
+                    return gstNumber;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setAdded(String added){
-                    this.added = added;
+                public void setGstNumber(String gstNumber){
+                    this.gstNumber = gstNumber;
                     //Update hashMap value..
-                    hashMap.put("added", added);
+                    hashMap.put("gstNumber", gstNumber);
                 }
 
             
@@ -178,17 +390,17 @@ public class Customer extends User {
             
 
             
-                private String updated;
+                private String shopAddress;
                 /* Adding Getter and Setter methods */
-                public String getUpdated(){
-                    return updated;
+                public String getShopAddress(){
+                    return shopAddress;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUpdated(String updated){
-                    this.updated = updated;
+                public void setShopAddress(String shopAddress){
+                    this.shopAddress = shopAddress;
                     //Update hashMap value..
-                    hashMap.put("updated", updated);
+                    hashMap.put("shopAddress", shopAddress);
                 }
 
             
@@ -199,17 +411,17 @@ public class Customer extends User {
             
 
             
-                private String registrationId;
+                private String pincode;
                 /* Adding Getter and Setter methods */
-                public String getRegistrationId(){
-                    return registrationId;
+                public String getPincode(){
+                    return pincode;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setRegistrationId(String registrationId){
-                    this.registrationId = registrationId;
+                public void setPincode(String pincode){
+                    this.pincode = pincode;
                     //Update hashMap value..
-                    hashMap.put("registrationId", registrationId);
+                    hashMap.put("pincode", pincode);
                 }
 
             
@@ -220,17 +432,17 @@ public class Customer extends User {
             
 
             
-                private Map<String, Object> profilePic;
+                private String city;
                 /* Adding Getter and Setter methods */
-                public Map<String, Object> getProfilePic(){
-                    return profilePic;
+                public String getCity(){
+                    return city;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setProfilePic(Map<String, Object> profilePic){
-                    this.profilePic = profilePic;
-                    //Update Map value..
-                    hashMap.put("profilePic", profilePic);
+                public void setCity(String city){
+                    this.city = city;
+                    //Update hashMap value..
+                    hashMap.put("city", city);
                 }
 
             
@@ -241,18 +453,81 @@ public class Customer extends User {
             
 
             
-                private String googleRefreshToken;
+                private String state;
                 /* Adding Getter and Setter methods */
-                public String getGoogleRefreshToken(){
-                    return googleRefreshToken;
+                public String getState(){
+                    return state;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setGoogleRefreshToken(String googleRefreshToken){
-                    this.googleRefreshToken = googleRefreshToken;
+                public void setState(String state){
+                    this.state = state;
                     //Update hashMap value..
-                    hashMap.put("googleRefreshToken", googleRefreshToken);
+                    hashMap.put("state", state);
                 }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String totalPurchase;
+                /* Adding Getter and Setter methods */
+                public String getTotalPurchase(){
+                    return totalPurchase;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTotalPurchase(String totalPurchase){
+                    this.totalPurchase = totalPurchase;
+                    //Update hashMap value..
+                    hashMap.put("totalPurchase", totalPurchase);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String verificationStatus;
+                /* Adding Getter and Setter methods */
+                public String getVerificationStatus(){
+                    return verificationStatus;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setVerificationStatus(String verificationStatus){
+                    this.verificationStatus = verificationStatus;
+                    //Update hashMap value..
+                    hashMap.put("verificationStatus", verificationStatus);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+            
+        
+    
+        
+            
+
+            
+            
+        
+    
+        
+            
 
             
             
@@ -404,37 +679,892 @@ public class Customer extends User {
         
         
                 
+                    //Define belongsTo relation method here..
+                    private transient Industry  industry ;
+                    private String industryId;
+
+                    public String getIndustryId(){
+                         return industryId;
+                    }
+
+                    public void setIndustryId(Object industryId){
+                        if(industryId != null){
+                          this.industryId = industryId.toString();
+                        }
+                    }
+
+                    public Industry getIndustry() {
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(industry == null){
+                                        CustomerRepository customerRepository = (CustomerRepository) getRepository();
+
+                                        SnaphyRestAdapter restAdapter = customerRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          industry = getIndustry__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
+
+                        return industry;
+                    }
+
+                    public void setIndustry(Industry industry) {
+                        this.industry = industry;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setIndustry(Map<String, Object> industry) {
+                        //First create a dummy Repo class object for customer.
+                        IndustryRepository industryRepository = new IndustryRepository();
+                        Industry industry1 = industryRepository.createObject(industry);
+                        setIndustry(industry1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setIndustry(HashMap<String, Object> industry) {
+                        //First create a dummy Repo class object for customer.
+                        IndustryRepository industryRepository = new IndustryRepository();
+                        Industry industry1 = industryRepository.createObject(industry);
+                        setIndustry(industry1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(Industry industry) {
+                        that.setIndustry(industry);
+                    }
+
+
+                    //Fetch related data from local database if present a industryId identifier as property for belongsTo
+                    public Industry getIndustry__db(SnaphyRestAdapter restAdapter){
+                      if(industryId != null){
+                        IndustryRepository industryRepository = restAdapter.createRepository(IndustryRepository.class);
+                            try{
+                            CustomerRepository lowercaseFirstLetterRepository = (CustomerRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(industryRepository.getDb() == null ){
+                                                    industryRepository.addStorage(context);
+                                                }
+
+                                                if(context != null && industryRepository.getDb() != null){
+                                                    industryRepository.addStorage(context);
+                                                    Industry industry = (Industry) industryRepository.getDb().get__db(industryId);
+                                                    return industry;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
+
+                        }else{
+                          return null;
+                      }
+                    }
+                
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__industry( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Industry> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.get__industry( (String)that.getId(), refresh,  new ObjectCallback<Industry> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Industry object) {
+                                                      try{
+                                                        if(object != null){
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+                    //Define belongsTo relation method here..
+                    private transient BusinessType  businessType ;
+                    private String businessTypeId;
+
+                    public String getBusinessTypeId(){
+                         return businessTypeId;
+                    }
+
+                    public void setBusinessTypeId(Object businessTypeId){
+                        if(businessTypeId != null){
+                          this.businessTypeId = businessTypeId.toString();
+                        }
+                    }
+
+                    public BusinessType getBusinessType() {
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(businessType == null){
+                                        CustomerRepository customerRepository = (CustomerRepository) getRepository();
+
+                                        SnaphyRestAdapter restAdapter = customerRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          businessType = getBusinessType__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
+
+                        return businessType;
+                    }
+
+                    public void setBusinessType(BusinessType businessType) {
+                        this.businessType = businessType;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setBusinessType(Map<String, Object> businessType) {
+                        //First create a dummy Repo class object for customer.
+                        BusinessTypeRepository businessTypeRepository = new BusinessTypeRepository();
+                        BusinessType businessType1 = businessTypeRepository.createObject(businessType);
+                        setBusinessType(businessType1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setBusinessType(HashMap<String, Object> businessType) {
+                        //First create a dummy Repo class object for customer.
+                        BusinessTypeRepository businessTypeRepository = new BusinessTypeRepository();
+                        BusinessType businessType1 = businessTypeRepository.createObject(businessType);
+                        setBusinessType(businessType1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(BusinessType businessType) {
+                        that.setBusinessType(businessType);
+                    }
+
+
+                    //Fetch related data from local database if present a businessTypeId identifier as property for belongsTo
+                    public BusinessType getBusinessType__db(SnaphyRestAdapter restAdapter){
+                      if(businessTypeId != null){
+                        BusinessTypeRepository businessTypeRepository = restAdapter.createRepository(BusinessTypeRepository.class);
+                            try{
+                            CustomerRepository lowercaseFirstLetterRepository = (CustomerRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(businessTypeRepository.getDb() == null ){
+                                                    businessTypeRepository.addStorage(context);
+                                                }
+
+                                                if(context != null && businessTypeRepository.getDb() != null){
+                                                    businessTypeRepository.addStorage(context);
+                                                    BusinessType businessType = (BusinessType) businessTypeRepository.getDb().get__db(businessTypeId);
+                                                    return businessType;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
+
+                        }else{
+                          return null;
+                      }
+                    }
+                
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__businessType( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<BusinessType> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.get__businessType( (String)that.getId(), refresh,  new ObjectCallback<BusinessType> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(BusinessType object) {
+                                                      try{
+                                                        if(object != null){
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+                    //Define belongsTo relation method here..
+                    private transient Employee  employee ;
+                    private String employeeId;
+
+                    public String getEmployeeId(){
+                         return employeeId;
+                    }
+
+                    public void setEmployeeId(Object employeeId){
+                        if(employeeId != null){
+                          this.employeeId = employeeId.toString();
+                        }
+                    }
+
+                    public Employee getEmployee() {
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(employee == null){
+                                        CustomerRepository customerRepository = (CustomerRepository) getRepository();
+
+                                        SnaphyRestAdapter restAdapter = customerRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          employee = getEmployee__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
+
+                        return employee;
+                    }
+
+                    public void setEmployee(Employee employee) {
+                        this.employee = employee;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setEmployee(Map<String, Object> employee) {
+                        //First create a dummy Repo class object for customer.
+                        EmployeeRepository employeeRepository = new EmployeeRepository();
+                        Employee employee1 = employeeRepository.createObject(employee);
+                        setEmployee(employee1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setEmployee(HashMap<String, Object> employee) {
+                        //First create a dummy Repo class object for customer.
+                        EmployeeRepository employeeRepository = new EmployeeRepository();
+                        Employee employee1 = employeeRepository.createObject(employee);
+                        setEmployee(employee1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(Employee employee) {
+                        that.setEmployee(employee);
+                    }
+
+
+                    //Fetch related data from local database if present a employeeId identifier as property for belongsTo
+                    public Employee getEmployee__db(SnaphyRestAdapter restAdapter){
+                      if(employeeId != null){
+                        EmployeeRepository employeeRepository = restAdapter.createRepository(EmployeeRepository.class);
+                            try{
+                            CustomerRepository lowercaseFirstLetterRepository = (CustomerRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(employeeRepository.getDb() == null ){
+                                                    employeeRepository.addStorage(context);
+                                                }
+
+                                                if(context != null && employeeRepository.getDb() != null){
+                                                    employeeRepository.addStorage(context);
+                                                    Employee employee = (Employee) employeeRepository.getDb().get__db(employeeId);
+                                                    return employee;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
+
+                        }else{
+                          return null;
+                      }
+                    }
+                
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__employee( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Employee> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.get__employee( (String)that.getId(), refresh,  new ObjectCallback<Employee> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Employee object) {
+                                                      try{
+                                                        if(object != null){
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
+    
+        
+        
+                
 
                 
                     
                     //Define hasMany relation method here..
-                    private transient DataList<FacebookAccessToken>  facebookAccessToken ;
+                    private transient DataList<Address>  addresses ;
 
-                    public DataList< FacebookAccessToken > getFacebookAccessToken() {
+                    public DataList< Address > getAddresses() {
                         //Check for pure case of hasMany
                                                     //TODO: Modify foreign key name..
                           try{
-                            FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
+                            AddressRepository addressRepository = (AddressRepository) getRepository();
 
-                            if(that.getId() != null && facebookAccessTokenRepository.getDb() != null){
+                            if(that.getId() != null && addressRepository.getDb() != null){
 
                                  //Fetch locally from db
-                                 //facebookAccessToken = getFacebookAccessToken__db(restAdapter);
+                                 //addresses = getAddresses__db(restAdapter);
                                  // Getting single cont
-                                 facebookAccessToken = facebookAccessTokenRepository.getDb().getAll__db("customerId", that.getId().toString());
+                                 addresses = addressRepository.getDb().getAll__db("customerId", that.getId().toString());
 
                                  //lowercaseFirstLetter(modelName)
                             }
                           }catch(Exception e){
                                 //Ignore
                           }
-                                                return facebookAccessToken;
+                                                return addresses;
                     }
 
-                    public void setFacebookAccessToken(DataList<FacebookAccessToken> facebookAccessToken) {
+                    public void setAddresses(DataList<Address> addresses) {
                         boolean hashType = false;
                         DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: facebookAccessToken){
+                        for(Object o: addresses){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
@@ -443,11 +1573,11 @@ public class Customer extends User {
                         }
 
                         if(hashType){
-                            setFacebookAccessToken1(hashMaps);
+                            setAddresses1(hashMaps);
                         }else{
-                            this.facebookAccessToken = facebookAccessToken;
+                            this.addresses = addresses;
                             //TODO: Warning move this to new thread
-                            for(FacebookAccessToken data: facebookAccessToken){
+                            for(Address data: addresses){
                               try{
                                 data.save__db();
                               } catch (NoSuchMethodError e) {
@@ -458,63 +1588,63 @@ public class Customer extends User {
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setFacebookAccessToken1(List<Map<String, Object>> facebookAccessToken) {
+                    public void setAddresses1(List<Map<String, Object>> addresses) {
                         //First create a dummy Repo class object for ..
-                        FacebookAccessTokenRepository facebookAccessTokenRepository = new FacebookAccessTokenRepository();
-                        List<FacebookAccessToken> result = new ArrayList<>();
-                        for (Map<String, Object> obj : facebookAccessToken) {
+                        AddressRepository addressesRepository = new AddressRepository();
+                        List<Address> result = new ArrayList<>();
+                        for (Map<String, Object> obj : addresses) {
                             //Also add relation to child type for two way communication..
-                            FacebookAccessToken obj1 = facebookAccessTokenRepository.createObject(obj);
+                            Address obj1 = addressesRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setFacebookAccessToken(result);
+                        setAddresses(result);
 
                     }
 
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setFacebookAccessToken1(DataList<HashMap<String, Object>> facebookAccessToken) {
+                    public void setAddresses1(DataList<HashMap<String, Object>> addresses) {
                         //First create a dummy Repo class object for ..
-                        FacebookAccessTokenRepository facebookAccessTokenRepository = new FacebookAccessTokenRepository();
-                        DataList<FacebookAccessToken> result = new DataList<>();
-                        for (HashMap<String, Object> obj : facebookAccessToken) {
+                        AddressRepository addressesRepository = new AddressRepository();
+                        DataList<Address> result = new DataList<>();
+                        for (HashMap<String, Object> obj : addresses) {
                             //Also add relation to child type for two way communication..
-                            FacebookAccessToken obj1 = facebookAccessTokenRepository.createObject(obj);
+                            Address obj1 = addressesRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setFacebookAccessToken(result);
+                        setAddresses(result);
 
                     }
 
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(DataList<FacebookAccessToken> facebookAccessToken, FacebookAccessToken dummyClassInstance) {
-                        that.setFacebookAccessToken(facebookAccessToken);
+                    public void addRelation(DataList<Address> addresses, Address dummyClassInstance) {
+                        that.setAddresses(addresses);
 
                     }
 
                     //Adding relation method..
                     //This will add a new data to the list relation object..
-                    public void addRelation(FacebookAccessToken facebookAccessToken) {
+                    public void addRelation(Address addresses) {
                         try{
                             try{
 
                                   //Save to database..
-                                  facebookAccessToken.save__db();
+                                  addresses.save__db();
                             }catch (NoSuchMethodError e) {
                               // ignore
                             }
-                            that.getFacebookAccessToken().add(facebookAccessToken);
+                            that.getAddresses().add(addresses);
                         }catch(Exception e){
-                            DataList< FacebookAccessToken> facebookAccessToken1 = new DataList();
+                            DataList< Address> addresses1 = new DataList();
                             //Now add this item to list..
-                            facebookAccessToken1.add(facebookAccessToken);
+                            addresses1.add(addresses);
                             //Now set data....
-                            that.setFacebookAccessToken(facebookAccessToken1);
+                            that.setAddresses(addresses1);
                         }
                     }
 
@@ -543,10 +1673,12 @@ public class Customer extends User {
                             
                          
                             
+                         
+                            
                         
 
                                     //Write the method here..
-                                    public void findById__facebookAccessToken( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<FacebookAccessToken> callback) {
+                                    public void findById__addresses( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<Address> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -560,27 +1692,30 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.findById__facebookAccessToken( (String)that.getId(), fk,  new ObjectCallback<FacebookAccessToken> (){
+                                        customerRepo.findById__addresses( (String)that.getId(), fk,  new ObjectCallback<Address> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(FacebookAccessToken object) {
+                                                    public void onSuccess(Address object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -603,7 +1738,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void destroyById__facebookAccessToken( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__addresses( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -617,7 +1752,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.destroyById__facebookAccessToken( (String)that.getId(), fk,  new VoidCallback (){
+                                        customerRepo.destroyById__addresses( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -647,7 +1782,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void updateById__facebookAccessToken( String fk,  FacebookAccessToken data,  SnaphyRestAdapter restAdapter, final ObjectCallback<FacebookAccessToken> callback) {
+                                    public void updateById__addresses( String fk,  Address data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Address> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -664,27 +1799,30 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.updateById__facebookAccessToken( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<FacebookAccessToken> (){
+                                        customerRepo.updateById__addresses( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Address> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(FacebookAccessToken object) {
+                                                    public void onSuccess(Address object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -712,10 +1850,26 @@ public class Customer extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
-                                    public void get__facebookAccessToken( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<FacebookAccessToken> callback) {
+                                    public void get__addresses( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<Address> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -729,7 +1883,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.get__facebookAccessToken( (String)that.getId(), filter,  new DataListCallback<FacebookAccessToken> (){
+                                        customerRepo.get__addresses( (String)that.getId(), filter,  new DataListCallback<Address> (){
                                             
 
                                             
@@ -738,26 +1892,29 @@ public class Customer extends User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(DataList<FacebookAccessToken> object) {
+                                                    public void onSuccess(DataList<Address> object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            FacebookAccessToken obj = new FacebookAccessToken();
-                                                            addRelation(object, obj);
-                                                            //Disabling two way communication for cyclic error..
-                                                            /*for (FacebookAccessToken obj : object) {
-                                                                //Also add relation to child type for two way communication..
-                                                                obj.addRelation(that);
-                                                            }*/
+                                                          //now add relation to this recipe.
+                                                          Address obj = new Address();
+                                                          addRelation(object, obj);
+                                                          //Disabling two way communication for cyclic error..
+                                                          /*for (Address obj : object) {
+                                                              //Also add relation to child type for two way communication..
+                                                              obj.addRelation(that);
+                                                          }*/
 
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -777,7 +1934,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void create__facebookAccessToken( FacebookAccessToken data,  SnaphyRestAdapter restAdapter, final ObjectCallback<FacebookAccessToken> callback) {
+                                    public void create__addresses( Address data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Address> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -791,27 +1948,30 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.create__facebookAccessToken( (String)that.getId(), data.convertMap(),  new ObjectCallback<FacebookAccessToken> (){
+                                        customerRepo.create__addresses( (String)that.getId(), data.convertMap(),  new ObjectCallback<Address> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(FacebookAccessToken object) {
+                                                    public void onSuccess(Address object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -834,7 +1994,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void delete__facebookAccessToken( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__addresses( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -845,7 +2005,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.delete__facebookAccessToken( (String)that.getId(),  new VoidCallback (){
+                                        customerRepo.delete__addresses( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -875,7 +2035,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void count__facebookAccessToken( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__addresses( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -889,16 +2049,21 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.count__facebookAccessToken( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                        customerRepo.count__addresses( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
                                                     public void onSuccess(JSONObject object) {
+                                                      try{
                                                         callback.onSuccess(object);
                                                         //Calling the finally..callback
                                                         callback.onFinally();
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+
                                                     }
                                                 
                                             
@@ -918,6 +2083,1307 @@ public class Customer extends User {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<Invoice>  invoices ;
+
+                    public DataList< Invoice > getInvoices() {
+                        //Check for pure case of hasMany
+                                                    //TODO: Modify foreign key name..
+                          try{
+                            InvoiceRepository invoiceRepository = (InvoiceRepository) getRepository();
+
+                            if(that.getId() != null && invoiceRepository.getDb() != null){
+
+                                 //Fetch locally from db
+                                 //invoices = getInvoices__db(restAdapter);
+                                 // Getting single cont
+                                 invoices = invoiceRepository.getDb().getAll__db("customerId", that.getId().toString());
+
+                                 //lowercaseFirstLetter(modelName)
+                            }
+                          }catch(Exception e){
+                                //Ignore
+                          }
+                                                return invoices;
+                    }
+
+                    public void setInvoices(DataList<Invoice> invoices) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: invoices){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setInvoices1(hashMaps);
+                        }else{
+                            this.invoices = invoices;
+                            //TODO: Warning move this to new thread
+                            for(Invoice data: invoices){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setInvoices1(List<Map<String, Object>> invoices) {
+                        //First create a dummy Repo class object for ..
+                        InvoiceRepository invoicesRepository = new InvoiceRepository();
+                        List<Invoice> result = new ArrayList<>();
+                        for (Map<String, Object> obj : invoices) {
+                            //Also add relation to child type for two way communication..
+                            Invoice obj1 = invoicesRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setInvoices(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setInvoices1(DataList<HashMap<String, Object>> invoices) {
+                        //First create a dummy Repo class object for ..
+                        InvoiceRepository invoicesRepository = new InvoiceRepository();
+                        DataList<Invoice> result = new DataList<>();
+                        for (HashMap<String, Object> obj : invoices) {
+                            //Also add relation to child type for two way communication..
+                            Invoice obj1 = invoicesRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setInvoices(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<Invoice> invoices, Invoice dummyClassInstance) {
+                        that.setInvoices(invoices);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(Invoice invoices) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  invoices.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getInvoices().add(invoices);
+                        }catch(Exception e){
+                            DataList< Invoice> invoices1 = new DataList();
+                            //Now add this item to list..
+                            invoices1.add(invoices);
+                            //Now set data....
+                            that.setInvoices(invoices1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__invoices( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<Invoice> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.findById__invoices( (String)that.getId(), fk,  new ObjectCallback<Invoice> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Invoice object) {
+                                                      try{
+                                                        if(object != null){
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__invoices( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.destroyById__invoices( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__invoices( String fk,  Invoice data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Invoice> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.updateById__invoices( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Invoice> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Invoice object) {
+                                                      try{
+                                                        if(object != null){
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__invoices( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<Invoice> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.get__invoices( (String)that.getId(), filter,  new DataListCallback<Invoice> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<Invoice> object) {
+                                                      try{
+                                                        if(object != null){
+                                                          //now add relation to this recipe.
+                                                          Invoice obj = new Invoice();
+                                                          addRelation(object, obj);
+                                                          //Disabling two way communication for cyclic error..
+                                                          /*for (Invoice obj : object) {
+                                                              //Also add relation to child type for two way communication..
+                                                              obj.addRelation(that);
+                                                          }*/
+
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__invoices( Invoice data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Invoice> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.create__invoices( (String)that.getId(), data.convertMap(),  new ObjectCallback<Invoice> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Invoice object) {
+                                                      try{
+                                                        if(object != null){
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__invoices( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+
+
+
+                                        customerRepo.delete__invoices( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__invoices( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.count__invoices( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                      try{
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<RecentSearch>  recentSearches ;
+
+                    public DataList< RecentSearch > getRecentSearches() {
+                        //Check for pure case of hasMany
+                                                    //TODO: Modify foreign key name..
+                          try{
+                            RecentSearchRepository recentSearchRepository = (RecentSearchRepository) getRepository();
+
+                            if(that.getId() != null && recentSearchRepository.getDb() != null){
+
+                                 //Fetch locally from db
+                                 //recentSearches = getRecentSearches__db(restAdapter);
+                                 // Getting single cont
+                                 recentSearches = recentSearchRepository.getDb().getAll__db("customerId", that.getId().toString());
+
+                                 //lowercaseFirstLetter(modelName)
+                            }
+                          }catch(Exception e){
+                                //Ignore
+                          }
+                                                return recentSearches;
+                    }
+
+                    public void setRecentSearches(DataList<RecentSearch> recentSearches) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: recentSearches){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setRecentSearches1(hashMaps);
+                        }else{
+                            this.recentSearches = recentSearches;
+                            //TODO: Warning move this to new thread
+                            for(RecentSearch data: recentSearches){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setRecentSearches1(List<Map<String, Object>> recentSearches) {
+                        //First create a dummy Repo class object for ..
+                        RecentSearchRepository recentSearchesRepository = new RecentSearchRepository();
+                        List<RecentSearch> result = new ArrayList<>();
+                        for (Map<String, Object> obj : recentSearches) {
+                            //Also add relation to child type for two way communication..
+                            RecentSearch obj1 = recentSearchesRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setRecentSearches(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setRecentSearches1(DataList<HashMap<String, Object>> recentSearches) {
+                        //First create a dummy Repo class object for ..
+                        RecentSearchRepository recentSearchesRepository = new RecentSearchRepository();
+                        DataList<RecentSearch> result = new DataList<>();
+                        for (HashMap<String, Object> obj : recentSearches) {
+                            //Also add relation to child type for two way communication..
+                            RecentSearch obj1 = recentSearchesRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setRecentSearches(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<RecentSearch> recentSearches, RecentSearch dummyClassInstance) {
+                        that.setRecentSearches(recentSearches);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(RecentSearch recentSearches) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  recentSearches.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getRecentSearches().add(recentSearches);
+                        }catch(Exception e){
+                            DataList< RecentSearch> recentSearches1 = new DataList();
+                            //Now add this item to list..
+                            recentSearches1.add(recentSearches);
+                            //Now set data....
+                            that.setRecentSearches(recentSearches1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__recentSearches( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<RecentSearch> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.findById__recentSearches( (String)that.getId(), fk,  new ObjectCallback<RecentSearch> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(RecentSearch object) {
+                                                      try{
+                                                        if(object != null){
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__recentSearches( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.destroyById__recentSearches( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__recentSearches( String fk,  RecentSearch data,  SnaphyRestAdapter restAdapter, final ObjectCallback<RecentSearch> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.updateById__recentSearches( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<RecentSearch> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(RecentSearch object) {
+                                                      try{
+                                                        if(object != null){
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__recentSearches( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<RecentSearch> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.get__recentSearches( (String)that.getId(), filter,  new DataListCallback<RecentSearch> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<RecentSearch> object) {
+                                                      try{
+                                                        if(object != null){
+                                                          //now add relation to this recipe.
+                                                          RecentSearch obj = new RecentSearch();
+                                                          addRelation(object, obj);
+                                                          //Disabling two way communication for cyclic error..
+                                                          /*for (RecentSearch obj : object) {
+                                                              //Also add relation to child type for two way communication..
+                                                              obj.addRelation(that);
+                                                          }*/
+
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__recentSearches( RecentSearch data,  SnaphyRestAdapter restAdapter, final ObjectCallback<RecentSearch> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.create__recentSearches( (String)that.getId(), data.convertMap(),  new ObjectCallback<RecentSearch> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(RecentSearch object) {
+                                                      try{
+                                                        if(object != null){
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__recentSearches( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+
+
+
+                                        customerRepo.delete__recentSearches( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__recentSearches( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.count__recentSearches( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                      try{
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

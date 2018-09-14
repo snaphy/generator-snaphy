@@ -332,6 +332,9 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
     
     
+
+    
+    
     return contract;
     }
 
@@ -389,6 +392,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
@@ -424,6 +428,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -471,6 +479,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -509,8 +518,11 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     callback.onSuccess(null);
                                 }
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
@@ -555,9 +567,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -606,9 +623,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -661,9 +683,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -709,11 +736,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
-                                callback.onSuccess(response);
+                            callback.onSuccess(response);
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
@@ -756,9 +787,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -805,9 +841,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -856,9 +897,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -905,9 +951,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -920,6 +971,8 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
             
 
+        
+    
         
     
 

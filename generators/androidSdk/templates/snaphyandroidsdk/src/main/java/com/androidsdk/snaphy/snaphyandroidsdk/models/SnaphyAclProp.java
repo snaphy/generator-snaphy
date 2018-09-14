@@ -365,20 +365,23 @@ public class SnaphyAclProp extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(SnaphyAcl object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             

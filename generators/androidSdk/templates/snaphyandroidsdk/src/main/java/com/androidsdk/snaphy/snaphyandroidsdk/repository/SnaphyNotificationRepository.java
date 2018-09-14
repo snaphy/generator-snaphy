@@ -343,6 +343,7 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyNotificationRepository snaphyNotificationRepo = getRestAdapter().createRepository(SnaphyNotificationRepository.class);
@@ -378,6 +379,10 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -427,6 +432,7 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyNotificationRepository snaphyNotificationRepo = getRestAdapter().createRepository(SnaphyNotificationRepository.class);
@@ -462,6 +468,10 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -510,9 +520,14 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -563,6 +578,7 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyNotificationRepository snaphyNotificationRepo = getRestAdapter().createRepository(SnaphyNotificationRepository.class);
@@ -598,6 +614,10 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -645,6 +665,7 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -683,8 +704,11 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
                                     callback.onSuccess(null);
                                 }
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
@@ -729,6 +753,7 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyNotificationRepository snaphyNotificationRepo = getRestAdapter().createRepository(SnaphyNotificationRepository.class);
@@ -764,6 +789,10 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -814,9 +843,14 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -865,9 +899,14 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -916,9 +955,14 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -969,6 +1013,7 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyNotificationRepository snaphyNotificationRepo = getRestAdapter().createRepository(SnaphyNotificationRepository.class);
@@ -1004,6 +1049,10 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1052,9 +1101,14 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1101,9 +1155,14 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1152,9 +1211,14 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1201,9 +1265,14 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1252,6 +1321,7 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyNotificationRepository snaphyNotificationRepo = getRestAdapter().createRepository(SnaphyNotificationRepository.class);
@@ -1287,6 +1357,10 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1337,9 +1411,14 @@ public class SnaphyNotificationRepository extends ModelRepository<SnaphyNotifica
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }

@@ -473,6 +473,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
@@ -508,6 +509,10 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -608,6 +613,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
@@ -643,6 +649,10 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -693,6 +703,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
@@ -728,6 +739,10 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -828,6 +843,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
@@ -863,6 +879,10 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -912,6 +932,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -950,8 +971,11 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
@@ -998,6 +1022,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
@@ -1033,6 +1058,10 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1129,9 +1158,14 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1181,6 +1215,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -1219,8 +1254,11 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
@@ -1267,6 +1305,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
@@ -1302,6 +1341,10 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1398,9 +1441,14 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1449,6 +1497,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
@@ -1484,6 +1533,10 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1533,6 +1586,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
@@ -1568,6 +1622,10 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1616,9 +1674,14 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1669,6 +1732,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
@@ -1704,6 +1768,10 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1751,6 +1819,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -1789,8 +1858,11 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
@@ -1835,6 +1907,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
@@ -1870,6 +1943,10 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1920,9 +1997,14 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1971,9 +2053,14 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2022,9 +2109,14 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2075,6 +2167,7 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
@@ -2110,6 +2203,10 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2158,9 +2255,14 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2207,9 +2309,14 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2258,9 +2365,14 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -2307,9 +2419,14 @@ public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }

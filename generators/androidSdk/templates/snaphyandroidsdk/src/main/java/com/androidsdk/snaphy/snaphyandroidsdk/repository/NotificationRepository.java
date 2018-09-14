@@ -325,6 +325,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
@@ -360,6 +361,10 @@ public class NotificationRepository extends ModelRepository<Notification> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -409,6 +414,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
@@ -444,6 +450,10 @@ public class NotificationRepository extends ModelRepository<Notification> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -492,9 +502,14 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -545,6 +560,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
@@ -580,6 +596,10 @@ public class NotificationRepository extends ModelRepository<Notification> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -627,6 +647,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -665,8 +686,11 @@ public class NotificationRepository extends ModelRepository<Notification> {
                                     callback.onSuccess(null);
                                 }
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
@@ -711,6 +735,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
@@ -746,6 +771,10 @@ public class NotificationRepository extends ModelRepository<Notification> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -796,9 +825,14 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -847,9 +881,14 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -898,9 +937,14 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -951,6 +995,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
@@ -986,6 +1031,10 @@ public class NotificationRepository extends ModelRepository<Notification> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1034,9 +1083,14 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1083,9 +1137,14 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1134,9 +1193,14 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1183,9 +1247,14 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }

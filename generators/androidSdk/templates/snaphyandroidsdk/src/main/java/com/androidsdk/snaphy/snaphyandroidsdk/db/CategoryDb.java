@@ -79,32 +79,10 @@ public class CategoryDb{
     public ContentValues getContentValues(Category _modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String categoryNameData = "";
-                        if(_modelData.getCategoryName() != null){
-                          categoryNameData = _modelData.getCategoryName().toString();
-                          values.put("`categoryName`", categoryNameData);
-                        }
-                                  
-                                
-                                                            String logoData = "";
-                        if(_modelData.getLogo() != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                          logoData = gson.toJson(_modelData.getLogo(), HashMap.class);
-                          values.put("`logo`", logoData);
-                        }
-                                  
-                                
-                                                            double priorityData;
-                        priorityData = (double)_modelData.getPriority();
-                        values.put("`priority`", priorityData);
-                                  
-                                
-                                                            String statusData = "";
-                        if(_modelData.getStatus() != null){
-                          statusData = _modelData.getStatus().toString();
-                          values.put("`status`", statusData);
+                                                            String idData = "";
+                        if(_modelData.getId() != null){
+                          idData = _modelData.getId().toString();
+                          values.put("`id`", idData);
                         }
                                   
                                 
@@ -122,26 +100,85 @@ public class CategoryDb{
                         }
                                   
                                 
-                                                            String slugData = "";
-                        if(_modelData.getSlug() != null){
-                          slugData = _modelData.getSlug().toString();
-                          values.put("`slug`", slugData);
+                                                            String nameData = "";
+                        if(_modelData.getName() != null){
+                          nameData = _modelData.getName().toString();
+                          values.put("`name`", nameData);
                         }
                                   
                                 
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String idData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getId");
-                              if(method.invoke(_modelData) != null){
-                                //idData = _modelData.getId().toString();
-                                idData = (String) method.invoke(_modelData);
-                                values.put("`id`", idData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
+                                                            int isTrendingData = 0;
+                        if(_modelData.getIsTrending()){
+                          isTrendingData = 1;
+                        }else{
+                          isTrendingData = 0;
                         }
-
+                        values.put("`isTrending`", isTrendingData);
+                                  
+                                
+                                                            String statusData = "";
+                        if(_modelData.getStatus() != null){
+                          statusData = _modelData.getStatus().toString();
+                          values.put("`status`", statusData);
+                        }
+                                  
+                                
+                                                            double priorityData;
+                        priorityData = (double)_modelData.getPriority();
+                        values.put("`priority`", priorityData);
+                                  
+                                
+                                                            String identifierData = "";
+                        if(_modelData.getIdentifier() != null){
+                          identifierData = _modelData.getIdentifier().toString();
+                          values.put("`identifier`", identifierData);
+                        }
+                                  
+                                
+                                                            String descriptionData = "";
+                        if(_modelData.getDescription() != null){
+                          descriptionData = _modelData.getDescription().toString();
+                          values.put("`description`", descriptionData);
+                        }
+                                  
+                                
+                                                            String imageData = "";
+                        if(_modelData.getImage() != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          imageData = gson.toJson(_modelData.getImage(), HashMap.class);
+                          values.put("`image`", imageData);
+                        }
+                                  
+                                
+                                                            String homeIconData = "";
+                        if(_modelData.getHomeIcon() != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          homeIconData = gson.toJson(_modelData.getHomeIcon(), HashMap.class);
+                          values.put("`homeIcon`", homeIconData);
+                        }
+                                  
+                                
+                                                            String defaultIconData = "";
+                        if(_modelData.getDefaultIcon() != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          defaultIconData = gson.toJson(_modelData.getDefaultIcon(), HashMap.class);
+                          values.put("`defaultIcon`", defaultIconData);
+                        }
+                                  
+                                
+                                                            int isSelectedData = 0;
+                        if(_modelData.getIsSelected()){
+                          isSelectedData = 1;
+                        }else{
+                          isSelectedData = 0;
+                        }
+                        values.put("`isSelected`", isSelectedData);
                                   
                   
         
@@ -225,50 +262,19 @@ public class CategoryDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String categoryNameData = "";
+                                                            String idData = "";
                         if(cursor.getString(0) != null){
-                          categoryNameData = cursor.getString(0);
-                          if(categoryNameData != null){
-                            categoryNameData = (String)categoryNameData;
-                            hashMap.put("categoryName", categoryNameData);
-                          }
-                        }
-                                                
-                                
-                                                            Map<String, Object> logoData = new HashMap<>();
-                        if(cursor.getString(1) != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                           logoData = gson.fromJson(cursor.getString(1), Map.class);
-                          if(logoData != null){
-                            logoData = (Map<String, Object>)logoData;
-                            hashMap.put("logo", logoData);
-                          }
-                        }
-                                                
-                                
-                                                            double priorityData = (double)0;
-                          priorityData = cursor.getInt(2);
-                          priorityData = (double)priorityData;
-                          hashMap.put("priority", priorityData);
-
-
-                                                
-                                
-                                                            String statusData = "";
-                        if(cursor.getString(3) != null){
-                          statusData = cursor.getString(3);
-                          if(statusData != null){
-                            statusData = (String)statusData;
-                            hashMap.put("status", statusData);
+                          idData = cursor.getString(0);
+                          if(idData != null){
+                            idData = (String)idData;
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
                                 
                                                             String addedData = "";
-                        if(cursor.getString(4) != null){
-                          addedData = cursor.getString(4);
+                        if(cursor.getString(1) != null){
+                          addedData = cursor.getString(1);
                           if(addedData != null){
                             addedData = (String)addedData;
                             hashMap.put("added", addedData);
@@ -277,8 +283,8 @@ public class CategoryDb{
                                                 
                                 
                                                             String updatedData = "";
-                        if(cursor.getString(5) != null){
-                          updatedData = cursor.getString(5);
+                        if(cursor.getString(2) != null){
+                          updatedData = cursor.getString(2);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -286,24 +292,111 @@ public class CategoryDb{
                         }
                                                 
                                 
-                                                            String slugData = "";
-                        if(cursor.getString(6) != null){
-                          slugData = cursor.getString(6);
-                          if(slugData != null){
-                            slugData = (String)slugData;
-                            hashMap.put("slug", slugData);
+                                                            String nameData = "";
+                        if(cursor.getString(3) != null){
+                          nameData = cursor.getString(3);
+                          if(nameData != null){
+                            nameData = (String)nameData;
+                            hashMap.put("name", nameData);
                           }
                         }
                                                 
                                 
-                                                            String idData = "";
-                        if(cursor.getString(7) != null){
-                          idData = cursor.getString(7);
-                          if(idData != null){
-                            idData = idData.toString();
-                            hashMap.put("id", idData);
+                                                            boolean isTrendingData = false;
+                        int tempisTrendingData = cursor.getInt(4);
+                        if( tempisTrendingData > 0){
+                          isTrendingData = true;
+                        }else{
+                          isTrendingData = false;
+                        }
+                        hashMap.put("isTrending", isTrendingData);
+                                                
+                                
+                                                            String statusData = "";
+                        if(cursor.getString(5) != null){
+                          statusData = cursor.getString(5);
+                          if(statusData != null){
+                            statusData = (String)statusData;
+                            hashMap.put("status", statusData);
                           }
                         }
+                                                
+                                
+                                                            double priorityData = (double)0;
+                          priorityData = cursor.getInt(6);
+                          priorityData = (double)priorityData;
+                          hashMap.put("priority", priorityData);
+
+
+                                                
+                                
+                                                            String identifierData = "";
+                        if(cursor.getString(7) != null){
+                          identifierData = cursor.getString(7);
+                          if(identifierData != null){
+                            identifierData = (String)identifierData;
+                            hashMap.put("identifier", identifierData);
+                          }
+                        }
+                                                
+                                
+                                                            String descriptionData = "";
+                        if(cursor.getString(8) != null){
+                          descriptionData = cursor.getString(8);
+                          if(descriptionData != null){
+                            descriptionData = (String)descriptionData;
+                            hashMap.put("description", descriptionData);
+                          }
+                        }
+                                                
+                                
+                                                            Map<String, Object> imageData = new HashMap<>();
+                        if(cursor.getString(9) != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           imageData = gson.fromJson(cursor.getString(9), Map.class);
+                          if(imageData != null){
+                            imageData = (Map<String, Object>)imageData;
+                            hashMap.put("image", imageData);
+                          }
+                        }
+                                                
+                                
+                                                            Map<String, Object> homeIconData = new HashMap<>();
+                        if(cursor.getString(10) != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           homeIconData = gson.fromJson(cursor.getString(10), Map.class);
+                          if(homeIconData != null){
+                            homeIconData = (Map<String, Object>)homeIconData;
+                            hashMap.put("homeIcon", homeIconData);
+                          }
+                        }
+                                                
+                                
+                                                            Map<String, Object> defaultIconData = new HashMap<>();
+                        if(cursor.getString(11) != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           defaultIconData = gson.fromJson(cursor.getString(11), Map.class);
+                          if(defaultIconData != null){
+                            defaultIconData = (Map<String, Object>)defaultIconData;
+                            hashMap.put("defaultIcon", defaultIconData);
+                          }
+                        }
+                                                
+                                
+                                                            boolean isSelectedData = false;
+                        int tempisSelectedData = cursor.getInt(12);
+                        if( tempisSelectedData > 0){
+                          isSelectedData = true;
+                        }else{
+                          isSelectedData = false;
+                        }
+                        hashMap.put("isSelected", isSelectedData);
                                                 
                   //End for loop
          

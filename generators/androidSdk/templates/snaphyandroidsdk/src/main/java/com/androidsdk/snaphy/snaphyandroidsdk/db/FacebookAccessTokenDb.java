@@ -100,19 +100,11 @@ public class FacebookAccessTokenDb{
                         }
                                   
                                 
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String userIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getUserId");
-                              if(method.invoke(_modelData) != null){
-                                //userIdData = _modelData.getUserId().toString();
-                                userIdData = (String) method.invoke(_modelData);
-                                values.put("`userId`", userIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
+                                                            String userIdData = "";
+                        if(_modelData.getUserId() != null){
+                          userIdData = _modelData.getUserId().toString();
+                          values.put("`userId`", userIdData);
                         }
-
                                   
                                 
                                                             String typeData = "";
@@ -252,7 +244,7 @@ public class FacebookAccessTokenDb{
                         if(cursor.getString(3) != null){
                           userIdData = cursor.getString(3);
                           if(userIdData != null){
-                            userIdData = userIdData.toString();
+                            userIdData = (String)userIdData;
                             hashMap.put("userId", userIdData);
                           }
                         }

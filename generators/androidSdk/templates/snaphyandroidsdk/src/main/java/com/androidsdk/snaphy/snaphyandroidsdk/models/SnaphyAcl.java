@@ -485,20 +485,23 @@ public class SnaphyAcl extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(SnaphyAclProp object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -589,20 +592,23 @@ public class SnaphyAcl extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(SnaphyAclProp object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -655,25 +661,28 @@ public class SnaphyAcl extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(DataList<SnaphyAclProp> object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            SnaphyAclProp obj = new SnaphyAclProp();
-                                                            addRelation(object, obj);
-                                                            //Disabling two way communication for cyclic error..
-                                                            /*for (SnaphyAclProp obj : object) {
-                                                                //Also add relation to child type for two way communication..
-                                                                obj.addRelation(that);
-                                                            }*/
+                                                          //now add relation to this recipe.
+                                                          SnaphyAclProp obj = new SnaphyAclProp();
+                                                          addRelation(object, obj);
+                                                          //Disabling two way communication for cyclic error..
+                                                          /*for (SnaphyAclProp obj : object) {
+                                                              //Also add relation to child type for two way communication..
+                                                              obj.addRelation(that);
+                                                          }*/
 
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -714,20 +723,23 @@ public class SnaphyAcl extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(SnaphyAclProp object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -812,9 +824,14 @@ public class SnaphyAcl extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(JSONObject object) {
+                                                      try{
                                                         callback.onSuccess(object);
                                                         //Calling the finally..callback
                                                         callback.onFinally();
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+
                                                     }
                                                 
                                             
@@ -1040,20 +1057,23 @@ public class SnaphyAcl extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(SnaphyAclRelation object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -1144,20 +1164,23 @@ public class SnaphyAcl extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(SnaphyAclRelation object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -1212,25 +1235,28 @@ public class SnaphyAcl extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(DataList<SnaphyAclRelation> object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            SnaphyAclRelation obj = new SnaphyAclRelation();
-                                                            addRelation(object, obj);
-                                                            //Disabling two way communication for cyclic error..
-                                                            /*for (SnaphyAclRelation obj : object) {
-                                                                //Also add relation to child type for two way communication..
-                                                                obj.addRelation(that);
-                                                            }*/
+                                                          //now add relation to this recipe.
+                                                          SnaphyAclRelation obj = new SnaphyAclRelation();
+                                                          addRelation(object, obj);
+                                                          //Disabling two way communication for cyclic error..
+                                                          /*for (SnaphyAclRelation obj : object) {
+                                                              //Also add relation to child type for two way communication..
+                                                              obj.addRelation(that);
+                                                          }*/
 
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -1271,20 +1297,23 @@ public class SnaphyAcl extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(SnaphyAclRelation object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -1369,9 +1398,14 @@ public class SnaphyAcl extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(JSONObject object) {
+                                                      try{
                                                         callback.onSuccess(object);
                                                         //Calling the finally..callback
                                                         callback.onFinally();
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
+
                                                     }
                                                 
                                             
