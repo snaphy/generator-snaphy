@@ -16,7 +16,7 @@
 
   console.log("Your base path: " + chalk.red(rootPath));
 
-  module.exports = yeoman.generators.Base.extend({
+  module.exports = yeoman.extend({
     prompting: function () {
       let done = this.async();
       let that = this;

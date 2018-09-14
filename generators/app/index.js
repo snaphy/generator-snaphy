@@ -6,7 +6,7 @@ var path = require('path');
 var util = require('util');
 var mkdirp = require('mkdirp');
 
-module.exports = yeoman.generators.Base.extend({
+module.exports = yeoman.extend({
   prompting: function() {
     var done = this.async();
 

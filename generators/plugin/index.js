@@ -50,7 +50,7 @@ function checkDirectory(){
 checkDirectory();
 
 
-module.exports = yeoman.generators.Base.extend({
+module.exports = yeoman.extend({
   prompting: function () {
     var done = this.async();
 
