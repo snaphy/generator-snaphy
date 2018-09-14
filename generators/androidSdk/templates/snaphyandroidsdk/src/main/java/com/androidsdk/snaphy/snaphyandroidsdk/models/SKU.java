@@ -119,6 +119,90 @@ public class SKU extends Model {
             
 
             
+                private String propAKey;
+                /* Adding Getter and Setter methods */
+                public String getPropAKey(){
+                    return propAKey;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPropAKey(String propAKey){
+                    this.propAKey = propAKey;
+                    //Update hashMap value..
+                    hashMap.put("propAKey", propAKey);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String propAValue;
+                /* Adding Getter and Setter methods */
+                public String getPropAValue(){
+                    return propAValue;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPropAValue(String propAValue){
+                    this.propAValue = propAValue;
+                    //Update hashMap value..
+                    hashMap.put("propAValue", propAValue);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String propBKey;
+                /* Adding Getter and Setter methods */
+                public String getPropBKey(){
+                    return propBKey;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPropBKey(String propBKey){
+                    this.propBKey = propBKey;
+                    //Update hashMap value..
+                    hashMap.put("propBKey", propBKey);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String propBValue;
+                /* Adding Getter and Setter methods */
+                public String getPropBValue(){
+                    return propBValue;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPropBValue(String propBValue){
+                    this.propBValue = propBValue;
+                    //Update hashMap value..
+                    hashMap.put("propBValue", propBValue);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private String SKUsName;
                 /* Adding Getter and Setter methods */
                 public String getSKUsName(){

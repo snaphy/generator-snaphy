@@ -3688,7 +3688,7 @@ public class ProductRepository extends ModelRepository<Product> {
     
         
             //Method fetchProductDetails definition
-            public void fetchProductDetails(  String productId,  double limit,  double skip, final DataListCallback<Product> callback){
+            public void fetchProductDetails(  String productId,  double limit,  double skip, final ObjectCallback<Product> callback){
 
                 /**
                 Call the onBefore event
@@ -3711,9 +3711,10 @@ public class ProductRepository extends ModelRepository<Product> {
 
 
                 
-
-                
-                    invokeStaticMethod("fetchProductDetails", hashMapObject, new Adapter.JsonArrayCallback() {
+                    
+                    
+                    invokeStaticMethod("fetchProductDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -3722,13 +3723,10 @@ public class ProductRepository extends ModelRepository<Product> {
                         }
 
                         @Override
-                        public void onSuccess(JSONArray response) {
+                        public void onSuccess(JSONObject response) {
                           try{
                             
                                 if(response != null){
-                                    //Now converting jsonObject to list
-                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Product> productList = new DataList<Product>();
                                     ProductRepository productRepo = getRestAdapter().createRepository(ProductRepository.class);
                                     if(context != null){
                                         try {
@@ -3738,37 +3736,40 @@ public class ProductRepository extends ModelRepository<Product> {
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
+
+                                        //productRepo.addStorage(context);
                                     }
-                                    for (Map<String, Object> obj : result) {
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Product product = productRepo.createObject(result);
 
-                                        Product product = productRepo.createObject(obj);
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = product.getClass().getMethod("save__db");
+                                                    method.invoke(product);
 
-                                        //Add to database if persistent storage required..
-                                        if(isSTORE_LOCALLY()){
-                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                            try {
-                                                      Method method = product.getClass().getMethod("save__db");
-                                                      method.invoke(product);
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
 
-                                            } catch (Exception e) {
-                                                Log.e("Database Error", e.toString());
-                                            }
-                                        }
+                                      }
 
-                                        productList.add(product);
-                                    }
-                                    callback.onSuccess(productList);
+                                    callback.onSuccess(product);
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
                           }catch(Exception e){
-                            Log.e("Snaphy",e.toString());
+                            Log.e("Snaphy", e.toString());
                           }
-                          //Call the finally method..
-                          callback.onFinally();
+
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
+                
+
                 
 
             }//Method fetchProductDetails definition ends here..

@@ -117,10 +117,10 @@ public class CustomerDb{
                         }
                                   
                                 
-                                                            String mobileNumberData = "";
-                        if(_modelData.getMobileNumber() != null){
-                          mobileNumberData = _modelData.getMobileNumber().toString();
-                          values.put("`mobileNumber`", mobileNumberData);
+                                                            String contactNumberData = "";
+                        if(_modelData.getContactNumber() != null){
+                          contactNumberData = _modelData.getContactNumber().toString();
+                          values.put("`contactNumber`", contactNumberData);
                         }
                                   
                                 
@@ -554,12 +554,12 @@ public class CustomerDb{
                         }
                                                 
                                 
-                                                            String mobileNumberData = "";
+                                                            String contactNumberData = "";
                         if(cursor.getString(5) != null){
-                          mobileNumberData = cursor.getString(5);
-                          if(mobileNumberData != null){
-                            mobileNumberData = (String)mobileNumberData;
-                            hashMap.put("mobileNumber", mobileNumberData);
+                          contactNumberData = cursor.getString(5);
+                          if(contactNumberData != null){
+                            contactNumberData = (String)contactNumberData;
+                            hashMap.put("contactNumber", contactNumberData);
                           }
                         }
                                                 

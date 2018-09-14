@@ -272,6 +272,15 @@ public class BrandRepository extends ModelRepository<Brand> {
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchBrandList", "POST"), "Brand.fetchBrandList");
+    
+
+    
+    
+
+    
     
     return contract;
     }
@@ -1267,6 +1276,95 @@ public class BrandRepository extends ModelRepository<Brand> {
                 
 
             }//Method getModelRelationSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchBrandList definition
+            public void fetchBrandList(  double limit,  double skip, final DataListCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("limit", limit);
+                
+                        hashMapObject.put("skip", skip);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("fetchBrandList", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                          try{
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Brand> brandList = new DataList<Brand>();
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        Brand brand = brandRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = brand.getClass().getMethod("save__db");
+                                                      method.invoke(brand);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        brandList.add(brand);
+                                    }
+                                    callback.onSuccess(brandList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method fetchBrandList definition ends here..
 
             
 

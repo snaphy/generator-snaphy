@@ -112,48 +112,6 @@ public class Product extends Model {
             
 
             
-                private String added;
-                /* Adding Getter and Setter methods */
-                public String getAdded(){
-                    return added;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setAdded(String added){
-                    this.added = added;
-                    //Update hashMap value..
-                    hashMap.put("added", added);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String updated;
-                /* Adding Getter and Setter methods */
-                public String getUpdated(){
-                    return updated;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUpdated(String updated){
-                    this.updated = updated;
-                    //Update hashMap value..
-                    hashMap.put("updated", updated);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
                 private String name;
                 /* Adding Getter and Setter methods */
                 public String getName(){
@@ -503,6 +461,48 @@ public class Product extends Model {
                     this.warehouseLocation = warehouseLocation;
                     //Update Map value..
                     hashMap.put("warehouseLocation", warehouseLocation);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String added;
+                /* Adding Getter and Setter methods */
+                public String getAdded(){
+                    return added;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAdded(String added){
+                    this.added = added;
+                    //Update hashMap value..
+                    hashMap.put("added", added);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String updated;
+                /* Adding Getter and Setter methods */
+                public String getUpdated(){
+                    return updated;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUpdated(String updated){
+                    this.updated = updated;
+                    //Update hashMap value..
+                    hashMap.put("updated", updated);
                 }
 
             

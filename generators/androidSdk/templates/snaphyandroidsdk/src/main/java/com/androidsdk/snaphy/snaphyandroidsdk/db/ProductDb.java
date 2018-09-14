@@ -86,20 +86,6 @@ public class ProductDb{
                         }
                                   
                                 
-                                                            String addedData = "";
-                        if(_modelData.getAdded() != null){
-                          addedData = _modelData.getAdded().toString();
-                          values.put("`added`", addedData);
-                        }
-                                  
-                                
-                                                            String updatedData = "";
-                        if(_modelData.getUpdated() != null){
-                          updatedData = _modelData.getUpdated().toString();
-                          values.put("`updated`", updatedData);
-                        }
-                                  
-                                
                                                             String nameData = "";
                         if(_modelData.getName() != null){
                           nameData = _modelData.getName().toString();
@@ -207,6 +193,20 @@ public class ProductDb{
                           Gson gson = gsonBuilder.create();
                           warehouseLocationData = gson.toJson(_modelData.getWarehouseLocation(), HashMap.class);
                           values.put("`warehouseLocation`", warehouseLocationData);
+                        }
+                                  
+                                
+                                                            String addedData = "";
+                        if(_modelData.getAdded() != null){
+                          addedData = _modelData.getAdded().toString();
+                          values.put("`added`", addedData);
+                        }
+                                  
+                                
+                                                            String updatedData = "";
+                        if(_modelData.getUpdated() != null){
+                          updatedData = _modelData.getUpdated().toString();
+                          values.put("`updated`", updatedData);
                         }
                                   
                                 
@@ -420,29 +420,9 @@ public class ProductDb{
                         }
                                                 
                                 
-                                                            String addedData = "";
-                        if(cursor.getString(1) != null){
-                          addedData = cursor.getString(1);
-                          if(addedData != null){
-                            addedData = (String)addedData;
-                            hashMap.put("added", addedData);
-                          }
-                        }
-                                                
-                                
-                                                            String updatedData = "";
-                        if(cursor.getString(2) != null){
-                          updatedData = cursor.getString(2);
-                          if(updatedData != null){
-                            updatedData = (String)updatedData;
-                            hashMap.put("updated", updatedData);
-                          }
-                        }
-                                                
-                                
                                                             String nameData = "";
-                        if(cursor.getString(3) != null){
-                          nameData = cursor.getString(3);
+                        if(cursor.getString(1) != null){
+                          nameData = cursor.getString(1);
                           if(nameData != null){
                             nameData = (String)nameData;
                             hashMap.put("name", nameData);
@@ -451,11 +431,11 @@ public class ProductDb{
                                                 
                                 
                                                             Map<String, Object> coverImageData = new HashMap<>();
-                        if(cursor.getString(4) != null){
+                        if(cursor.getString(2) != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                           coverImageData = gson.fromJson(cursor.getString(4), Map.class);
+                           coverImageData = gson.fromJson(cursor.getString(2), Map.class);
                           if(coverImageData != null){
                             coverImageData = (Map<String, Object>)coverImageData;
                             hashMap.put("coverImage", coverImageData);
@@ -464,7 +444,7 @@ public class ProductDb{
                                                 
                                 
                                                             double inStockData = (double)0;
-                          inStockData = cursor.getInt(5);
+                          inStockData = cursor.getInt(3);
                           inStockData = (double)inStockData;
                           hashMap.put("inStock", inStockData);
 
@@ -472,7 +452,7 @@ public class ProductDb{
                                                 
                                 
                                                             double mrpData = (double)0;
-                          mrpData = cursor.getInt(6);
+                          mrpData = cursor.getInt(4);
                           mrpData = (double)mrpData;
                           hashMap.put("mrp", mrpData);
 
@@ -480,7 +460,7 @@ public class ProductDb{
                                                 
                                 
                                                             double discountedPriceData = (double)0;
-                          discountedPriceData = cursor.getInt(7);
+                          discountedPriceData = cursor.getInt(5);
                           discountedPriceData = (double)discountedPriceData;
                           hashMap.put("discountedPrice", discountedPriceData);
 
@@ -488,7 +468,7 @@ public class ProductDb{
                                                 
                                 
                                                             double minimumQuantityData = (double)0;
-                          minimumQuantityData = cursor.getInt(8);
+                          minimumQuantityData = cursor.getInt(6);
                           minimumQuantityData = (double)minimumQuantityData;
                           hashMap.put("minimumQuantity", minimumQuantityData);
 
@@ -496,7 +476,7 @@ public class ProductDb{
                                                 
                                 
                                                             double maximumQuantityData = (double)0;
-                          maximumQuantityData = cursor.getInt(9);
+                          maximumQuantityData = cursor.getInt(7);
                           maximumQuantityData = (double)maximumQuantityData;
                           hashMap.put("maximumQuantity", maximumQuantityData);
 
@@ -504,7 +484,7 @@ public class ProductDb{
                                                 
                                 
                                                             double minimumQuantityPriceData = (double)0;
-                          minimumQuantityPriceData = cursor.getInt(10);
+                          minimumQuantityPriceData = cursor.getInt(8);
                           minimumQuantityPriceData = (double)minimumQuantityPriceData;
                           hashMap.put("minimumQuantityPrice", minimumQuantityPriceData);
 
@@ -512,7 +492,7 @@ public class ProductDb{
                                                 
                                 
                                                             double maximumQuantityPriceData = (double)0;
-                          maximumQuantityPriceData = cursor.getInt(11);
+                          maximumQuantityPriceData = cursor.getInt(9);
                           maximumQuantityPriceData = (double)maximumQuantityPriceData;
                           hashMap.put("maximumQuantityPrice", maximumQuantityPriceData);
 
@@ -520,8 +500,8 @@ public class ProductDb{
                                                 
                                 
                                                             String identifierData = "";
-                        if(cursor.getString(12) != null){
-                          identifierData = cursor.getString(12);
+                        if(cursor.getString(10) != null){
+                          identifierData = cursor.getString(10);
                           if(identifierData != null){
                             identifierData = (String)identifierData;
                             hashMap.put("identifier", identifierData);
@@ -530,7 +510,7 @@ public class ProductDb{
                                                 
                                 
                                                             double priorityData = (double)0;
-                          priorityData = cursor.getInt(13);
+                          priorityData = cursor.getInt(11);
                           priorityData = (double)priorityData;
                           hashMap.put("priority", priorityData);
 
@@ -538,7 +518,7 @@ public class ProductDb{
                                                 
                                 
                                                             boolean isTrendingData = false;
-                        int tempisTrendingData = cursor.getInt(14);
+                        int tempisTrendingData = cursor.getInt(12);
                         if( tempisTrendingData > 0){
                           isTrendingData = true;
                         }else{
@@ -548,11 +528,11 @@ public class ProductDb{
                                                 
                                 
                                   DataList<Map<String, Object>> otherImagesData = new DataList<>();
-                  if(cursor.getString(15) != null){
+                  if(cursor.getString(13) != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    otherImagesData = gson.fromJson(cursor.getString(15), DataList.class);
+                    otherImagesData = gson.fromJson(cursor.getString(13), DataList.class);
                     if(otherImagesData != null){
                       otherImagesData = (DataList<Map<String, Object>>)otherImagesData;
                       hashMap.put("otherImages", otherImagesData);
@@ -561,7 +541,7 @@ public class ProductDb{
                             
                                 
                                                             double weightData = (double)0;
-                          weightData = cursor.getInt(16);
+                          weightData = cursor.getInt(14);
                           weightData = (double)weightData;
                           hashMap.put("weight", weightData);
 
@@ -569,7 +549,7 @@ public class ProductDb{
                                                 
                                 
                                                             double sizeData = (double)0;
-                          sizeData = cursor.getInt(17);
+                          sizeData = cursor.getInt(15);
                           sizeData = (double)sizeData;
                           hashMap.put("size", sizeData);
 
@@ -577,8 +557,8 @@ public class ProductDb{
                                                 
                                 
                                                             String offerTextData = "";
-                        if(cursor.getString(18) != null){
-                          offerTextData = cursor.getString(18);
+                        if(cursor.getString(16) != null){
+                          offerTextData = cursor.getString(16);
                           if(offerTextData != null){
                             offerTextData = (String)offerTextData;
                             hashMap.put("offerText", offerTextData);
@@ -587,14 +567,34 @@ public class ProductDb{
                                                 
                                 
                                                             Map<String, Object> warehouseLocationData = new HashMap<>();
-                        if(cursor.getString(19) != null){
+                        if(cursor.getString(17) != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                           warehouseLocationData = gson.fromJson(cursor.getString(19), Map.class);
+                           warehouseLocationData = gson.fromJson(cursor.getString(17), Map.class);
                           if(warehouseLocationData != null){
                             warehouseLocationData = (Map<String, Object>)warehouseLocationData;
                             hashMap.put("warehouseLocation", warehouseLocationData);
+                          }
+                        }
+                                                
+                                
+                                                            String addedData = "";
+                        if(cursor.getString(18) != null){
+                          addedData = cursor.getString(18);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            hashMap.put("added", addedData);
+                          }
+                        }
+                                                
+                                
+                                                            String updatedData = "";
+                        if(cursor.getString(19) != null){
+                          updatedData = cursor.getString(19);
+                          if(updatedData != null){
+                            updatedData = (String)updatedData;
+                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 

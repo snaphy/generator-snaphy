@@ -201,17 +201,17 @@ public class Customer extends User {
             
 
             
-                private String mobileNumber;
+                private String contactNumber;
                 /* Adding Getter and Setter methods */
-                public String getMobileNumber(){
-                    return mobileNumber;
+                public String getContactNumber(){
+                    return contactNumber;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setMobileNumber(String mobileNumber){
-                    this.mobileNumber = mobileNumber;
+                public void setContactNumber(String contactNumber){
+                    this.contactNumber = contactNumber;
                     //Update hashMap value..
-                    hashMap.put("mobileNumber", mobileNumber);
+                    hashMap.put("contactNumber", contactNumber);
                 }
 
             
