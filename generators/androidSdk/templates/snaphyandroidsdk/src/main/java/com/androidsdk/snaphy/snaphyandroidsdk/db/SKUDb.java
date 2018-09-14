@@ -121,6 +121,11 @@ public class SKUDb{
                         }
                                   
                                 
+                                                            double availQuantData;
+                        availQuantData = (double)_modelData.getAvailQuant();
+                        values.put("`availQuant`", availQuantData);
+                                  
+                                
                                                             String propBValueData = "";
                         if(_modelData.getPropBValue() != null){
                           propBValueData = _modelData.getPropBValue().toString();
@@ -322,9 +327,17 @@ public class SKUDb{
                         }
                                                 
                                 
+                                                            double availQuantData = (double)0;
+                          availQuantData = cursor.getInt(6);
+                          availQuantData = (double)availQuantData;
+                          hashMap.put("availQuant", availQuantData);
+
+
+                                                
+                                
                                                             String propBValueData = "";
-                        if(cursor.getString(6) != null){
-                          propBValueData = cursor.getString(6);
+                        if(cursor.getString(7) != null){
+                          propBValueData = cursor.getString(7);
                           if(propBValueData != null){
                             propBValueData = (String)propBValueData;
                             hashMap.put("propBValue", propBValueData);
@@ -333,8 +346,8 @@ public class SKUDb{
                                                 
                                 
                                                             String SKUsNameData = "";
-                        if(cursor.getString(7) != null){
-                          SKUsNameData = cursor.getString(7);
+                        if(cursor.getString(8) != null){
+                          SKUsNameData = cursor.getString(8);
                           if(SKUsNameData != null){
                             SKUsNameData = (String)SKUsNameData;
                             hashMap.put("SKUsName", SKUsNameData);
@@ -343,7 +356,7 @@ public class SKUDb{
                                                 
                                 
                                                             double SKUWeightData = (double)0;
-                          SKUWeightData = cursor.getInt(8);
+                          SKUWeightData = cursor.getInt(9);
                           SKUWeightData = (double)SKUWeightData;
                           hashMap.put("SKUWeight", SKUWeightData);
 
@@ -351,8 +364,8 @@ public class SKUDb{
                                                 
                                 
                                                             String SKUColorData = "";
-                        if(cursor.getString(9) != null){
-                          SKUColorData = cursor.getString(9);
+                        if(cursor.getString(10) != null){
+                          SKUColorData = cursor.getString(10);
                           if(SKUColorData != null){
                             SKUColorData = (String)SKUColorData;
                             hashMap.put("SKUColor", SKUColorData);
@@ -361,8 +374,8 @@ public class SKUDb{
                                                 
                                 
                                                             String CategoryData = "";
-                        if(cursor.getString(10) != null){
-                          CategoryData = cursor.getString(10);
+                        if(cursor.getString(11) != null){
+                          CategoryData = cursor.getString(11);
                           if(CategoryData != null){
                             CategoryData = (String)CategoryData;
                             hashMap.put("Category", CategoryData);
@@ -371,7 +384,7 @@ public class SKUDb{
                                                 
                                 
                                                             double pricePerUnitData = (double)0;
-                          pricePerUnitData = cursor.getInt(11);
+                          pricePerUnitData = cursor.getInt(12);
                           pricePerUnitData = (double)pricePerUnitData;
                           hashMap.put("pricePerUnit", pricePerUnitData);
 
@@ -379,8 +392,8 @@ public class SKUDb{
                                                 
                                 
                                                             String identifierData = "";
-                        if(cursor.getString(12) != null){
-                          identifierData = cursor.getString(12);
+                        if(cursor.getString(13) != null){
+                          identifierData = cursor.getString(13);
                           if(identifierData != null){
                             identifierData = (String)identifierData;
                             hashMap.put("identifier", identifierData);
@@ -389,8 +402,8 @@ public class SKUDb{
                                                 
                                 
                                                             String productIdData = "";
-                        if(cursor.getString(13) != null){
-                          productIdData = cursor.getString(13);
+                        if(cursor.getString(14) != null){
+                          productIdData = cursor.getString(14);
                           if(productIdData != null){
                             productIdData = productIdData.toString();
                             hashMap.put("productId", productIdData);

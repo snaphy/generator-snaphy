@@ -8,7 +8,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
-
+import android.util.Log;
 import java.util.List;
 import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
@@ -172,6 +172,27 @@ public class SKU extends Model {
                     this.propBKey = propBKey;
                     //Update hashMap value..
                     hashMap.put("propBKey", propBKey);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private double availQuant;
+                /* Adding Getter and Setter methods */
+                public double getAvailQuant(){
+                    return availQuant;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAvailQuant(double availQuant){
+                    this.availQuant = availQuant;
+                    //Update hashMap value..
+                    hashMap.put("availQuant", availQuant);
                 }
 
             
@@ -569,6 +590,7 @@ public class SKU extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

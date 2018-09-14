@@ -288,6 +288,15 @@ public class SKURepository extends ModelRepository<SKU> {
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchSkuProps", "POST"), "SKU.fetchSkuProps");
+    
+
+    
+    
+
+    
     
 
     
@@ -1394,6 +1403,58 @@ public class SKURepository extends ModelRepository<SKU> {
                 
 
             }//Method getModelRelationSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchSkuProps definition
+            public void fetchSkuProps(  String productId, final ObjectCallback<JSONArray> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("productId", productId);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("fetchSkuProps", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                          try{
+                            
+                            callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method fetchSkuProps definition ends here..
 
             
 

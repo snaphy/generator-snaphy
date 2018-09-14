@@ -1,6 +1,6 @@
 {
   "name": "generator-snaphy",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Web application framework written in Node.js for rapid prototyping of web backend console.",
   "homepage": "http://snaphy.com",
   "author": {
