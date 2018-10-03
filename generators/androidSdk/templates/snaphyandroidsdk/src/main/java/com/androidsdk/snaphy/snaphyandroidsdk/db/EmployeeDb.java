@@ -79,13 +79,6 @@ public class EmployeeDb{
     public ContentValues getContentValues(Employee _modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String usernameData = "";
-                        if(_modelData.getUsername() != null){
-                          usernameData = _modelData.getUsername().toString();
-                          values.put("`username`", usernameData);
-                        }
-                                  
-                                
                                                             String firstNameData = "";
                         if(_modelData.getFirstName() != null){
                           firstNameData = _modelData.getFirstName().toString();
@@ -97,6 +90,13 @@ public class EmployeeDb{
                         if(_modelData.getLastName() != null){
                           lastNameData = _modelData.getLastName().toString();
                           values.put("`lastName`", lastNameData);
+                        }
+                                  
+                                
+                                                            String cityData = "";
+                        if(_modelData.getCity() != null){
+                          cityData = _modelData.getCity().toString();
+                          values.put("`city`", cityData);
                         }
                                   
                                 
@@ -128,6 +128,107 @@ public class EmployeeDb{
                         }
                                   
                                 
+                                                            String typeData = "";
+                        if(_modelData.getType() != null){
+                          typeData = _modelData.getType().toString();
+                          values.put("`type`", typeData);
+                        }
+                                  
+                                
+                                                            String mobileNumberData = "";
+                        if(_modelData.getMobileNumber() != null){
+                          mobileNumberData = _modelData.getMobileNumber().toString();
+                          values.put("`mobileNumber`", mobileNumberData);
+                        }
+                                  
+                                
+                                                            String franchiseCodeData = "";
+                        if(_modelData.getFranchiseCode() != null){
+                          franchiseCodeData = _modelData.getFranchiseCode().toString();
+                          values.put("`franchiseCode`", franchiseCodeData);
+                        }
+                                  
+                                
+                                                            String franchiseAddressData = "";
+                        if(_modelData.getFranchiseAddress() != null){
+                          franchiseAddressData = _modelData.getFranchiseAddress().toString();
+                          values.put("`franchiseAddress`", franchiseAddressData);
+                        }
+                                  
+                                
+                                                            String areaData = "";
+                        if(_modelData.getArea() != null){
+                          areaData = _modelData.getArea().toString();
+                          values.put("`area`", areaData);
+                        }
+                                  
+                                
+                                                            String gtinNumberData = "";
+                        if(_modelData.getGtinNumber() != null){
+                          gtinNumberData = _modelData.getGtinNumber().toString();
+                          values.put("`gtinNumber`", gtinNumberData);
+                        }
+                                  
+                                
+                                                            String cinNumberData = "";
+                        if(_modelData.getCinNumber() != null){
+                          cinNumberData = _modelData.getCinNumber().toString();
+                          values.put("`cinNumber`", cinNumberData);
+                        }
+                                  
+                                
+                                                            String accountNameData = "";
+                        if(_modelData.getAccountName() != null){
+                          accountNameData = _modelData.getAccountName().toString();
+                          values.put("`accountName`", accountNameData);
+                        }
+                                  
+                                
+                                                            String accountNumberData = "";
+                        if(_modelData.getAccountNumber() != null){
+                          accountNumberData = _modelData.getAccountNumber().toString();
+                          values.put("`accountNumber`", accountNumberData);
+                        }
+                                  
+                                
+                                                            String bankNameData = "";
+                        if(_modelData.getBankName() != null){
+                          bankNameData = _modelData.getBankName().toString();
+                          values.put("`bankName`", bankNameData);
+                        }
+                                  
+                                
+                                                            String branchNameData = "";
+                        if(_modelData.getBranchName() != null){
+                          branchNameData = _modelData.getBranchName().toString();
+                          values.put("`branchName`", branchNameData);
+                        }
+                                  
+                                
+                                                            String bankAddressData = "";
+                        if(_modelData.getBankAddress() != null){
+                          bankAddressData = _modelData.getBankAddress().toString();
+                          values.put("`bankAddress`", bankAddressData);
+                        }
+                                  
+                                
+                                                            String ifscCodeData = "";
+                        if(_modelData.getIfscCode() != null){
+                          ifscCodeData = _modelData.getIfscCode().toString();
+                          values.put("`ifscCode`", ifscCodeData);
+                        }
+                                  
+                                
+                                  String franchiseOrderSettingsData = "";
+                  if(_modelData.getFranchiseOrderSettings() != null){
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    franchiseOrderSettingsData = gson.toJson(_modelData.getFranchiseOrderSettings(), DataList.class);
+                    values.put("`franchiseOrderSettings`", franchiseOrderSettingsData);
+                  }
+              
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
                         try {
@@ -136,6 +237,21 @@ public class EmployeeDb{
                                 //realmData = _modelData.getRealm().toString();
                                 realmData = (String) method.invoke(_modelData);
                                 values.put("`realm`", realmData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String usernameData = "";
+                        try {
+                              Method method = _modelData.getClass().getMethod("getUsername");
+                              if(method.invoke(_modelData) != null){
+                                //usernameData = _modelData.getUsername().toString();
+                                usernameData = (String) method.invoke(_modelData);
+                                values.put("`username`", usernameData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -262,6 +378,36 @@ public class EmployeeDb{
                         }
 
                                   
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String cityIdData = "";
+                        try {
+                              Method method = _modelData.getClass().getMethod("getCityId");
+                              if(method.invoke(_modelData) != null){
+                                //cityIdData = _modelData.getCityId().toString();
+                                cityIdData = (String) method.invoke(_modelData);
+                                values.put("`cityId`", cityIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String areaIdData = "";
+                        try {
+                              Method method = _modelData.getClass().getMethod("getAreaId");
+                              if(method.invoke(_modelData) != null){
+                                //areaIdData = _modelData.getAreaId().toString();
+                                areaIdData = (String) method.invoke(_modelData);
+                                values.put("`areaId`", areaIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
                   
         
           
@@ -344,19 +490,9 @@ public class EmployeeDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String usernameData = "";
-                        if(cursor.getString(0) != null){
-                          usernameData = cursor.getString(0);
-                          if(usernameData != null){
-                            usernameData = (String)usernameData;
-                            hashMap.put("username", usernameData);
-                          }
-                        }
-                                                
-                                
                                                             String firstNameData = "";
-                        if(cursor.getString(1) != null){
-                          firstNameData = cursor.getString(1);
+                        if(cursor.getString(0) != null){
+                          firstNameData = cursor.getString(0);
                           if(firstNameData != null){
                             firstNameData = (String)firstNameData;
                             hashMap.put("firstName", firstNameData);
@@ -365,11 +501,21 @@ public class EmployeeDb{
                                                 
                                 
                                                             String lastNameData = "";
-                        if(cursor.getString(2) != null){
-                          lastNameData = cursor.getString(2);
+                        if(cursor.getString(1) != null){
+                          lastNameData = cursor.getString(1);
                           if(lastNameData != null){
                             lastNameData = (String)lastNameData;
                             hashMap.put("lastName", lastNameData);
+                          }
+                        }
+                                                
+                                
+                                                            String cityData = "";
+                        if(cursor.getString(2) != null){
+                          cityData = cursor.getString(2);
+                          if(cityData != null){
+                            cityData = (String)cityData;
+                            hashMap.put("city", cityData);
                           }
                         }
                                                 
@@ -414,9 +560,152 @@ public class EmployeeDb{
                         }
                                                 
                                 
-                                                            String realmData = "";
+                                                            String typeData = "";
                         if(cursor.getString(7) != null){
-                          realmData = cursor.getString(7);
+                          typeData = cursor.getString(7);
+                          if(typeData != null){
+                            typeData = (String)typeData;
+                            hashMap.put("type", typeData);
+                          }
+                        }
+                                                
+                                
+                                                            String mobileNumberData = "";
+                        if(cursor.getString(8) != null){
+                          mobileNumberData = cursor.getString(8);
+                          if(mobileNumberData != null){
+                            mobileNumberData = (String)mobileNumberData;
+                            hashMap.put("mobileNumber", mobileNumberData);
+                          }
+                        }
+                                                
+                                
+                                                            String franchiseCodeData = "";
+                        if(cursor.getString(9) != null){
+                          franchiseCodeData = cursor.getString(9);
+                          if(franchiseCodeData != null){
+                            franchiseCodeData = (String)franchiseCodeData;
+                            hashMap.put("franchiseCode", franchiseCodeData);
+                          }
+                        }
+                                                
+                                
+                                                            String franchiseAddressData = "";
+                        if(cursor.getString(10) != null){
+                          franchiseAddressData = cursor.getString(10);
+                          if(franchiseAddressData != null){
+                            franchiseAddressData = (String)franchiseAddressData;
+                            hashMap.put("franchiseAddress", franchiseAddressData);
+                          }
+                        }
+                                                
+                                
+                                                            String areaData = "";
+                        if(cursor.getString(11) != null){
+                          areaData = cursor.getString(11);
+                          if(areaData != null){
+                            areaData = (String)areaData;
+                            hashMap.put("area", areaData);
+                          }
+                        }
+                                                
+                                
+                                                            String gtinNumberData = "";
+                        if(cursor.getString(12) != null){
+                          gtinNumberData = cursor.getString(12);
+                          if(gtinNumberData != null){
+                            gtinNumberData = (String)gtinNumberData;
+                            hashMap.put("gtinNumber", gtinNumberData);
+                          }
+                        }
+                                                
+                                
+                                                            String cinNumberData = "";
+                        if(cursor.getString(13) != null){
+                          cinNumberData = cursor.getString(13);
+                          if(cinNumberData != null){
+                            cinNumberData = (String)cinNumberData;
+                            hashMap.put("cinNumber", cinNumberData);
+                          }
+                        }
+                                                
+                                
+                                                            String accountNameData = "";
+                        if(cursor.getString(14) != null){
+                          accountNameData = cursor.getString(14);
+                          if(accountNameData != null){
+                            accountNameData = (String)accountNameData;
+                            hashMap.put("accountName", accountNameData);
+                          }
+                        }
+                                                
+                                
+                                                            String accountNumberData = "";
+                        if(cursor.getString(15) != null){
+                          accountNumberData = cursor.getString(15);
+                          if(accountNumberData != null){
+                            accountNumberData = (String)accountNumberData;
+                            hashMap.put("accountNumber", accountNumberData);
+                          }
+                        }
+                                                
+                                
+                                                            String bankNameData = "";
+                        if(cursor.getString(16) != null){
+                          bankNameData = cursor.getString(16);
+                          if(bankNameData != null){
+                            bankNameData = (String)bankNameData;
+                            hashMap.put("bankName", bankNameData);
+                          }
+                        }
+                                                
+                                
+                                                            String branchNameData = "";
+                        if(cursor.getString(17) != null){
+                          branchNameData = cursor.getString(17);
+                          if(branchNameData != null){
+                            branchNameData = (String)branchNameData;
+                            hashMap.put("branchName", branchNameData);
+                          }
+                        }
+                                                
+                                
+                                                            String bankAddressData = "";
+                        if(cursor.getString(18) != null){
+                          bankAddressData = cursor.getString(18);
+                          if(bankAddressData != null){
+                            bankAddressData = (String)bankAddressData;
+                            hashMap.put("bankAddress", bankAddressData);
+                          }
+                        }
+                                                
+                                
+                                                            String ifscCodeData = "";
+                        if(cursor.getString(19) != null){
+                          ifscCodeData = cursor.getString(19);
+                          if(ifscCodeData != null){
+                            ifscCodeData = (String)ifscCodeData;
+                            hashMap.put("ifscCode", ifscCodeData);
+                          }
+                        }
+                                                
+                                
+                                  DataList<Map<String, Object>> franchiseOrderSettingsData = new DataList<>();
+                  if(cursor.getString(20) != null){
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    franchiseOrderSettingsData = gson.fromJson(cursor.getString(20), DataList.class);
+                    if(franchiseOrderSettingsData != null){
+                      franchiseOrderSettingsData = (DataList<Map<String, Object>>)franchiseOrderSettingsData;
+                      hashMap.put("franchiseOrderSettings", franchiseOrderSettingsData);
+                    }
+                  }
+                            
+                                
+                                                            String realmData = "";
+                        if(cursor.getString(21) != null){
+                          realmData = cursor.getString(21);
                           if(realmData != null){
                             realmData = realmData.toString();
                             hashMap.put("realm", realmData);
@@ -424,9 +713,19 @@ public class EmployeeDb{
                         }
                                                 
                                 
+                                                            String usernameData = "";
+                        if(cursor.getString(22) != null){
+                          usernameData = cursor.getString(22);
+                          if(usernameData != null){
+                            usernameData = usernameData.toString();
+                            hashMap.put("username", usernameData);
+                          }
+                        }
+                                                
+                                
                                                             String credentialsData = "";
-                        if(cursor.getString(8) != null){
-                          credentialsData = cursor.getString(8);
+                        if(cursor.getString(23) != null){
+                          credentialsData = cursor.getString(23);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
                             hashMap.put("credentials", credentialsData);
@@ -435,8 +734,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String challengesData = "";
-                        if(cursor.getString(9) != null){
-                          challengesData = cursor.getString(9);
+                        if(cursor.getString(24) != null){
+                          challengesData = cursor.getString(24);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
                             hashMap.put("challenges", challengesData);
@@ -445,8 +744,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String emailVerifiedData = "";
-                        if(cursor.getString(10) != null){
-                          emailVerifiedData = cursor.getString(10);
+                        if(cursor.getString(25) != null){
+                          emailVerifiedData = cursor.getString(25);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
                             hashMap.put("emailVerified", emailVerifiedData);
@@ -455,8 +754,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String verificationTokenData = "";
-                        if(cursor.getString(11) != null){
-                          verificationTokenData = cursor.getString(11);
+                        if(cursor.getString(26) != null){
+                          verificationTokenData = cursor.getString(26);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
                             hashMap.put("verificationToken", verificationTokenData);
@@ -465,8 +764,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String statusData = "";
-                        if(cursor.getString(12) != null){
-                          statusData = cursor.getString(12);
+                        if(cursor.getString(27) != null){
+                          statusData = cursor.getString(27);
                           if(statusData != null){
                             statusData = statusData.toString();
                             hashMap.put("status", statusData);
@@ -475,8 +774,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String createdData = "";
-                        if(cursor.getString(13) != null){
-                          createdData = cursor.getString(13);
+                        if(cursor.getString(28) != null){
+                          createdData = cursor.getString(28);
                           if(createdData != null){
                             createdData = createdData.toString();
                             hashMap.put("created", createdData);
@@ -485,8 +784,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String lastUpdatedData = "";
-                        if(cursor.getString(14) != null){
-                          lastUpdatedData = cursor.getString(14);
+                        if(cursor.getString(29) != null){
+                          lastUpdatedData = cursor.getString(29);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
                             hashMap.put("lastUpdated", lastUpdatedData);
@@ -495,11 +794,31 @@ public class EmployeeDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(15) != null){
-                          idData = cursor.getString(15);
+                        if(cursor.getString(30) != null){
+                          idData = cursor.getString(30);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
+                          }
+                        }
+                                                
+                                
+                                                            String cityIdData = "";
+                        if(cursor.getString(31) != null){
+                          cityIdData = cursor.getString(31);
+                          if(cityIdData != null){
+                            cityIdData = cityIdData.toString();
+                            hashMap.put("cityId", cityIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String areaIdData = "";
+                        if(cursor.getString(32) != null){
+                          areaIdData = cursor.getString(32);
+                          if(areaIdData != null){
+                            areaIdData = areaIdData.toString();
+                            hashMap.put("areaId", areaIdData);
                           }
                         }
                                                 

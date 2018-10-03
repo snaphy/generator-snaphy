@@ -149,42 +149,6 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SnaphyAclProp.create");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SnaphyAclProp.create");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "SnaphyAclProp.upsert");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "SnaphyAclProp.exists");
-    
-
-    
-    
-
-    
-
-    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "SnaphyAclProp.findById");
     
 
@@ -203,43 +167,7 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "SnaphyAclProp.findOne");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "SnaphyAclProp.updateAll");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "SnaphyAclProp.deleteById");
-    
-
-    
-    
-
-    
-
-    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "SnaphyAclProp.count");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclPropId", "PUT"), "SnaphyAclProp.prototype.updateAttributes");
     
 
     
@@ -367,6 +295,7 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
@@ -402,6 +331,10 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -411,224 +344,6 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
                 
 
             }//Method get__snaphyAcl definition ends here..
-
-            
-
-        
-    
-        
-            //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAclProp> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = snaphyAclPropRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(snaphyAclPropRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //snaphyAclPropRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    SnaphyAclProp snaphyAclProp = snaphyAclPropRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = snaphyAclProp.getClass().getMethod("save__db");
-                                                    method.invoke(snaphyAclProp);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(snaphyAclProp);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method create definition ends here..
-
-            
-
-        
-    
-        
-        
-            //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAclProp> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = snaphyAclPropRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(snaphyAclPropRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //snaphyAclPropRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    SnaphyAclProp snaphyAclProp = snaphyAclPropRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = snaphyAclProp.getClass().getMethod("save__db");
-                                                    method.invoke(snaphyAclProp);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(snaphyAclProp);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method upsert definition ends here..
-
-            
-
-        
-    
-        
-            //Method exists definition
-            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("id", id);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method exists definition ends here..
 
             
 
@@ -670,6 +385,7 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
@@ -705,6 +421,10 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -752,6 +472,7 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -790,200 +511,16 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
                                     callback.onSuccess(null);
                                 }
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
 
             }//Method find definition ends here..
-
-            
-
-        
-    
-        
-            //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<SnaphyAclProp> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = snaphyAclPropRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(snaphyAclPropRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //snaphyAclPropRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    SnaphyAclProp snaphyAclProp = snaphyAclPropRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = snaphyAclProp.getClass().getMethod("save__db");
-                                                    method.invoke(snaphyAclProp);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(snaphyAclProp);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method findOne definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("where", where);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method updateAll definition ends here..
-
-            
-
-        
-    
-        
-            //Method deleteById definition
-            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("id", id);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method deleteById definition ends here..
 
             
 
@@ -1023,9 +560,14 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1035,91 +577,6 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
                 
 
             }//Method count definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateAttributes definition
-            public void updateAttributes(  String snaphyAclPropId,  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAclProp> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("snaphyAclPropId", snaphyAclPropId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = snaphyAclPropRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(snaphyAclPropRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //snaphyAclPropRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    SnaphyAclProp snaphyAclProp = snaphyAclPropRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = snaphyAclProp.getClass().getMethod("save__db");
-                                                    method.invoke(snaphyAclProp);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(snaphyAclProp);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method updateAttributes definition ends here..
 
             
 
@@ -1159,9 +616,14 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1208,9 +670,14 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1259,9 +726,14 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -1308,9 +780,14 @@ public class SnaphyAclPropRepository extends ModelRepository<SnaphyAclProp> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }

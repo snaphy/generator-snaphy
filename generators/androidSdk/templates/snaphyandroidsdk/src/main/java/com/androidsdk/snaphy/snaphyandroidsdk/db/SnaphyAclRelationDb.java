@@ -94,51 +94,6 @@ public class SnaphyAclRelationDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String is_deletedData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(_modelData) != null){
-                                //is_deletedData = _modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(_modelData);
-                                values.put("`is_deleted`", is_deletedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String addedData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getAdded");
-                              if(method.invoke(_modelData) != null){
-                                //addedData = _modelData.getAdded().toString();
-                                addedData = (String) method.invoke(_modelData);
-                                values.put("`added`", addedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String updatedData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getUpdated");
-                              if(method.invoke(_modelData) != null){
-                                //updatedData = _modelData.getUpdated().toString();
-                                updatedData = (String) method.invoke(_modelData);
-                                values.put("`updated`", updatedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
                               Method method = _modelData.getClass().getMethod("getId");
@@ -269,39 +224,9 @@ public class SnaphyAclRelationDb{
                         }
                                                 
                                 
-                                                            String is_deletedData = "";
-                        if(cursor.getString(2) != null){
-                          is_deletedData = cursor.getString(2);
-                          if(is_deletedData != null){
-                            is_deletedData = is_deletedData.toString();
-                            hashMap.put("is_deleted", is_deletedData);
-                          }
-                        }
-                                                
-                                
-                                                            String addedData = "";
-                        if(cursor.getString(3) != null){
-                          addedData = cursor.getString(3);
-                          if(addedData != null){
-                            addedData = addedData.toString();
-                            hashMap.put("added", addedData);
-                          }
-                        }
-                                                
-                                
-                                                            String updatedData = "";
-                        if(cursor.getString(4) != null){
-                          updatedData = cursor.getString(4);
-                          if(updatedData != null){
-                            updatedData = updatedData.toString();
-                            hashMap.put("updated", updatedData);
-                          }
-                        }
-                                                
-                                
                                                             String idData = "";
-                        if(cursor.getString(5) != null){
-                          idData = cursor.getString(5);
+                        if(cursor.getString(2) != null){
+                          idData = cursor.getString(2);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -310,8 +235,8 @@ public class SnaphyAclRelationDb{
                                                 
                                 
                                                             String snaphyAclIdData = "";
-                        if(cursor.getString(6) != null){
-                          snaphyAclIdData = cursor.getString(6);
+                        if(cursor.getString(3) != null){
+                          snaphyAclIdData = cursor.getString(3);
                           if(snaphyAclIdData != null){
                             snaphyAclIdData = snaphyAclIdData.toString();
                             hashMap.put("snaphyAclId", snaphyAclIdData);

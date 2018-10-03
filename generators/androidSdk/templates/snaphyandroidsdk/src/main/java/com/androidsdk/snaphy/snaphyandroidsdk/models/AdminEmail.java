@@ -8,7 +8,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
-
+import android.util.Log;
 import java.util.List;
 import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;

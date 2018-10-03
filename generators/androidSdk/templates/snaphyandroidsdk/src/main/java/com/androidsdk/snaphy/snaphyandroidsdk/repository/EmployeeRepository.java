@@ -55,6 +55,27 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.EmployeeDb;
     
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.City;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CityRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Area;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AreaRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.NotificationData;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.NotificationDataRepository;
+            
+        
+    
+
 
 
 
@@ -234,6 +255,186 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "GET"), "Employee.prototype.__findById__accessTokens");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "DELETE"), "Employee.prototype.__destroyById__accessTokens");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "PUT"), "Employee.prototype.__updateById__accessTokens");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/city", "GET"), "Employee.prototype.__get__city");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/area", "GET"), "Employee.prototype.__get__area");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/notificationData/:fk", "GET"), "Employee.prototype.__findById__notificationData");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/notificationData/:fk", "DELETE"), "Employee.prototype.__destroyById__notificationData");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/notificationData/:fk", "PUT"), "Employee.prototype.__updateById__notificationData");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "GET"), "Employee.prototype.__get__accessTokens");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "POST"), "Employee.prototype.__create__accessTokens");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "DELETE"), "Employee.prototype.__delete__accessTokens");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/count", "GET"), "Employee.prototype.__count__accessTokens");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/notificationData", "GET"), "Employee.prototype.__get__notificationData");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/notificationData", "POST"), "Employee.prototype.__create__notificationData");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/notificationData", "DELETE"), "Employee.prototype.__delete__notificationData");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/notificationData/count", "GET"), "Employee.prototype.__count__notificationData");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Employee.upsert");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Employee.exists");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Employee.findById");
     
 
@@ -244,6 +445,24 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Employee.find");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Employee.findOne");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Employee.updateAll");
     
 
     
@@ -268,9 +487,36 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId", "PUT"), "Employee.prototype.updateAttributes");
     
 
     
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Employee.confirm");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Employee.resetPassword");
     
 
     
@@ -332,6 +578,9 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
     
     
+
+    
+    
     return contract;
     }
 
@@ -352,6 +601,1445 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
 
 
+    
+        
+            //Method findById__accessTokens definition
+            public void findById__accessTokens(  String employeeId,  String fk, final ObjectCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = accessToken.getClass().getMethod("save__db");
+                                                    method.invoke(accessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(accessToken);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__accessTokens definition
+            public void destroyById__accessTokens(  String employeeId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__accessTokens definition
+            public void updateById__accessTokens(  String employeeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = accessToken.getClass().getMethod("save__db");
+                                                    method.invoke(accessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(accessToken);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__city definition
+            public void get__city(  String employeeId,  Boolean refresh, final ObjectCallback<City> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__city", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    CityRepository cityRepo = getRestAdapter().createRepository(CityRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = cityRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(cityRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //cityRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    City city = cityRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = city.getClass().getMethod("save__db");
+                                                    method.invoke(city);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(city);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__city definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__area definition
+            public void get__area(  String employeeId,  Boolean refresh, final ObjectCallback<Area> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__area", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    AreaRepository areaRepo = getRestAdapter().createRepository(AreaRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = areaRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(areaRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //areaRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Area area = areaRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = area.getClass().getMethod("save__db");
+                                                    method.invoke(area);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(area);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__area definition ends here..
+
+            
+
+        
+    
+        
+            //Method findById__notificationData definition
+            public void findById__notificationData(  String employeeId,  String fk, final ObjectCallback<NotificationData> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__notificationData", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    NotificationDataRepository notificationDataRepo = getRestAdapter().createRepository(NotificationDataRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = notificationDataRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(notificationDataRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //notificationDataRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    NotificationData notificationData = notificationDataRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = notificationData.getClass().getMethod("save__db");
+                                                    method.invoke(notificationData);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(notificationData);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__notificationData definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__notificationData definition
+            public void destroyById__notificationData(  String employeeId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__notificationData", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__notificationData definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__notificationData definition
+            public void updateById__notificationData(  String employeeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<NotificationData> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__notificationData", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    NotificationDataRepository notificationDataRepo = getRestAdapter().createRepository(NotificationDataRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = notificationDataRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(notificationDataRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //notificationDataRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    NotificationData notificationData = notificationDataRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = notificationData.getClass().getMethod("save__db");
+                                                    method.invoke(notificationData);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(notificationData);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__notificationData definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__accessTokens definition
+            public void get__accessTokens(  String employeeId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__accessTokens", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                          try{
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        AccessToken accessToken = accessTokenRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = accessToken.getClass().getMethod("save__db");
+                                                      method.invoke(accessToken);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        accessTokenList.add(accessToken);
+                                    }
+                                    callback.onSuccess(accessTokenList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__accessTokens definition
+            public void create__accessTokens(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = accessToken.getClass().getMethod("save__db");
+                                                    method.invoke(accessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(accessToken);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__accessTokens definition
+            public void delete__accessTokens(  String employeeId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__accessTokens", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__accessTokens definition
+            public void count__accessTokens(  String employeeId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__notificationData definition
+            public void get__notificationData(  String employeeId,  Map<String,  ? extends Object> filter, final DataListCallback<NotificationData> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__notificationData", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                          try{
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<NotificationData> notificationDataList = new DataList<NotificationData>();
+                                    NotificationDataRepository notificationDataRepo = getRestAdapter().createRepository(NotificationDataRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = notificationDataRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(notificationDataRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        NotificationData notificationData = notificationDataRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = notificationData.getClass().getMethod("save__db");
+                                                      method.invoke(notificationData);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        notificationDataList.add(notificationData);
+                                    }
+                                    callback.onSuccess(notificationDataList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__notificationData definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__notificationData definition
+            public void create__notificationData(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<NotificationData> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__notificationData", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    NotificationDataRepository notificationDataRepo = getRestAdapter().createRepository(NotificationDataRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = notificationDataRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(notificationDataRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //notificationDataRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    NotificationData notificationData = notificationDataRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = notificationData.getClass().getMethod("save__db");
+                                                    method.invoke(notificationData);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(notificationData);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__notificationData definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__notificationData definition
+            public void delete__notificationData(  String employeeId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__notificationData", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__notificationData definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__notificationData definition
+            public void count__notificationData(  String employeeId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__notificationData", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__notificationData definition ends here..
+
+            
+
+        
+    
+        
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(employeeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //employeeRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = employee.getClass().getMethod("save__db");
+                                                    method.invoke(employee);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(employee);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create definition ends here..
+
+            
+
+        
+    
+        
+        
+            //Method upsert definition
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(employeeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //employeeRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = employee.getClass().getMethod("save__db");
+                                                    method.invoke(employee);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(employee);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method upsert definition ends here..
+
+            
+
+        
+    
+        
+            //Method exists definition
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method exists definition ends here..
+
+            
+
+        
     
         
             //Method findById definition
@@ -389,6 +2077,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
@@ -424,6 +2113,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -471,6 +2164,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
@@ -509,13 +2203,162 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     callback.onSuccess(null);
                                 }
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method find definition ends here..
+
+            
+
+        
+    
+        
+            //Method findOne definition
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(employeeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //employeeRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = employee.getClass().getMethod("save__db");
+                                                    method.invoke(employee);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(employee);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
                     });
                 
 
-            }//Method find definition ends here..
+                
+
+            }//Method findOne definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateAll definition
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                callback.onSuccess(response);
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateAll definition ends here..
 
             
 
@@ -555,9 +2398,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -606,9 +2454,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -624,9 +2477,195 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
     
         
+            //Method updateAttributes definition
+            public void updateAttributes(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                          try{
+                            
+                                if(response != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(employeeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //employeeRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = employee.getClass().getMethod("save__db");
+                                                    method.invoke(employee);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(employee);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateAttributes definition ends here..
+
+            
+
+        
     
         
     
+        
+    
+        
+    
+        
+            //Method confirm definition
+            public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("uid", uid);
+                
+                        hashMapObject.put("token", token);
+                
+                        hashMapObject.put("redirect", redirect);
+                
+
+                
+                    invokeStaticMethod("confirm", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method confirm definition ends here..
+
+            
+
+        
+    
+        
+            //Method resetPassword definition
+            public void resetPassword(  Map<String,  ? extends Object> options, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("options", options);
+                
+
+                
+                    invokeStaticMethod("resetPassword", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method resetPassword definition ends here..
+
+            
+
         
     
         
@@ -661,9 +2700,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -709,11 +2753,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONArray response) {
+                          try{
                             
-                                callback.onSuccess(response);
+                            callback.onSuccess(response);
                             
-                            //Call the finally method..
-                            callback.onFinally();
+                          }catch(Exception e){
+                            Log.e("Snaphy",e.toString());
+                          }
+                          //Call the finally method..
+                          callback.onFinally();
                         }
                     });
                 
@@ -756,9 +2804,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -805,9 +2858,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -856,9 +2914,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -905,9 +2968,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
+                          try{
                             
                                 callback.onSuccess(response);
                             
+                          }catch(Exception e){
+                            Log.e("Snaphy", e.toString());
+                          }
+
                             //Call the finally method..
                             callback.onFinally();
                         }
@@ -920,6 +2988,8 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
             
 
+        
+    
         
     
 

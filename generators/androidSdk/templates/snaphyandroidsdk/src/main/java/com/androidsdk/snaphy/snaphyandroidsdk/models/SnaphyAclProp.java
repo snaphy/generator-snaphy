@@ -8,7 +8,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
-
+import android.util.Log;
 import java.util.List;
 import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
@@ -124,27 +124,6 @@ public class SnaphyAclProp extends Model {
                     //Update hashMap value..
                     hashMap.put("write", write);
                 }
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
 
             
             
@@ -365,20 +344,23 @@ public class SnaphyAclProp extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(SnaphyAcl object) {
+                                                      try{
                                                         if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
+                                                          //now add relation to this recipe.
+                                                          addRelation(object);
+                                                          //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                          //object.addRelation(that);
+                                                          callback.onSuccess(object);
+                                                          //Calling the finally..callback
+                                                          callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
                                                             //Calling the finally..callback
                                                             callback.onFinally();
                                                         }
-
+                                                      }catch(Exception e){
+                                                        Log.e("Snaphy", e.toString());
+                                                      }
                                                     }
                                                 
                                             
@@ -398,14 +380,6 @@ public class SnaphyAclProp extends Model {
                                     } //method def ends here.
                                  
                             
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                         
                         

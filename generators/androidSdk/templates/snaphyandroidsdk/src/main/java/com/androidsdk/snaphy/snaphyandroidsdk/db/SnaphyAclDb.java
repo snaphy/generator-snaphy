@@ -136,21 +136,6 @@ public class SnaphyAclDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String is_deletedData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(_modelData) != null){
-                                //is_deletedData = _modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(_modelData);
-                                values.put("`is_deleted`", is_deletedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
                               Method method = _modelData.getClass().getMethod("getId");
@@ -326,19 +311,9 @@ public class SnaphyAclDb{
                         }
                                                 
                                 
-                                                            String is_deletedData = "";
-                        if(cursor.getString(8) != null){
-                          is_deletedData = cursor.getString(8);
-                          if(is_deletedData != null){
-                            is_deletedData = is_deletedData.toString();
-                            hashMap.put("is_deleted", is_deletedData);
-                          }
-                        }
-                                                
-                                
                                                             String idData = "";
-                        if(cursor.getString(9) != null){
-                          idData = cursor.getString(9);
+                        if(cursor.getString(8) != null){
+                          idData = cursor.getString(8);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);

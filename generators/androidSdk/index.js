@@ -67,7 +67,7 @@ var generateDbModel = function(app, modelsRestDefinition){
   //Clean model folder and add new dir.
   rimraf.sync(AndroidModelPath);
   mkdirp.sync(AndroidModelPath);
-  
+
   for(var modelName in app.models){
     if(app.models.hasOwnProperty(modelName)){
       var modelObj = app.models[modelName];
