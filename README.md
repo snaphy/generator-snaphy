@@ -1,4 +1,4 @@
-# generator-snaphy [![NPM version][npm-image]][npm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-snaphy 
 > Web application framework written in Node.js for rapid prototyping of web backend console.
 
 ## Installation
